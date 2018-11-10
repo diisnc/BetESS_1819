@@ -5,7 +5,7 @@
  */
 package betess;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,27 +13,87 @@ import java.util.HashMap;
  */
 public class BetESS {
     
-    private HashMap<String, Jogador> jogadores;
+    private Database database;
+    private String id_utilizador_aut;
     
     /* Contrutor BetESS */
     public BetESS(){
         /* QUANDO FOR SERIALIZABLE, TEMOS DE CARREGAR AQUI */
-        this.jogadores = new HashMap<String, Jogador> ();
+        this.database = new Database();
+    }
+    
+    /* método que permite definir o jogador autenticado na sessao */
+    public void setId_utilizador_aut(String id_utilizador_aut) {
+        this.id_utilizador_aut = id_utilizador_aut;
+    }
+
+    public String getId_utilizador_aut() {
+        return id_utilizador_aut;
     }
     
     /* inserção de um jogador no sistema */
-    public void regista(Jogador j){
-        this.jogadores.put(j.getEmail(), j);
+    public void registaJogador(Jogador j){
+        this.database.registaJogador(j);
     }
     
     /* verificação se um jogador se encontra registado no sistema */
     public Jogador checkUser(String username){
-        Jogador jogador = null;
-        if (this.jogadores.containsKey(username)){
-            jogador = this.jogadores.get(username);
-        }
+        return this.database.checkUser(username);
+    }
+    
+    public EventoDesportivo getEventoDesportivo(int id){
+        return this.database.getEventoDesportivo(id);
+    }
+    
+    /* método que tratará do fecho de um evento desportivo com o respetivo pagamento das apostas referentes a esse */
+    public void fechaEvento(int id_Evento){
         
-        return jogador;
+        EventoDesportivo e = this.database.getEventoDesportivo(id_Evento);
+        e.setEstado("Terminado");
+        
+        for (Aposta a : database.getApostas().values()){
+                
+            if ( e != null){
+                boolean evento_ganha_casa = e.getGanha_casa();
+                boolean evento_ganha_fora = e.getGanha_fora();
+                boolean evento_empate = e.getEmpate();
+                
+                boolean aposta_ganha_casa = a.getGanha_casa();
+                boolean aposta_ganha_fora = a.getGanha_fora();
+                boolean aposta_empate = a.getEmpate();
+                
+                Jogador j = this.database.checkUser(a.getId_jogador());
+                double saldo = j.getSaldo();
+                double quant_aposta = a.getQuantia();
+                double odd = -1;
+                
+                if (evento_ganha_casa == aposta_ganha_casa 
+                 && evento_ganha_fora == aposta_ganha_fora
+                 && evento_empate == aposta_empate)
+                {
+                    if (evento_ganha_casa){
+                        odd = e.getOdd_casa();
+                        saldo += odd * quant_aposta;
+                        
+                    }
+                    else if (evento_ganha_fora){
+                        odd = e.getOdd_fora();
+                        saldo += odd * quant_aposta;
+                        
+                    }
+                    else if (evento_empate){
+                        odd = e.getOdd_empate();
+                        saldo += odd * quant_aposta;
+                        
+                    }
+                }
+                else {
+                    saldo -= quant_aposta;
+                }
+                this.database.updateSaldo(j.getEmail(), saldo);
+            }
+        }
+        this.database.atualizaEventoDesportivo(e);
     }
 
     /**

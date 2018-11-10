@@ -11,17 +11,12 @@ package betess;
  */
 public class AreaCliente extends javax.swing.JFrame {
     
-    private String id_utilizador_aut;
     private BetESS betess;
-
-    /* método que permite definir o jogador autenticado na sessao */
-    public void setId_utilizador_aut(String id_utilizador_aut) {
-        this.id_utilizador_aut = id_utilizador_aut;
-        Welcome_label.setText("Bem vindo " + this.betess.checkUser(id_utilizador_aut).getNome());
-    }
 
     public void setBetess(BetESS betess) {
         this.betess = betess;
+        Welcome_label.setText("Bem vindo " + this.betess.checkUser(this.betess.getId_utilizador_aut()).getNome());
+
     }
 
     /**
@@ -40,36 +35,48 @@ public class AreaCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        editar_perfil_button = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        menu_panel = new javax.swing.JPanel();
+        Welcome_label = new javax.swing.JLabel();
+        buttons_panel = new javax.swing.JPanel();
+        apostar_button = new javax.swing.JButton();
         ver_apostas_button = new javax.swing.JButton();
         creditos_button = new javax.swing.JButton();
         notificacoes_button = new javax.swing.JButton();
-        apostar_button = new javax.swing.JButton();
-        Welcome_label = new javax.swing.JLabel();
+        editar_perfil_button = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        options_panel = new javax.swing.JPanel();
+        apostar_elements = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jButton1 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        apostas_elements = new javax.swing.JPanel();
+        creditos_elements = new javax.swing.JPanel();
+        notificacoes_elements = new javax.swing.JPanel();
+        edit_perfil_elements = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        nome_field = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        email_field = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        palavra_passe_field = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        contacto_field = new javax.swing.JTextField();
+        edit_dados_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        editar_perfil_button.setText("Editar Perfil");
-        editar_perfil_button.addActionListener(new java.awt.event.ActionListener() {
+        Welcome_label.setText("jLabel2");
+
+        apostar_button.setText("Apostar");
+        apostar_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editar_perfil_buttonActionPerformed(evt);
+                apostar_buttonActionPerformed(evt);
             }
         });
-
-        jLabel1.setText("Menu:");
-
-        javax.swing.GroupLayout menu_panelLayout = new javax.swing.GroupLayout(menu_panel);
-        menu_panel.setLayout(menu_panelLayout);
-        menu_panelLayout.setHorizontalGroup(
-            menu_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 532, Short.MAX_VALUE)
-        );
-        menu_panelLayout.setVerticalGroup(
-            menu_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 384, Short.MAX_VALUE)
-        );
 
         ver_apostas_button.setText("Minhas apostas");
         ver_apostas_button.addActionListener(new java.awt.event.ActionListener() {
@@ -82,75 +89,318 @@ public class AreaCliente extends javax.swing.JFrame {
 
         notificacoes_button.setText("Notificações");
 
-        apostar_button.setText("Apostar");
-        apostar_button.addActionListener(new java.awt.event.ActionListener() {
+        editar_perfil_button.setText("Editar Perfil");
+        editar_perfil_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                apostar_buttonActionPerformed(evt);
+                editar_perfil_buttonActionPerformed(evt);
             }
         });
 
-        Welcome_label.setText("jLabel2");
+        jLabel1.setText("Menu:");
+
+        javax.swing.GroupLayout buttons_panelLayout = new javax.swing.GroupLayout(buttons_panel);
+        buttons_panel.setLayout(buttons_panelLayout);
+        buttons_panelLayout.setHorizontalGroup(
+            buttons_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(buttons_panelLayout.createSequentialGroup()
+                .addGroup(buttons_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(buttons_panelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(editar_perfil_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(buttons_panelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(buttons_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(apostar_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(creditos_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(notificacoes_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(buttons_panelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(ver_apostas_button, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(buttons_panelLayout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        buttons_panelLayout.setVerticalGroup(
+            buttons_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(buttons_panelLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(apostar_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ver_apostas_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(creditos_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(notificacoes_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(editar_perfil_button)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        options_panel.setLayout(new java.awt.CardLayout());
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
+
+        jButton1.setText("Apostar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Quantia:");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("€ (euros)");
+
+        jLabel8.setText("Ganhos possíveis:");
+
+        jTextField2.setEditable(false);
+
+        javax.swing.GroupLayout apostar_elementsLayout = new javax.swing.GroupLayout(apostar_elements);
+        apostar_elements.setLayout(apostar_elementsLayout);
+        apostar_elementsLayout.setHorizontalGroup(
+            apostar_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(apostar_elementsLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(apostar_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, apostar_elementsLayout.createSequentialGroup()
+                        .addGroup(apostar_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(apostar_elementsLayout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(apostar_elementsLayout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel7)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+        apostar_elementsLayout.setVerticalGroup(
+            apostar_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(apostar_elementsLayout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(apostar_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(apostar_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+
+        options_panel.add(apostar_elements, "card2");
+
+        javax.swing.GroupLayout apostas_elementsLayout = new javax.swing.GroupLayout(apostas_elements);
+        apostas_elements.setLayout(apostas_elementsLayout);
+        apostas_elementsLayout.setHorizontalGroup(
+            apostas_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 599, Short.MAX_VALUE)
+        );
+        apostas_elementsLayout.setVerticalGroup(
+            apostas_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 338, Short.MAX_VALUE)
+        );
+
+        options_panel.add(apostas_elements, "card2");
+
+        javax.swing.GroupLayout creditos_elementsLayout = new javax.swing.GroupLayout(creditos_elements);
+        creditos_elements.setLayout(creditos_elementsLayout);
+        creditos_elementsLayout.setHorizontalGroup(
+            creditos_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 599, Short.MAX_VALUE)
+        );
+        creditos_elementsLayout.setVerticalGroup(
+            creditos_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 338, Short.MAX_VALUE)
+        );
+
+        options_panel.add(creditos_elements, "card2");
+
+        javax.swing.GroupLayout notificacoes_elementsLayout = new javax.swing.GroupLayout(notificacoes_elements);
+        notificacoes_elements.setLayout(notificacoes_elementsLayout);
+        notificacoes_elementsLayout.setHorizontalGroup(
+            notificacoes_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 599, Short.MAX_VALUE)
+        );
+        notificacoes_elementsLayout.setVerticalGroup(
+            notificacoes_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 338, Short.MAX_VALUE)
+        );
+
+        options_panel.add(notificacoes_elements, "card2");
+
+        jLabel2.setText("Nome:");
+
+        nome_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nome_fieldActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Email:");
+
+        email_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                email_fieldActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Palavra-Passe:");
+
+        palavra_passe_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                palavra_passe_fieldActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Contacto:");
+
+        contacto_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contacto_fieldActionPerformed(evt);
+            }
+        });
+
+        edit_dados_button.setText("Editar Dados");
+        edit_dados_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edit_dados_buttonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout edit_perfil_elementsLayout = new javax.swing.GroupLayout(edit_perfil_elements);
+        edit_perfil_elements.setLayout(edit_perfil_elementsLayout);
+        edit_perfil_elementsLayout.setHorizontalGroup(
+            edit_perfil_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(edit_perfil_elementsLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(edit_perfil_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(edit_perfil_elementsLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(contacto_field, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(edit_perfil_elementsLayout.createSequentialGroup()
+                        .addGroup(edit_perfil_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(edit_perfil_elementsLayout.createSequentialGroup()
+                                .addGroup(edit_perfil_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2))
+                                .addGap(28, 28, 28)
+                                .addGroup(edit_perfil_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(email_field)
+                                    .addComponent(nome_field)))
+                            .addGroup(edit_perfil_elementsLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(palavra_passe_field)))
+                        .addGap(6, 6, 6))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, edit_perfil_elementsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(edit_dados_button)
+                .addContainerGap())
+        );
+        edit_perfil_elementsLayout.setVerticalGroup(
+            edit_perfil_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(edit_perfil_elementsLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(edit_perfil_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(nome_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(edit_perfil_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(email_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(edit_perfil_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(palavra_passe_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(edit_perfil_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(contacto_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
+                .addComponent(edit_dados_button)
+                .addContainerGap(130, Short.MAX_VALUE))
+        );
+
+        options_panel.add(edit_perfil_elements, "card2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(buttons_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(jLabel1))
+                        .addGap(61, 61, 61)
+                        .addComponent(Welcome_label))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(ver_apostas_button))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(editar_perfil_button))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(apostar_button))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(notificacoes_button))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(creditos_button)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(menu_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(Welcome_label)
-                .addGap(355, 355, 355))
+                        .addGap(18, 18, 18)
+                        .addComponent(options_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addComponent(Welcome_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(menu_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(editar_perfil_button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ver_apostas_button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(apostar_button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(notificacoes_button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(creditos_button)))
-                .addContainerGap(42, Short.MAX_VALUE))
+                        .addComponent(Welcome_label)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addComponent(options_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22))
+                    .addComponent(buttons_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void editar_perfil_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editar_perfil_buttonActionPerformed
-        menu_panel.removeAll();
+        Jogador autenticado = this.betess.checkUser(this.betess.getId_utilizador_aut());
+        
+        nome_field.setText(autenticado.getNome());
+        email_field.setText(autenticado.getEmail());
+        contacto_field.setText(autenticado.getContacto());
+        
+        /* remoção de paineis anteriores */
+        options_panel.removeAll();
+        options_panel.repaint();
+        options_panel.revalidate();
+        
+        /* alocação do respetivo painel de opções */
+        options_panel.add(edit_perfil_elements);
+        options_panel.repaint();
+        options_panel.revalidate();
+        
+        
     }//GEN-LAST:event_editar_perfil_buttonActionPerformed
 
     private void ver_apostas_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ver_apostas_buttonActionPerformed
@@ -160,6 +410,39 @@ public class AreaCliente extends javax.swing.JFrame {
     private void apostar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apostar_buttonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_apostar_buttonActionPerformed
+
+    private void nome_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nome_fieldActionPerformed
+        
+    }//GEN-LAST:event_nome_fieldActionPerformed
+
+    private void email_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_email_fieldActionPerformed
+
+    private void palavra_passe_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_palavra_passe_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_palavra_passe_fieldActionPerformed
+
+    private void contacto_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contacto_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_contacto_fieldActionPerformed
+
+    private void edit_dados_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_dados_buttonActionPerformed
+        Jogador autenticado = this.betess.checkUser(this.betess.getId_utilizador_aut());
+        
+        autenticado.setNome(nome_field.getText());
+        autenticado.setEmail(email_field.getText());
+        autenticado.setPassword(palavra_passe_field.getText());
+        autenticado.setContacto(contacto_field.getText());
+    }//GEN-LAST:event_edit_dados_buttonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,11 +483,43 @@ public class AreaCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Welcome_label;
     private javax.swing.JButton apostar_button;
+    private javax.swing.JPanel apostar_elements;
+    private javax.swing.JPanel apostas_elements;
+    private javax.swing.JPanel buttons_panel;
+    private javax.swing.JTextField contacto_field;
     private javax.swing.JButton creditos_button;
+    private javax.swing.JPanel creditos_elements;
+    private javax.swing.JButton edit_dados_button;
+    private javax.swing.JPanel edit_perfil_elements;
     private javax.swing.JButton editar_perfil_button;
+    private javax.swing.JTextField email_field;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel menu_panel;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JPanel menu_panel2;
+    private javax.swing.JPanel menu_panel3;
+    private javax.swing.JPanel menu_panel4;
+    private javax.swing.JPanel menu_panel5;
+    private javax.swing.JPanel menu_panel6;
+    private javax.swing.JPanel menu_panel7;
+    private javax.swing.JTextField nome_field;
     private javax.swing.JButton notificacoes_button;
+    private javax.swing.JPanel notificacoes_elements;
+    private javax.swing.JPanel options_panel;
+    private javax.swing.JTextField palavra_passe_field;
     private javax.swing.JButton ver_apostas_button;
     // End of variables declaration//GEN-END:variables
 }

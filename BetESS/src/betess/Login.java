@@ -140,7 +140,7 @@ public class Login extends javax.swing.JFrame {
         if (jogador != null){
             if (jogador.checkPassword(password)){
                 AreaCliente frame = new AreaCliente();
-                frame.setId_utilizador_aut(email);
+                this.betess.setId_utilizador_aut(email);
                 frame.setTitle("Área autenticada");
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);

@@ -12,17 +12,17 @@ package betess;
  */
 public class Aposta {
     
+    public int id_aposta;
     public double quantia;
-    public String resultado;
     public int id_evento;
-    public int id_jogador;
+    public String id_jogador;
     public boolean ganha_casa;
     public boolean ganha_fora;
     public boolean empate;
 
-    public Aposta(double quantia, String resultado, int id_evento, int id_jogador, boolean ganha_casa, boolean ganha_fora, boolean empate) {
+    public Aposta(int id_aposta, double quantia, int id_evento, String id_jogador, boolean ganha_casa, boolean ganha_fora, boolean empate) {
+        this.id_aposta = id_aposta;
         this.quantia = quantia;
-        this.resultado = resultado;
         this.id_evento = id_evento;
         this.id_jogador = id_jogador;
         this.ganha_casa = ganha_casa;
@@ -31,31 +31,31 @@ public class Aposta {
     }
 
     /* GETTERS */
-    public double getQuantia() {
-        return quantia;
+    public int getId_aposta() {
+        return id_aposta;
     }
 
-    public String getResultado() {
-        return resultado;
+    public double getQuantia() {
+        return quantia;
     }
 
     public int getId_evento() {
         return id_evento;
     }
 
-    public int getId_jogador() {
+    public String getId_jogador() {
         return id_jogador;
     }
 
-    public boolean isGanha_casa() {
+    public boolean getGanha_casa() {
         return ganha_casa;
     }
 
-    public boolean isGanha_fora() {
+    public boolean getGanha_fora() {
         return ganha_fora;
     }
 
-    public boolean isEmpate() {
+    public boolean getEmpate() {
         return empate;
     }
     
@@ -63,19 +63,19 @@ public class Aposta {
     
     /* SETTERS */
 
-    public void setQuantia(double quantia) {
-        this.quantia = quantia;
+    public void setId_aposta(int id_aposta) {
+        this.id_aposta = id_aposta;
     }
 
-    public void setResultado(String resultado) {
-        this.resultado = resultado;
+    public void setQuantia(double quantia) {
+        this.quantia = quantia;
     }
 
     public void setId_evento(int id_evento) {
         this.id_evento = id_evento;
     }
 
-    public void setId_jogador(int id_jogador) {
+    public void setId_jogador(String id_jogador) {
         this.id_jogador = id_jogador;
     }
 
@@ -91,7 +91,7 @@ public class Aposta {
         this.empate = empate;
     }
     
-    
-    
-
+    public Aposta clone(){
+        return new Aposta(this.getId_aposta(), this.getQuantia(), this.getId_evento(), this.getId_jogador(), this.getGanha_casa(), this.getGanha_fora(), this.getEmpate());
+    }
 }

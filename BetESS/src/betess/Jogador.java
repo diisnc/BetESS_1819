@@ -15,6 +15,7 @@ public class Jogador {
     public String nome;
     private String password;
     public String contacto;
+    public double saldo;
 
     
     /* CONSTRUTOR */
@@ -23,6 +24,7 @@ public class Jogador {
         this.nome = nome;
         this.password = password;
         this.contacto = contacto;
+        this.saldo = 5; /* CONSIDERAR A OFERTA DE SALDO PARA UM NOVO UTILIZADOR */
     }
     
     /* GETTERS */
@@ -37,6 +39,10 @@ public class Jogador {
     
     public String getContacto() {
         return contacto;
+    }
+
+    public double getSaldo() {
+        return saldo;
     }
     
     /* SETTERS */
@@ -55,6 +61,10 @@ public class Jogador {
     
     public void setContacto(String contacto) {
         this.contacto = contacto;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
     }
     
     

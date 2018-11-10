@@ -136,13 +136,13 @@ public class NovoJogador extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Já existe um utilizador registado com o email indicado.", "Falha no registo", JOptionPane.ERROR_MESSAGE);
         }
         else {
-            this.betess.regista(novo_jogador);
+            this.betess.registaJogador(novo_jogador);
             JOptionPane.showMessageDialog(null, "Registo efetuado com sucesso.", "Registo", JOptionPane.PLAIN_MESSAGE);
             this.setVisible(false);
             
             AreaCliente frame = new AreaCliente();
             frame.setBetess(this.betess);
-            frame.setId_utilizador_aut(email);
+            this.betess.setId_utilizador_aut(email);
             frame.setTitle("Área autenticada");
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
