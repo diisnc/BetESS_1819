@@ -6,6 +6,8 @@
 
 package betess;
 
+import java.util.*;
+
 /**
  *
  * @author MarcoSilva
@@ -16,6 +18,7 @@ public class Jogador {
     private String password;
     public String contacto;
     public double saldo;
+    public List<Notificacao> notificacoes;
 
     
     /* CONSTRUTOR */
@@ -25,6 +28,7 @@ public class Jogador {
         this.password = password;
         this.contacto = contacto;
         this.saldo = 5; /* CONSIDERAR A OFERTA DE SALDO PARA UM NOVO UTILIZADOR */
+        this.notificacoes = new ArrayList ();
     }
     
     /* GETTERS */
@@ -43,6 +47,16 @@ public class Jogador {
 
     public double getSaldo() {
         return saldo;
+    }
+    
+    public List<Notificacao> getNotificacoes(){
+        List<Notificacao> res = new ArrayList ();
+        
+        for (Notificacao n : this.notificacoes){
+            res.add(n.clone());
+        }
+        
+        return res;
     }
     
     /* SETTERS */

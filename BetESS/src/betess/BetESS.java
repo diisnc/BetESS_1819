@@ -31,6 +31,10 @@ public class BetESS {
         return id_utilizador_aut;
     }
     
+    public Aposta getAposta(int id_aposta){
+        return this.database.getAposta(id_aposta);
+    }
+    
     /* inserção de um jogador no sistema */
     public void registaJogador(Jogador j){
         this.database.registaJogador(j);

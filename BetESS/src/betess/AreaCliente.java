@@ -76,6 +76,10 @@ public class AreaCliente extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         creditar_button = new javax.swing.JButton();
         notificacoes_elements = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        notificacoes_list = new javax.swing.JTable();
+        descartar_button = new javax.swing.JButton();
         edit_perfil_elements = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         nome_field = new javax.swing.JTextField();
@@ -108,6 +112,11 @@ public class AreaCliente extends javax.swing.JFrame {
         creditos_button.setText("Créditos");
 
         notificacoes_button.setText("Notificações");
+        notificacoes_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                notificacoes_buttonActionPerformed(evt);
+            }
+        });
 
         editar_perfil_button.setText("Editar Perfil");
         editar_perfil_button.addActionListener(new java.awt.event.ActionListener() {
@@ -423,15 +432,74 @@ public class AreaCliente extends javax.swing.JFrame {
 
         options_panel.add(creditos_elements, "card2");
 
+        jLabel14.setText("Notificações:");
+
+        notificacoes_list.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Identificador Evento", "Identificador Aposta", "Equipa Casa", "Equipa Fora", "Quantia aposta", "Balanço"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(notificacoes_list);
+        if (notificacoes_list.getColumnModel().getColumnCount() > 0) {
+            notificacoes_list.getColumnModel().getColumn(0).setResizable(false);
+            notificacoes_list.getColumnModel().getColumn(1).setResizable(false);
+            notificacoes_list.getColumnModel().getColumn(2).setResizable(false);
+            notificacoes_list.getColumnModel().getColumn(3).setResizable(false);
+            notificacoes_list.getColumnModel().getColumn(4).setResizable(false);
+            notificacoes_list.getColumnModel().getColumn(5).setResizable(false);
+        }
+
+        descartar_button.setText("Descartar");
+        descartar_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descartar_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout notificacoes_elementsLayout = new javax.swing.GroupLayout(notificacoes_elements);
         notificacoes_elements.setLayout(notificacoes_elementsLayout);
         notificacoes_elementsLayout.setHorizontalGroup(
             notificacoes_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 697, Short.MAX_VALUE)
+            .addGroup(notificacoes_elementsLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(notificacoes_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(descartar_button)
+                    .addGroup(notificacoes_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel14)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         notificacoes_elementsLayout.setVerticalGroup(
             notificacoes_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 422, Short.MAX_VALUE)
+            .addGroup(notificacoes_elementsLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jLabel14)
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(descartar_button)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         options_panel.add(notificacoes_elements, "card2");
@@ -723,6 +791,37 @@ public class AreaCliente extends javax.swing.JFrame {
         this.betess.atualizaSaldo(creditos, this.betess.getId_utilizador_aut());
     }//GEN-LAST:event_creditar_buttonActionPerformed
 
+    private void descartar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descartar_buttonActionPerformed
+        DefaultTableModel model = (DefaultTableModel) notificacoes_list.getModel(); 
+        int row = notificacoes_list.getSelectedRow();
+        
+        model.removeRow(row);
+    }//GEN-LAST:event_descartar_buttonActionPerformed
+
+    private void notificacoes_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notificacoes_buttonActionPerformed
+        /* remoção de paineis anteriores */
+        options_panel.removeAll();
+        options_panel.repaint();
+        options_panel.revalidate();
+        
+        /* alocação do respetivo painel de opções */
+        options_panel.add(notificacoes_elements);
+        options_panel.repaint();
+        options_panel.revalidate();
+        
+        Jogador j = this.betess.checkUser(this.betess.getId_utilizador_aut());
+        
+        List<Notificacao> notificacoes = j.getNotificacoes();
+        
+        DefaultTableModel model = (DefaultTableModel) notificacoes_list.getModel();
+        
+        for (Notificacao n : notificacoes){
+            Aposta a = this.betess.getAposta(n.getId_aposta());
+            
+            model.addRow(new Object[]{a.getId_evento(), a.getId_aposta(), "nome equipa casa", "nome equipa fora", a.getQuantia(), n.getBalanco()});
+        }
+    }//GEN-LAST:event_notificacoes_buttonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -771,6 +870,7 @@ public class AreaCliente extends javax.swing.JFrame {
     private javax.swing.JButton creditos_button;
     private javax.swing.JPanel creditos_elements;
     private javax.swing.JTextField creditos_field;
+    private javax.swing.JButton descartar_button;
     private javax.swing.JButton edit_dados_button;
     private javax.swing.JPanel edit_perfil_elements;
     private javax.swing.JButton editar_perfil_button;
@@ -784,6 +884,7 @@ public class AreaCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -794,12 +895,14 @@ public class AreaCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTable lista_apostas;
     private javax.swing.JScrollPane lista_apostas_pane;
     private javax.swing.JTextField nome_field;
     private javax.swing.JButton notificacoes_button;
     private javax.swing.JPanel notificacoes_elements;
+    private javax.swing.JTable notificacoes_list;
     private javax.swing.ButtonGroup opcoes_aposta;
     private javax.swing.JPanel options_panel;
     private javax.swing.JTextField palavra_passe_field;

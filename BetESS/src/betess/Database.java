@@ -68,6 +68,10 @@ public class Database {
         return this.eventos.get(id).clone();
     }
     
+    public Aposta getAposta(int id_aposta){
+        return this.apostas.get(id_aposta).clone();
+    }
+    
     public HashMap<Integer, Aposta> getApostas(){
         HashMap<Integer, Aposta> res = new HashMap ();
         
