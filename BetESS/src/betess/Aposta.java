@@ -20,6 +20,17 @@ public class Aposta {
     public boolean ganha_fora;
     public boolean empate;
 
+    public Aposta(double quantia, int id_evento, String id_jogador, boolean ganha_casa, boolean ganha_fora, boolean empate) {
+        this.quantia = quantia;
+        this.id_evento = id_evento;
+        this.id_jogador = id_jogador;
+        this.ganha_casa = ganha_casa;
+        this.ganha_fora = ganha_fora;
+        this.empate = empate;
+    }
+    
+    /* construtor utilizado para o clone */
+
     public Aposta(int id_aposta, double quantia, int id_evento, String id_jogador, boolean ganha_casa, boolean ganha_fora, boolean empate) {
         this.id_aposta = id_aposta;
         this.quantia = quantia;

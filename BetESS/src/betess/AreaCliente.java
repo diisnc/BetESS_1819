@@ -5,6 +5,11 @@
  */
 package betess;
 
+import java.util.*;
+import javax.swing.ButtonModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author MarcoSilva
@@ -35,6 +40,7 @@ public class AreaCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        opcoes_aposta = new javax.swing.ButtonGroup();
         Welcome_label = new javax.swing.JLabel();
         buttons_panel = new javax.swing.JPanel();
         apostar_button = new javax.swing.JButton();
@@ -45,16 +51,30 @@ public class AreaCliente extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         options_panel = new javax.swing.JPanel();
         apostar_elements = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jButton1 = new javax.swing.JButton();
+        submit_aposta_button = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        quantia_field = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        ganhos_field = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        events_list = new javax.swing.JTable();
+        casa_button = new javax.swing.JRadioButton();
+        empate_button = new javax.swing.JRadioButton();
+        fora_button = new javax.swing.JRadioButton();
         apostas_elements = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        lista_apostas_pane = new javax.swing.JScrollPane();
+        lista_apostas = new javax.swing.JTable();
         creditos_elements = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        creditos_field = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        creditar_button = new javax.swing.JButton();
         notificacoes_elements = new javax.swing.JPanel();
         edit_perfil_elements = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -103,19 +123,13 @@ public class AreaCliente extends javax.swing.JFrame {
         buttons_panelLayout.setHorizontalGroup(
             buttons_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(buttons_panelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(buttons_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(buttons_panelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(editar_perfil_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(buttons_panelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(buttons_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(apostar_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(creditos_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(notificacoes_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(buttons_panelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(ver_apostas_button, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)))
+                    .addComponent(editar_perfil_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(apostar_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(creditos_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(notificacoes_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ver_apostas_button, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(buttons_panelLayout.createSequentialGroup()
                 .addGap(56, 56, 56)
@@ -137,30 +151,23 @@ public class AreaCliente extends javax.swing.JFrame {
                 .addComponent(notificacoes_button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(editar_perfil_button)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(237, Short.MAX_VALUE))
         );
 
         options_panel.setLayout(new java.awt.CardLayout());
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
-
-        jButton1.setText("Apostar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        submit_aposta_button.setText("Apostar");
+        submit_aposta_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                submit_aposta_buttonActionPerformed(evt);
             }
         });
 
         jLabel6.setText("Quantia:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        quantia_field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                quantia_fieldActionPerformed(evt);
             }
         });
 
@@ -168,74 +175,250 @@ public class AreaCliente extends javax.swing.JFrame {
 
         jLabel8.setText("Ganhos possíveis:");
 
-        jTextField2.setEditable(false);
+        ganhos_field.setEditable(false);
+
+        events_list.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Evento número", "Casa", "Fora", "Odd Casa", "Odd Fora", "Odd Empate"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(events_list);
+        if (events_list.getColumnModel().getColumnCount() > 0) {
+            events_list.getColumnModel().getColumn(0).setResizable(false);
+            events_list.getColumnModel().getColumn(1).setResizable(false);
+            events_list.getColumnModel().getColumn(2).setResizable(false);
+            events_list.getColumnModel().getColumn(3).setResizable(false);
+            events_list.getColumnModel().getColumn(4).setResizable(false);
+            events_list.getColumnModel().getColumn(5).setResizable(false);
+        }
+
+        jScrollPane1.setViewportView(jScrollPane2);
+
+        opcoes_aposta.add(casa_button);
+        casa_button.setText("Casa");
+        casa_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                casa_buttonActionPerformed(evt);
+            }
+        });
+
+        opcoes_aposta.add(empate_button);
+        empate_button.setText("Empate");
+        empate_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                empate_buttonActionPerformed(evt);
+            }
+        });
+
+        opcoes_aposta.add(fora_button);
+        fora_button.setText("Fora");
+        fora_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fora_buttonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout apostar_elementsLayout = new javax.swing.GroupLayout(apostar_elements);
         apostar_elements.setLayout(apostar_elementsLayout);
         apostar_elementsLayout.setHorizontalGroup(
             apostar_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(apostar_elementsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+            .addGroup(apostar_elementsLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addGroup(apostar_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, apostar_elementsLayout.createSequentialGroup()
-                        .addGroup(apostar_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(apostar_elementsLayout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(apostar_elementsLayout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel7)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addGroup(apostar_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(apostar_elementsLayout.createSequentialGroup()
+                        .addComponent(casa_button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fora_button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(empate_button)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(apostar_elementsLayout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(quantia_field, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ganhos_field, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                        .addComponent(submit_aposta_button)
+                        .addGap(36, 36, 36))))
         );
         apostar_elementsLayout.setVerticalGroup(
             apostar_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(apostar_elementsLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(apostar_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(apostar_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(quantia_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(submit_aposta_button)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(31, Short.MAX_VALUE))
+                    .addComponent(ganhos_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(apostar_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(casa_button)
+                    .addComponent(fora_button)
+                    .addComponent(empate_button))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         options_panel.add(apostar_elements, "card2");
+
+        jLabel13.setText("Minhas apostas");
+
+        lista_apostas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Identificador", "Equipa Casa", "Equipa Fora", "Vitória Casa", "Vitória Fora", "Empate", "Quantia"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        lista_apostas_pane.setViewportView(lista_apostas);
+        if (lista_apostas.getColumnModel().getColumnCount() > 0) {
+            lista_apostas.getColumnModel().getColumn(0).setResizable(false);
+            lista_apostas.getColumnModel().getColumn(1).setResizable(false);
+            lista_apostas.getColumnModel().getColumn(2).setResizable(false);
+            lista_apostas.getColumnModel().getColumn(3).setResizable(false);
+            lista_apostas.getColumnModel().getColumn(4).setResizable(false);
+            lista_apostas.getColumnModel().getColumn(5).setResizable(false);
+            lista_apostas.getColumnModel().getColumn(6).setResizable(false);
+        }
 
         javax.swing.GroupLayout apostas_elementsLayout = new javax.swing.GroupLayout(apostas_elements);
         apostas_elements.setLayout(apostas_elementsLayout);
         apostas_elementsLayout.setHorizontalGroup(
             apostas_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 599, Short.MAX_VALUE)
+            .addGroup(apostas_elementsLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(apostas_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lista_apostas_pane, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         apostas_elementsLayout.setVerticalGroup(
             apostas_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 338, Short.MAX_VALUE)
+            .addGroup(apostas_elementsLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel13)
+                .addGap(18, 18, 18)
+                .addComponent(lista_apostas_pane, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         options_panel.add(apostas_elements, "card2");
+
+        jLabel9.setText("Saldo Atual:");
+
+        jTextField1.setEditable(false);
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("€ (euros)");
+
+        jLabel11.setText("Creditar");
+
+        jLabel12.setText("€ (euros)");
+
+        creditar_button.setText("Creditar");
+        creditar_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                creditar_buttonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout creditos_elementsLayout = new javax.swing.GroupLayout(creditos_elements);
         creditos_elements.setLayout(creditos_elementsLayout);
         creditos_elementsLayout.setHorizontalGroup(
             creditos_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 599, Short.MAX_VALUE)
+            .addGroup(creditos_elementsLayout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addGroup(creditos_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(creditos_elementsLayout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(creditos_field, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel12))
+                    .addGroup(creditos_elementsLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel10)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, creditos_elementsLayout.createSequentialGroup()
+                .addContainerGap(342, Short.MAX_VALUE)
+                .addComponent(creditar_button)
+                .addGap(275, 275, 275))
         );
         creditos_elementsLayout.setVerticalGroup(
             creditos_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 338, Short.MAX_VALUE)
+            .addGroup(creditos_elementsLayout.createSequentialGroup()
+                .addGap(77, 77, 77)
+                .addGroup(creditos_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addGap(57, 57, 57)
+                .addGroup(creditos_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(creditos_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addGap(18, 18, 18)
+                .addComponent(creditar_button)
+                .addContainerGap(190, Short.MAX_VALUE))
         );
 
         options_panel.add(creditos_elements, "card2");
@@ -244,11 +427,11 @@ public class AreaCliente extends javax.swing.JFrame {
         notificacoes_elements.setLayout(notificacoes_elementsLayout);
         notificacoes_elementsLayout.setHorizontalGroup(
             notificacoes_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 599, Short.MAX_VALUE)
+            .addGap(0, 697, Short.MAX_VALUE)
         );
         notificacoes_elementsLayout.setVerticalGroup(
             notificacoes_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 338, Short.MAX_VALUE)
+            .addGap(0, 422, Short.MAX_VALUE)
         );
 
         options_panel.add(notificacoes_elements, "card2");
@@ -302,7 +485,7 @@ public class AreaCliente extends javax.swing.JFrame {
                     .addGroup(edit_perfil_elementsLayout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(contacto_field, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
+                        .addComponent(contacto_field, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(edit_perfil_elementsLayout.createSequentialGroup()
                         .addGroup(edit_perfil_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -345,7 +528,7 @@ public class AreaCliente extends javax.swing.JFrame {
                     .addComponent(contacto_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46)
                 .addComponent(edit_dados_button)
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addContainerGap(214, Short.MAX_VALUE))
         );
 
         options_panel.add(edit_perfil_elements, "card2");
@@ -360,11 +543,12 @@ public class AreaCliente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(61, 61, 61)
-                        .addComponent(Welcome_label))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(options_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                        .addComponent(Welcome_label)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(options_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -373,9 +557,8 @@ public class AreaCliente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Welcome_label)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                        .addComponent(options_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(options_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(buttons_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -404,11 +587,45 @@ public class AreaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_editar_perfil_buttonActionPerformed
 
     private void ver_apostas_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ver_apostas_buttonActionPerformed
-        // TODO add your handling code here:
+        /* remoção de paineis anteriores */
+        options_panel.removeAll();
+        options_panel.repaint();
+        options_panel.revalidate();
+        
+        /* alocação do respetivo painel de opções */
+        options_panel.add(apostas_elements);
+        options_panel.repaint();
+        options_panel.revalidate();
+        
+        List<Aposta> apostas = this.betess.getApostasJogador(this.betess.getId_utilizador_aut());
+        
+        DefaultTableModel model = (DefaultTableModel) lista_apostas.getModel();
+        
+        for (Aposta a : apostas){
+            model.addRow(new Object[]{a.getId_evento(), "nome equipa casa", "nome equipa fora", a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), a.getQuantia()});
+        }
+        
+        
     }//GEN-LAST:event_ver_apostas_buttonActionPerformed
 
     private void apostar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apostar_buttonActionPerformed
-        // TODO add your handling code here:
+        /* remoção de paineis anteriores */
+        options_panel.removeAll();
+        options_panel.repaint();
+        options_panel.revalidate();
+        
+        /* alocação do respetivo painel de opções */
+        options_panel.add(apostar_elements);
+        options_panel.repaint();
+        options_panel.revalidate();
+        
+        Map<Integer, EventoDesportivo> eventos = this.betess.getEventosDesportivos();
+        
+        DefaultTableModel model = (DefaultTableModel) events_list.getModel();
+        
+        for (EventoDesportivo e : eventos.values()){
+            model.addRow(new Object[]{e.getId_evento(), "nome equipa casa", "nome equipa fora", e.getOdd_casa(), e.getOdd_fora(), e.getOdd_empate()});
+        }
     }//GEN-LAST:event_apostar_buttonActionPerformed
 
     private void nome_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nome_fieldActionPerformed
@@ -436,13 +653,75 @@ public class AreaCliente extends javax.swing.JFrame {
         autenticado.setContacto(contacto_field.getText());
     }//GEN-LAST:event_edit_dados_buttonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void submit_aposta_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submit_aposta_buttonActionPerformed
+        String user = this.betess.getId_utilizador_aut();
+        Jogador j = this.betess.checkUser(user);
+        
+        if (j.getSaldo() > Double.parseDouble(quantia_field.getText())){
+        
+            DefaultTableModel model = (DefaultTableModel) events_list.getModel();
+
+            int row = events_list.getSelectedRow();
+
+            int id_evento = (int)model.getValueAt(row, 0);
+
+            boolean casa_selected = casa_button.isSelected();
+            boolean fora_selected = fora_button.isSelected();
+            boolean empate_selected = empate_button.isSelected();
+
+            Aposta a = new Aposta(Double.parseDouble(quantia_field.getText()), id_evento, user, casa_selected, fora_selected, empate_selected);
+
+            this.betess.registaAposta(a);
+            
+            JOptionPane.showMessageDialog(null, "Aposta registada com sucesso.", "BetESS", JOptionPane.PLAIN_MESSAGE);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Créditos insuficientes.", "Falha no registo da aposta", JOptionPane.ERROR_MESSAGE);
+
+        }
+        
+    }//GEN-LAST:event_submit_aposta_buttonActionPerformed
+
+    private void quantia_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantia_fieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_quantia_fieldActionPerformed
+
+    private void casa_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_casa_buttonActionPerformed
+        DefaultTableModel model = (DefaultTableModel) events_list.getModel(); 
+        int row = events_list.getSelectedRow();
+        
+        double odd_casa = (double)model.getValueAt(row, 3);
+        
+        ganhos_field.setText(Double.toString(odd_casa * Double.parseDouble(quantia_field.getText())));
+    }//GEN-LAST:event_casa_buttonActionPerformed
+
+    private void fora_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fora_buttonActionPerformed
+        DefaultTableModel model = (DefaultTableModel) events_list.getModel(); 
+        int row = events_list.getSelectedRow();
+        
+        double odd_fora = (double)model.getValueAt(row, 4);
+        
+        ganhos_field.setText(Double.toString(odd_fora * Double.parseDouble(quantia_field.getText())));
+    }//GEN-LAST:event_fora_buttonActionPerformed
+
+    private void empate_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empate_buttonActionPerformed
+        DefaultTableModel model = (DefaultTableModel) events_list.getModel(); 
+        int row = events_list.getSelectedRow();
+        
+        double odd_empate = (double)model.getValueAt(row, 5);
+        
+        ganhos_field.setText(Double.toString(odd_empate * Double.parseDouble(quantia_field.getText())));
+    }//GEN-LAST:event_empate_buttonActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void creditar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditar_buttonActionPerformed
+        double creditos = Double.parseDouble(creditos_field.getText());
+        
+        this.betess.atualizaSaldo(creditos, this.betess.getId_utilizador_aut());
+    }//GEN-LAST:event_creditar_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -486,15 +765,25 @@ public class AreaCliente extends javax.swing.JFrame {
     private javax.swing.JPanel apostar_elements;
     private javax.swing.JPanel apostas_elements;
     private javax.swing.JPanel buttons_panel;
+    private javax.swing.JRadioButton casa_button;
     private javax.swing.JTextField contacto_field;
+    private javax.swing.JButton creditar_button;
     private javax.swing.JButton creditos_button;
     private javax.swing.JPanel creditos_elements;
+    private javax.swing.JTextField creditos_field;
     private javax.swing.JButton edit_dados_button;
     private javax.swing.JPanel edit_perfil_elements;
     private javax.swing.JButton editar_perfil_button;
     private javax.swing.JTextField email_field;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JRadioButton empate_button;
+    private javax.swing.JTable events_list;
+    private javax.swing.JRadioButton fora_button;
+    private javax.swing.JTextField ganhos_field;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -502,24 +791,20 @@ public class AreaCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JPanel menu_panel2;
-    private javax.swing.JPanel menu_panel3;
-    private javax.swing.JPanel menu_panel4;
-    private javax.swing.JPanel menu_panel5;
-    private javax.swing.JPanel menu_panel6;
-    private javax.swing.JPanel menu_panel7;
+    private javax.swing.JTable lista_apostas;
+    private javax.swing.JScrollPane lista_apostas_pane;
     private javax.swing.JTextField nome_field;
     private javax.swing.JButton notificacoes_button;
     private javax.swing.JPanel notificacoes_elements;
+    private javax.swing.ButtonGroup opcoes_aposta;
     private javax.swing.JPanel options_panel;
     private javax.swing.JTextField palavra_passe_field;
+    private javax.swing.JTextField quantia_field;
+    private javax.swing.JButton submit_aposta_button;
     private javax.swing.JButton ver_apostas_button;
     // End of variables declaration//GEN-END:variables
 }

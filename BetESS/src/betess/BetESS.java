@@ -5,7 +5,7 @@
  */
 package betess;
 
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  *
@@ -36,6 +36,14 @@ public class BetESS {
         this.database.registaJogador(j);
     }
     
+    public void registaAposta(Aposta a){
+        this.database.registaAposta(a);
+    }
+    
+    public void atualizaSaldo(double creditos, String id_jogador){
+        this.database.atualizaSaldo(creditos, id_jogador);
+    }
+    
     /* verificação se um jogador se encontra registado no sistema */
     public Jogador checkUser(String username){
         return this.database.checkUser(username);
@@ -43,6 +51,14 @@ public class BetESS {
     
     public EventoDesportivo getEventoDesportivo(int id){
         return this.database.getEventoDesportivo(id);
+    }
+    
+    public Map<Integer, EventoDesportivo> getEventosDesportivos(){
+        return this.database.getEventosDesportivos();
+    }
+    
+    public List<Aposta> getApostasJogador(String id_jogador){
+        return this.database.getApostasJogador(id_jogador);
     }
     
     /* método que tratará do fecho de um evento desportivo com o respetivo pagamento das apostas referentes a esse */

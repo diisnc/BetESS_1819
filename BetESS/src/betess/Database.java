@@ -6,7 +6,7 @@
 
 package betess;
 
-import java.util.HashMap;
+import java.util.*;
 
 /**
  *
@@ -65,7 +65,7 @@ public class Database {
     }
     
     public EventoDesportivo getEventoDesportivo(int id){
-        return this.eventos.get(id);
+        return this.eventos.get(id).clone();
     }
     
     public HashMap<Integer, Aposta> getApostas(){
@@ -75,6 +75,39 @@ public class Database {
             res.put(a.getId_aposta(), a.clone());
         }
         
+        return res;
+    }
+    
+    public HashMap<Integer, EventoDesportivo> getEventosDesportivos(){
+        HashMap<Integer, EventoDesportivo> res = new HashMap ();
+        
+        for (EventoDesportivo e : this.eventos.values()){
+            res.put(e.getId_evento(), e.clone());
+        }
+        
+        return res;
+    }
+
+    void atualizaSaldo(double creditos, String id_jogador) {
+        Jogador j = this.jogadores.get(id_jogador);
+        
+        if (j != null){
+            double saldo = j.getSaldo();
+            j.setSaldo(saldo + creditos);
+            this.jogadores.put(id_jogador, j);
+        }
+    }
+
+    List<Aposta> getApostasJogador(String id_jogador) {
+        List<Aposta> res = new ArrayList();
+        
+        for (Aposta a: this.apostas.values()){
+            String id_jogador_aposta = a.getId_jogador();
+            
+            if (id_jogador_aposta.equals(id_jogador)){
+                res.add(a.clone());
+            }
+        }
         return res;
     }
     
