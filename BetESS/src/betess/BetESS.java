@@ -31,8 +31,28 @@ public class BetESS {
         return id_utilizador_aut;
     }
     
+    public HashMap<String, Jogador> getJogadores(){
+        return this.database.getJogadores();
+    }
+    
+    public void eliminaJogador(String id){
+        this.database.eliminaJogador(id);
+    }
+    
+    public void bloqueiaJogador(String id){
+        this.database.bloqueiaJogador(id);
+    }
+    
+    public void desbloqueiaJogador(String id){
+        this.database.desbloqueiaJogador(id);
+    }
+    
     public Aposta getAposta(int id_aposta){
         return this.database.getAposta(id_aposta);
+    }
+    
+    public Equipa getEquipa(int id_equipa){
+        return this.database.getEquipa(id_equipa);
     }
     
     /* inserção de um jogador no sistema */
@@ -59,6 +79,14 @@ public class BetESS {
     
     public Map<Integer, EventoDesportivo> getEventosDesportivos(){
         return this.database.getEventosDesportivos();
+    }
+    
+    public HashMap<Integer, Aposta> getApostas(){
+        return this.database.getApostas();
+    }
+    
+    public void removeAposta(int id){
+        this.database.removeAposta(id);
     }
     
     public List<Aposta> getApostasJogador(String id_jogador){

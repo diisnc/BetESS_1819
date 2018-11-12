@@ -15,12 +15,15 @@ import java.util.*;
 public class Database {
     
     private HashMap<String, Jogador> jogadores;
+    private HashMap<String, Jogador> jogadores_bloqueados;
     private HashMap<Integer, Aposta> apostas;
     private HashMap<Integer, EventoDesportivo> eventos;
+    private HashMap<Integer, Equipa> equipas;
     
     /* CONTADORES DE IDENTIDICAÇÃO */
     private int cont_apostas;
     private int cont_eventos;
+    private int cont_equipas;
     
     public Database (){
         this.jogadores = new HashMap<String, Jogador> ();
@@ -28,11 +31,42 @@ public class Database {
         this.eventos = new HashMap<Integer, EventoDesportivo> ();
         this.cont_apostas = 1;
         this.cont_eventos = 1;
+        this.cont_equipas = 1;
+    }
+    
+    /* registo de uma equipa */
+    public void registaEquipa(Equipa e){
+        this.equipas.put(cont_equipas++, e);
+    }
+    
+    public Equipa getEquipa(int id_equipa){
+        return this.equipas.get(id_equipa).clone();
+    }
+    
+    public void bloqueiaJogador(String id){
+        Jogador j = this.jogadores.get(id);
+        this.jogadores.remove(id);
+        this.jogadores_bloqueados.put(id, j);
+    }
+    
+    public void desbloqueiaJogador(String id){
+        Jogador j = this.jogadores_bloqueados.get(id);
+        this.jogadores_bloqueados.remove(j);
+        this.jogadores.put(id, j);
     }
     
     /* inserção de um jogador no sistema */
     public void registaJogador(Jogador j){
         this.jogadores.put(j.getEmail(), j);
+    }
+    
+    public HashMap<String, Jogador> getJogadores(){
+        HashMap<String, Jogador> res = new HashMap ();
+        
+        for (Jogador j : this.jogadores.values()){
+            res.put(j.getEmail(), j.clone());
+        }
+        return res;
     }
     
     public void registaEvento(EventoDesportivo e){
@@ -49,6 +83,10 @@ public class Database {
             jogador = this.jogadores.get(username);
         }
         return jogador;
+    }
+
+    public void eliminaJogador(String id) {
+        this.jogadores.remove(id);
     }
     
     public void updateSaldo(String id_jogador, double novo_saldo){
@@ -92,7 +130,7 @@ public class Database {
         return res;
     }
 
-    void atualizaSaldo(double creditos, String id_jogador) {
+    public void atualizaSaldo(double creditos, String id_jogador) {
         Jogador j = this.jogadores.get(id_jogador);
         
         if (j != null){
@@ -114,5 +152,8 @@ public class Database {
         }
         return res;
     }
-    
+
+    public void removeAposta(int id) {
+        this.apostas.remove(id);
+    }
 }

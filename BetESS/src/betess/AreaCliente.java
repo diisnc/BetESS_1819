@@ -670,7 +670,10 @@ public class AreaCliente extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) lista_apostas.getModel();
         
         for (Aposta a : apostas){
-            model.addRow(new Object[]{a.getId_evento(), "nome equipa casa", "nome equipa fora", a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), a.getQuantia()});
+            EventoDesportivo e = this.betess.getEventoDesportivo(a.getId_evento());
+            String equipa_casa = this.betess.getEquipa(e.getId_equipa_casa()).getDesignacao();
+            String equipa_fora = this.betess.getEquipa(e.getId_equipa_fora()).getDesignacao();
+            model.addRow(new Object[]{a.getId_evento(), equipa_casa, equipa_fora, a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), a.getQuantia()});
         }
         
         
@@ -692,7 +695,9 @@ public class AreaCliente extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) events_list.getModel();
         
         for (EventoDesportivo e : eventos.values()){
-            model.addRow(new Object[]{e.getId_evento(), "nome equipa casa", "nome equipa fora", e.getOdd_casa(), e.getOdd_fora(), e.getOdd_empate()});
+            String equipa_casa = this.betess.getEquipa(e.getId_equipa_casa()).getDesignacao();
+            String equipa_fora = this.betess.getEquipa(e.getId_equipa_fora()).getDesignacao();
+            model.addRow(new Object[]{e.getId_evento(), equipa_casa, equipa_fora, e.getOdd_casa(), e.getOdd_fora(), e.getOdd_empate()});
         }
     }//GEN-LAST:event_apostar_buttonActionPerformed
 

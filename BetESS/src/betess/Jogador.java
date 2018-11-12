@@ -30,6 +30,17 @@ public class Jogador {
         this.saldo = 5; /* CONSIDERAR A OFERTA DE SALDO PARA UM NOVO UTILIZADOR */
         this.notificacoes = new ArrayList ();
     }
+
+    public Jogador(String email, String nome, String password, String contacto, double saldo, List<Notificacao> notificacoes) {
+        this.email = email;
+        this.nome = nome;
+        this.password = password;
+        this.contacto = contacto;
+        this.saldo = saldo;
+        this.notificacoes = notificacoes;
+    }
+    
+    
     
     /* GETTERS */
 
@@ -48,6 +59,12 @@ public class Jogador {
     public double getSaldo() {
         return saldo;
     }
+
+    private String getPassword() {
+        return password;
+    }
+    
+    
     
     public List<Notificacao> getNotificacoes(){
         List<Notificacao> res = new ArrayList ();
@@ -87,5 +104,7 @@ public class Jogador {
         return this.password.equals(password);
     }
     
-    
+    public Jogador clone(){
+        return new Jogador(this.getEmail(), this.getNome(), this.getPassword(), this.getContacto(), this.getSaldo(), this.getNotificacoes());
+    }
 }
