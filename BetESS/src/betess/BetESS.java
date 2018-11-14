@@ -5,6 +5,7 @@
  */
 package betess;
 
+import java.io.*;
 import java.util.*;
 
 /**
@@ -18,8 +19,40 @@ public class BetESS {
     
     /* Contrutor BetESS */
     public BetESS(){
-        /* QUANDO FOR SERIALIZABLE, TEMOS DE CARREGAR AQUI */
-        this.database = new Database();
+        Database d = null;
+        try {
+            FileInputStream fileIn = new FileInputStream("/tmp/database");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            d = (Database) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            System.out.println("Database class not found");
+            c.printStackTrace();
+        }
+        if (d == null){
+            System.out.println("Estado da aplicação iniciado.");
+            this.database = new Database();
+        }
+        else {
+            System.out.println("Restauro da aplicação com sucesso.");
+            this.database = d;
+        }
+    }
+    
+    public void save() {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("/tmp/database");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(this.database);
+            out.close();
+            fileOut.close();
+            System.out.printf("Serialized data!");
+        } catch (IOException i) {
+              i.printStackTrace();
+        }
     }
     
     /* método que permite definir o jogador autenticado na sessao */
@@ -51,8 +84,12 @@ public class BetESS {
         return this.database.getAposta(id_aposta);
     }
     
-    public Equipa getEquipa(int id_equipa){
+    public Equipa getEquipa(String id_equipa){
         return this.database.getEquipa(id_equipa);
+    }
+    
+    public List<Equipa> getEquipas(){
+        return this.database.getEquipas();
     }
     
     /* inserção de um jogador no sistema */
@@ -75,6 +112,18 @@ public class BetESS {
     
     public EventoDesportivo getEventoDesportivo(int id){
         return this.database.getEventoDesportivo(id);
+    }
+    
+    public void registaLiga(Liga l){
+        this.database.registaLiga(l);
+    }
+    
+    public List<Liga> getLigas(){
+        return this.database.getLigas();
+    }
+            
+    public void registaEventoDesportivo(String equipa_casa, String equipa_fora){
+        this.database.registaEventoDesportivo(equipa_casa, equipa_fora);
     }
     
     public Map<Integer, EventoDesportivo> getEventosDesportivos(){
@@ -113,7 +162,8 @@ public class BetESS {
                 Jogador j = this.database.checkUser(a.getId_jogador());
                 double saldo = j.getSaldo();
                 double quant_aposta = a.getQuantia();
-                double odd = -1;
+                double odd = -10000;
+                double saldo_ant = saldo;
                 
                 if (evento_ganha_casa == aposta_ganha_casa 
                  && evento_ganha_fora == aposta_ganha_fora
@@ -138,6 +188,13 @@ public class BetESS {
                 else {
                     saldo -= quant_aposta;
                 }
+                /* lançamento de notificações */
+                Notificacao n = new Notificacao(a.getId_aposta(), saldo - saldo_ant);
+                Jogador jogador = this.database.checkUser(a.getId_jogador());
+                jogador.adicionaNotificacao(n);
+                this.database.registaJogador(jogador);
+                
+                /* atualização do saldo do cliente */
                 this.database.updateSaldo(j.getEmail(), saldo);
             }
         }
@@ -152,5 +209,4 @@ public class BetESS {
         l.setLocationRelativeTo(null);
         l.setVisible(true);
     }
-    
 }

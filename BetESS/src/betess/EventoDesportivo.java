@@ -6,15 +6,17 @@
 
 package betess;
 
+import java.io.Serializable;
+
 /**
  *
  *
  */
-public class EventoDesportivo {
+public class EventoDesportivo implements Serializable{
     
     public int id_evento;
-    public int id_equipa_casa;
-    public int id_equipa_fora;
+    public String equipa_casa;
+    public String equipa_fora;
     public String estado;
     public boolean ganha_casa;
     public boolean ganha_fora;
@@ -24,9 +26,9 @@ public class EventoDesportivo {
     public double odd_empate;
     /* COLOCAMOS A HORA DO JOGO OU NÃO VALE A PENA? */
 
-    public EventoDesportivo(int id_evento, int id_equipa_casa, int id_equipa_fora) {
-        this.id_equipa_casa = id_equipa_casa;
-        this.id_equipa_fora = id_equipa_fora;
+    public EventoDesportivo(int id_evento, String equipa_casa, String equipa_fora) {
+        this.equipa_casa = equipa_casa;
+        this.equipa_fora = equipa_fora;
         this.estado = "Aberto";
         this.ganha_casa = false;
         this.ganha_fora = false;
@@ -34,10 +36,10 @@ public class EventoDesportivo {
     }
 
     /* construtor utilizado no clone */
-    public EventoDesportivo(int id_evento, int id_equipa_casa, int id_equipa_fora, String estado, boolean ganha_casa, boolean ganha_fora, boolean empate, double odd_casa, double odd_fora, double odd_empate) {
+    public EventoDesportivo(int id_evento, String equipa_casa, String equipa_fora, String estado, boolean ganha_casa, boolean ganha_fora, boolean empate, double odd_casa, double odd_fora, double odd_empate) {
         this.id_evento = id_evento;
-        this.id_equipa_casa = id_equipa_casa;
-        this.id_equipa_fora = id_equipa_fora;
+        this.equipa_casa = equipa_casa;
+        this.equipa_fora = equipa_fora;
         this.estado = estado;
         this.ganha_casa = ganha_casa;
         this.ganha_fora = ganha_fora;
@@ -55,12 +57,12 @@ public class EventoDesportivo {
         return id_evento;
     }
 
-    public int getId_equipa_casa() {
-        return id_equipa_casa;
+    public String getequipa_casa() {
+        return equipa_casa;
     }
 
-    public int getId_equipa_fora() {
-        return id_equipa_fora;
+    public String getequipa_fora() {
+        return equipa_fora;
     }
 
     public String getEstado() {
@@ -97,12 +99,12 @@ public class EventoDesportivo {
     
     /* SETTERS */
 
-    public void setId_equipa_casa(int id_equipa_casa) {
-        this.id_equipa_casa = id_equipa_casa;
+    public void setId_equipa_casa(String equipa_casa) {
+        this.equipa_casa = equipa_casa;
     }
 
-    public void setId_equipa_fora(int id_equipa_fora) {
-        this.id_equipa_fora = id_equipa_fora;
+    public void setId_equipa_fora(String equipa_fora) {
+        this.equipa_fora = equipa_fora;
     }
 
     public void setEstado(String estado) {
@@ -134,7 +136,7 @@ public class EventoDesportivo {
     }
     
     public EventoDesportivo clone(){
-        return new EventoDesportivo(this.getId_evento(), this.getId_equipa_casa(), this.getId_equipa_fora(),
+        return new EventoDesportivo(this.getId_evento(), this.getequipa_casa(), this.getequipa_fora(),
                 this.getEstado(), this.getGanha_casa(), this.getGanha_fora(), this.getEmpate(), this.getOdd_casa(),
                 this.getOdd_fora(), this.getOdd_empate());
     }

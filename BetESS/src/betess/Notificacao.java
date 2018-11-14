@@ -6,18 +6,23 @@
 
 package betess;
 
+import java.io.Serializable;
+
 /**
  *
  *
  */
-public class Notificacao {
+public class Notificacao implements Serializable{
     
     private int id_aposta;
     private double balanco;
+    private String status;
 
     public Notificacao(int id_aposta, double balaco) {
         this.id_aposta = id_aposta;
         this.balanco = balanco;
+        this.status = "Não Lida";
+        
     }
     
     public Notificacao clone(){
@@ -32,6 +37,11 @@ public class Notificacao {
     public double getBalanco() {
         return balanco;
     }
+
+    public String getStatus() {
+        return status;
+    }
+    
     
     /* SETTERS */
 
@@ -41,5 +51,9 @@ public class Notificacao {
 
     public void setBalanco(double balanco) {
         this.balanco = balanco;
+    }
+    
+    public void marcarLida(){
+        this.status = "Lida";
     }
 }

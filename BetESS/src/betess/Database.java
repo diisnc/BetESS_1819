@@ -6,41 +6,63 @@
 
 package betess;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  *
  *
  */
-public class Database {
+public class Database implements Serializable{
     
     private HashMap<String, Jogador> jogadores;
     private HashMap<String, Jogador> jogadores_bloqueados;
     private HashMap<Integer, Aposta> apostas;
     private HashMap<Integer, EventoDesportivo> eventos;
-    private HashMap<Integer, Equipa> equipas;
+    private HashMap<String, Equipa> equipas;
+    private HashMap<String, Liga> ligas;
     
     /* CONTADORES DE IDENTIDICAÇÃO */
     private int cont_apostas;
     private int cont_eventos;
-    private int cont_equipas;
     
     public Database (){
-        this.jogadores = new HashMap<String, Jogador> ();
-        this.apostas = new HashMap<Integer, Aposta> ();
-        this.eventos = new HashMap<Integer, EventoDesportivo> ();
+        this.jogadores = new HashMap<> ();
+        this.apostas = new HashMap<> ();
+        this.eventos = new HashMap<> ();
         this.cont_apostas = 1;
         this.cont_eventos = 1;
-        this.cont_equipas = 1;
     }
     
     /* registo de uma equipa */
     public void registaEquipa(Equipa e){
-        this.equipas.put(cont_equipas++, e);
+        this.equipas.put(e.getDesignacao(), e);
     }
     
-    public Equipa getEquipa(int id_equipa){
+    public void registaLiga(Liga l){
+        this.ligas.put(l.getNome(), l.clone());
+    }
+    
+    public List<Liga> getLigas(){
+        List<Liga> res = new ArrayList<> ();
+        
+        for (Liga l: this.ligas.values()){
+            res.add(l.clone());
+        }
+        return res;
+    }
+    
+    public Equipa getEquipa(String id_equipa){
         return this.equipas.get(id_equipa).clone();
+    }
+    
+    public List<Equipa> getEquipas(){
+        List<Equipa> res = new ArrayList<> ();
+        
+        for (Equipa e : this.equipas.values()){
+            res.add(e.clone());
+        }
+        return res;
     }
     
     public void bloqueiaJogador(String id){
@@ -51,7 +73,7 @@ public class Database {
     
     public void desbloqueiaJogador(String id){
         Jogador j = this.jogadores_bloqueados.get(id);
-        this.jogadores_bloqueados.remove(j);
+        this.jogadores_bloqueados.remove(id);
         this.jogadores.put(id, j);
     }
     
@@ -67,10 +89,6 @@ public class Database {
             res.put(j.getEmail(), j.clone());
         }
         return res;
-    }
-    
-    public void registaEvento(EventoDesportivo e){
-        this.eventos.put(cont_eventos++, e);
     }
     
     public void registaAposta(Aposta a){
@@ -98,8 +116,9 @@ public class Database {
         this.eventos.put(e.getId_evento(), e);
     }
     
-    public void registaEventoDesportivo(EventoDesportivo e){
-        this.eventos.put(cont_eventos++, e);
+    public void registaEventoDesportivo(String equipa_casa, String equipa_fora){
+        EventoDesportivo e = new EventoDesportivo(this.cont_eventos++, equipa_casa, equipa_fora);
+        this.eventos.put(e.getId_evento(), e);
     }
     
     public EventoDesportivo getEventoDesportivo(int id){

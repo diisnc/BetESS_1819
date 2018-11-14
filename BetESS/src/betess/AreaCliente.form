@@ -32,14 +32,14 @@
               <Component id="buttons_panel" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-                      <Component id="Welcome_label" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="options_panel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="Welcome_label" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -50,9 +50,10 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="0" pref="15" max="32767" attributes="0"/>
                       <Component id="Welcome_label" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="options_panel" min="-2" pref="422" max="-2" attributes="0"/>
                   </Group>
                   <Component id="buttons_panel" max="32767" attributes="0"/>
@@ -65,7 +66,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="Welcome_label">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel2"/>
+        <Property name="text" type="java.lang.String" value="Bem-vindo &#xe0; BetESS"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="buttons_panel">
@@ -74,20 +75,28 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="editar_perfil_button" alignment="0" max="32767" attributes="0"/>
-                      <Component id="apostar_button" alignment="0" max="32767" attributes="0"/>
-                      <Component id="creditos_button" alignment="0" max="32767" attributes="0"/>
-                      <Component id="notificacoes_button" alignment="0" max="32767" attributes="0"/>
-                      <Component id="ver_apostas_button" alignment="0" pref="140" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="editar_perfil_button" alignment="0" max="32767" attributes="0"/>
+                              <Component id="apostar_button" alignment="0" max="32767" attributes="0"/>
+                              <Component id="creditos_button" alignment="0" max="32767" attributes="0"/>
+                              <Component id="notificacoes_button" alignment="0" max="32767" attributes="0"/>
+                              <Component id="ver_apostas_button" alignment="0" pref="140" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="logout_button" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -106,7 +115,9 @@
                   <Component id="notificacoes_button" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="editar_perfil_button" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="237" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="logout_button" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -132,6 +143,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Cr&#xe9;ditos"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="creditos_buttonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="notificacoes_button">
           <Properties>
@@ -153,6 +167,14 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Menu:"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="logout_button">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Terminar sess&#xe3;o"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logout_buttonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -617,17 +639,23 @@
                 <Component class="javax.swing.JTable" name="notificacoes_list">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="6" rowCount="4">
+                      <Table columnCount="7" rowCount="4">
                         <Column editable="false" title="Identificador Evento" type="java.lang.Integer"/>
                         <Column editable="false" title="Identificador Aposta" type="java.lang.Integer"/>
                         <Column editable="false" title="Equipa Casa" type="java.lang.String"/>
                         <Column editable="false" title="Equipa Fora" type="java.lang.String"/>
                         <Column editable="false" title="Quantia aposta" type="java.lang.Double"/>
                         <Column editable="false" title="Balan&#xe7;o" type="java.lang.Double"/>
+                        <Column editable="false" title="Estado" type="java.lang.String"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                           <Title/>
                           <Editor/>

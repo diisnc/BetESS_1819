@@ -134,20 +134,29 @@ public class Login extends javax.swing.JFrame {
         String password = password_field.getText();
         
         /* NÃO ESQUECER QUE TEMOS DE VERIFICAR SEMPRE SE QUEM ESTÁ A FAZER O LOGIN É O ADMIN */
-        
-        Jogador jogador = betess.checkUser(email);
-        
-        if (jogador != null){
-            if (jogador.checkPassword(password)){
-                AreaCliente frame = new AreaCliente();
-                this.betess.setId_utilizador_aut(email);
-                frame.setTitle("Área autenticada");
-                frame.setLocationRelativeTo(null);
-                frame.setVisible(true);
-            }
-        }
+        if (email.equals("admin") && password.equals("admin")){
+            this.betess.setId_utilizador_aut(email);
+            AreaAdministrador frame = new AreaAdministrador();
+            frame.setTitle("Área de administração");
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+}
         else {
-            JOptionPane.showMessageDialog(null, "O nome de utilizador ou a palavra.passe introduzidos não são válidos.", "Erro na autenticação", ERROR_MESSAGE);
+            Jogador jogador = betess.checkUser(email);
+
+            if (jogador != null){
+                if (jogador.checkPassword(password)){
+                    this.betess.setId_utilizador_aut(email);
+                    AreaCliente frame = new AreaCliente();
+                    frame.setTitle("Área autenticada");
+                    frame.setLocationRelativeTo(null);
+                    frame.setVisible(true);
+                }
+
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "O nome de utilizador ou a palavra.passe introduzidos não são válidos.", "Erro na autenticação", ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 
@@ -191,7 +200,8 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                Login l = new Login();
+                l.setVisible(true);
             }
         });
     }

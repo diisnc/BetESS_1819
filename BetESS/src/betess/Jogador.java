@@ -6,13 +6,14 @@
 
 package betess;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  *
  * @author MarcoSilva
  */
-public class Jogador {
+public class Jogador implements Serializable{
     public String email;
     public String nome;
     private String password;
@@ -102,6 +103,11 @@ public class Jogador {
     /* método que permite a verificação da password sem que esta seja passada para o exterior */
     public boolean checkPassword(String password){
         return this.password.equals(password);
+    }
+    
+    /* método que permmite a adição de uma notificação relativa ao jogador */
+    public void adicionaNotificacao(Notificacao n){
+        this.notificacoes.add(n);
     }
     
     public Jogador clone(){

@@ -6,7 +6,6 @@
 package betess;
 
 import java.util.*;
-import javax.swing.ButtonModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,8 +19,7 @@ public class AreaCliente extends javax.swing.JFrame {
 
     public void setBetess(BetESS betess) {
         this.betess = betess;
-        Welcome_label.setText("Bem vindo " + this.betess.checkUser(this.betess.getId_utilizador_aut()).getNome());
-
+        this.setTitle("Área autenticada");
     }
 
     /**
@@ -49,6 +47,7 @@ public class AreaCliente extends javax.swing.JFrame {
         notificacoes_button = new javax.swing.JButton();
         editar_perfil_button = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        logout_button = new javax.swing.JButton();
         options_panel = new javax.swing.JPanel();
         apostar_elements = new javax.swing.JPanel();
         submit_aposta_button = new javax.swing.JButton();
@@ -93,7 +92,7 @@ public class AreaCliente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Welcome_label.setText("jLabel2");
+        Welcome_label.setText("Bem-vindo à BetESS");
 
         apostar_button.setText("Apostar");
         apostar_button.addActionListener(new java.awt.event.ActionListener() {
@@ -110,6 +109,11 @@ public class AreaCliente extends javax.swing.JFrame {
         });
 
         creditos_button.setText("Créditos");
+        creditos_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                creditos_buttonActionPerformed(evt);
+            }
+        });
 
         notificacoes_button.setText("Notificações");
         notificacoes_button.addActionListener(new java.awt.event.ActionListener() {
@@ -127,23 +131,35 @@ public class AreaCliente extends javax.swing.JFrame {
 
         jLabel1.setText("Menu:");
 
+        logout_button.setText("Terminar sessão");
+        logout_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logout_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout buttons_panelLayout = new javax.swing.GroupLayout(buttons_panel);
         buttons_panel.setLayout(buttons_panelLayout);
         buttons_panelLayout.setHorizontalGroup(
             buttons_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(buttons_panelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(buttons_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(editar_perfil_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(apostar_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(creditos_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(notificacoes_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ver_apostas_button, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
+                    .addGroup(buttons_panelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(buttons_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(editar_perfil_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(apostar_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(creditos_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(notificacoes_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ver_apostas_button, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)))
+                    .addGroup(buttons_panelLayout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(buttons_panelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(logout_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(buttons_panelLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         buttons_panelLayout.setVerticalGroup(
             buttons_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,7 +176,9 @@ public class AreaCliente extends javax.swing.JFrame {
                 .addComponent(notificacoes_button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(editar_perfil_button)
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(logout_button)
+                .addContainerGap())
         );
 
         options_panel.setLayout(new java.awt.CardLayout());
@@ -436,20 +454,20 @@ public class AreaCliente extends javax.swing.JFrame {
 
         notificacoes_list.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Identificador Evento", "Identificador Aposta", "Equipa Casa", "Equipa Fora", "Quantia aposta", "Balanço"
+                "Identificador Evento", "Identificador Aposta", "Equipa Casa", "Equipa Fora", "Quantia aposta", "Balanço", "Estado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -468,6 +486,7 @@ public class AreaCliente extends javax.swing.JFrame {
             notificacoes_list.getColumnModel().getColumn(3).setResizable(false);
             notificacoes_list.getColumnModel().getColumn(4).setResizable(false);
             notificacoes_list.getColumnModel().getColumn(5).setResizable(false);
+            notificacoes_list.getColumnModel().getColumn(6).setResizable(false);
         }
 
         descartar_button.setText("Descartar");
@@ -610,13 +629,13 @@ public class AreaCliente extends javax.swing.JFrame {
                 .addComponent(buttons_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(Welcome_label)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(options_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43))))
+                        .addGap(43, 43, 43))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(Welcome_label)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -624,8 +643,9 @@ public class AreaCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 15, Short.MAX_VALUE)
                         .addComponent(Welcome_label)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(options_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(buttons_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -670,10 +690,8 @@ public class AreaCliente extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) lista_apostas.getModel();
         
         for (Aposta a : apostas){
-            EventoDesportivo e = this.betess.getEventoDesportivo(a.getId_evento());
-            String equipa_casa = this.betess.getEquipa(e.getId_equipa_casa()).getDesignacao();
-            String equipa_fora = this.betess.getEquipa(e.getId_equipa_fora()).getDesignacao();
-            model.addRow(new Object[]{a.getId_evento(), equipa_casa, equipa_fora, a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), a.getQuantia()});
+            EventoDesportivo e = this.betess.getEventoDesportivo(a.getId_evento());;
+            model.addRow(new Object[]{a.getId_evento(), e.getequipa_casa(), e.getequipa_fora(), a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), a.getQuantia()});
         }
         
         
@@ -695,8 +713,8 @@ public class AreaCliente extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) events_list.getModel();
         
         for (EventoDesportivo e : eventos.values()){
-            String equipa_casa = this.betess.getEquipa(e.getId_equipa_casa()).getDesignacao();
-            String equipa_fora = this.betess.getEquipa(e.getId_equipa_fora()).getDesignacao();
+            String equipa_casa = this.betess.getEquipa(e.getequipa_casa()).getDesignacao();
+            String equipa_fora = this.betess.getEquipa(e.getequipa_fora()).getDesignacao();
             model.addRow(new Object[]{e.getId_evento(), equipa_casa, equipa_fora, e.getOdd_casa(), e.getOdd_fora(), e.getOdd_empate()});
         }
     }//GEN-LAST:event_apostar_buttonActionPerformed
@@ -741,16 +759,26 @@ public class AreaCliente extends javax.swing.JFrame {
             boolean casa_selected = casa_button.isSelected();
             boolean fora_selected = fora_button.isSelected();
             boolean empate_selected = empate_button.isSelected();
-
-            Aposta a = new Aposta(Double.parseDouble(quantia_field.getText()), id_evento, user, casa_selected, fora_selected, empate_selected);
-
-            this.betess.registaAposta(a);
             
-            JOptionPane.showMessageDialog(null, "Aposta registada com sucesso.", "BetESS", JOptionPane.PLAIN_MESSAGE);
+            boolean aposta_permitida = true;
+            for (Aposta a : this.betess.getApostasJogador(user)){
+                aposta_permitida = false;
+                break;
+            }
+
+            if (aposta_permitida){
+                Aposta a = new Aposta(Double.parseDouble(quantia_field.getText()), id_evento, user, casa_selected, fora_selected, empate_selected);
+
+                this.betess.registaAposta(a);
+
+                JOptionPane.showMessageDialog(null, "Aposta registada com sucesso.", "BetESS", JOptionPane.PLAIN_MESSAGE);
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Já tem uma aposta registada para o evento selecionado.", "Falha no registo da aposta", JOptionPane.ERROR_MESSAGE);
+            }
         }
         else {
             JOptionPane.showMessageDialog(null, "Créditos insuficientes.", "Falha no registo da aposta", JOptionPane.ERROR_MESSAGE);
-
         }
         
     }//GEN-LAST:event_submit_aposta_buttonActionPerformed
@@ -823,9 +851,29 @@ public class AreaCliente extends javax.swing.JFrame {
         for (Notificacao n : notificacoes){
             Aposta a = this.betess.getAposta(n.getId_aposta());
             
-            model.addRow(new Object[]{a.getId_evento(), a.getId_aposta(), "nome equipa casa", "nome equipa fora", a.getQuantia(), n.getBalanco()});
+            model.addRow(new Object[]{a.getId_evento(), a.getId_aposta(), "nome equipa casa", "nome equipa fora", a.getQuantia(), n.getBalanco(), n.getStatus()});
         }
     }//GEN-LAST:event_notificacoes_buttonActionPerformed
+
+    private void logout_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout_buttonActionPerformed
+        this.betess.setId_utilizador_aut("None");
+        this.setVisible(false);
+        
+        /* local onde o estado da aplicação é guardado */
+        this.betess.save();
+    }//GEN-LAST:event_logout_buttonActionPerformed
+
+    private void creditos_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditos_buttonActionPerformed
+        /* remoção de paineis anteriores */
+        options_panel.removeAll();
+        options_panel.repaint();
+        options_panel.revalidate();
+        
+        /* alocação do respetivo painel de opções */
+        options_panel.add(creditos_elements);
+        options_panel.repaint();
+        options_panel.revalidate();
+    }//GEN-LAST:event_creditos_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -859,6 +907,7 @@ public class AreaCliente extends javax.swing.JFrame {
             public void run() {
                 AreaCliente main = new AreaCliente();
                 main.setVisible(true);
+                
             }
         });
     }
@@ -904,6 +953,7 @@ public class AreaCliente extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTable lista_apostas;
     private javax.swing.JScrollPane lista_apostas_pane;
+    private javax.swing.JButton logout_button;
     private javax.swing.JTextField nome_field;
     private javax.swing.JButton notificacoes_button;
     private javax.swing.JPanel notificacoes_elements;

@@ -6,6 +6,7 @@
 package betess;
 
 import java.util.*;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -46,6 +47,9 @@ public class AreaAdministrador extends javax.swing.JFrame {
         jogadores_bloq_button = new javax.swing.JButton();
         apostas_button = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        novo_evento_button = new javax.swing.JButton();
+        nova_equipa_button = new javax.swing.JButton();
+        nova_liga_button = new javax.swing.JButton();
         options_panel = new javax.swing.JPanel();
         ver_jogadores_elements = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -54,6 +58,11 @@ public class AreaAdministrador extends javax.swing.JFrame {
         remover_jogador_button = new javax.swing.JButton();
         bloquear_jogador_button = new javax.swing.JButton();
         eventos_desportivos_elements = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        eventos_lista = new javax.swing.JTable();
+        fechar_evento_button = new javax.swing.JButton();
+        registar_evento_button = new javax.swing.JButton();
         jogadores_bloqueados_elements = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -64,6 +73,24 @@ public class AreaAdministrador extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         lista_apostas = new javax.swing.JTable();
         elimina_aposta = new javax.swing.JButton();
+        novo_evento_elements = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        combo_casa = new javax.swing.JComboBox<>();
+        combo_fora = new javax.swing.JComboBox<>();
+        regista_evento_button = new javax.swing.JButton();
+        nova_equipa_elements = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        nome_equipa_field = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        ligas_combo = new javax.swing.JComboBox<>();
+        nova_liga_elements = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        nome_liga_field = new javax.swing.JTextField();
+        regista_liga_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,22 +121,46 @@ public class AreaAdministrador extends javax.swing.JFrame {
 
         jLabel1.setText("Menu:");
 
+        novo_evento_button.setText("Novo Evento");
+        novo_evento_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                novo_evento_buttonActionPerformed(evt);
+            }
+        });
+
+        nova_equipa_button.setText("Nova Equipa");
+        nova_equipa_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nova_equipa_buttonActionPerformed(evt);
+            }
+        });
+
+        nova_liga_button.setText("Nova Liga");
+        nova_liga_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nova_liga_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout buttons_panelLayout = new javax.swing.GroupLayout(buttons_panel);
         buttons_panel.setLayout(buttons_panelLayout);
         buttons_panelLayout.setHorizontalGroup(
             buttons_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buttons_panelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(69, 69, 69))
             .addGroup(buttons_panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(buttons_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ver_jogadores_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jogadores_bloq_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(apostas_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(eventos_desportivos_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(eventos_desportivos_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(novo_evento_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nova_equipa_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nova_liga_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buttons_panelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(69, 69, 69))
         );
         buttons_panelLayout.setVerticalGroup(
             buttons_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,6 +175,12 @@ public class AreaAdministrador extends javax.swing.JFrame {
                 .addComponent(jogadores_bloq_button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(apostas_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(novo_evento_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nova_equipa_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nova_liga_button)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -211,15 +268,87 @@ public class AreaAdministrador extends javax.swing.JFrame {
 
         options_panel.add(ver_jogadores_elements, "card2");
 
+        jLabel5.setText("Eventos Desportivos");
+
+        eventos_lista.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Identificador", "Equipa Casa", "Equipa Fora", "Ganha Casa", "Ganha Fora", "Empate", "Estado"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(eventos_lista);
+        if (eventos_lista.getColumnModel().getColumnCount() > 0) {
+            eventos_lista.getColumnModel().getColumn(0).setResizable(false);
+            eventos_lista.getColumnModel().getColumn(1).setResizable(false);
+            eventos_lista.getColumnModel().getColumn(2).setResizable(false);
+            eventos_lista.getColumnModel().getColumn(3).setResizable(false);
+            eventos_lista.getColumnModel().getColumn(4).setResizable(false);
+            eventos_lista.getColumnModel().getColumn(5).setResizable(false);
+            eventos_lista.getColumnModel().getColumn(6).setResizable(false);
+        }
+
+        fechar_evento_button.setText("Fechar Evento");
+        fechar_evento_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fechar_evento_buttonActionPerformed(evt);
+            }
+        });
+
+        registar_evento_button.setText("Registar Evento Desportivo");
+        registar_evento_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registar_evento_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout eventos_desportivos_elementsLayout = new javax.swing.GroupLayout(eventos_desportivos_elements);
         eventos_desportivos_elements.setLayout(eventos_desportivos_elementsLayout);
         eventos_desportivos_elementsLayout.setHorizontalGroup(
             eventos_desportivos_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 697, Short.MAX_VALUE)
+            .addGroup(eventos_desportivos_elementsLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(eventos_desportivos_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(eventos_desportivos_elementsLayout.createSequentialGroup()
+                        .addComponent(registar_evento_button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(fechar_evento_button))
+                    .addGroup(eventos_desportivos_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         eventos_desportivos_elementsLayout.setVerticalGroup(
             eventos_desportivos_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 422, Short.MAX_VALUE)
+            .addGroup(eventos_desportivos_elementsLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(eventos_desportivos_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fechar_evento_button)
+                    .addComponent(registar_evento_button))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         options_panel.add(eventos_desportivos_elements, "card2");
@@ -338,6 +467,158 @@ public class AreaAdministrador extends javax.swing.JFrame {
 
         options_panel.add(apostas_elements, "card2");
 
+        jLabel6.setText("Novo Evento Desportivo");
+
+        jLabel7.setText("Equipa Casa:");
+
+        jLabel8.setText("Equipa Fora:");
+
+        combo_casa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        combo_fora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        regista_evento_button.setText("Registar Evento");
+        regista_evento_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regista_evento_buttonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout novo_evento_elementsLayout = new javax.swing.GroupLayout(novo_evento_elements);
+        novo_evento_elements.setLayout(novo_evento_elementsLayout);
+        novo_evento_elementsLayout.setHorizontalGroup(
+            novo_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(novo_evento_elementsLayout.createSequentialGroup()
+                .addGroup(novo_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(novo_evento_elementsLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel6))
+                    .addGroup(novo_evento_elementsLayout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addGroup(novo_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(novo_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(combo_casa, 0, 222, Short.MAX_VALUE)
+                            .addComponent(combo_fora, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, novo_evento_elementsLayout.createSequentialGroup()
+                .addGap(0, 350, Short.MAX_VALUE)
+                .addComponent(regista_evento_button)
+                .addGap(220, 220, 220))
+        );
+        novo_evento_elementsLayout.setVerticalGroup(
+            novo_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(novo_evento_elementsLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jLabel6)
+                .addGap(41, 41, 41)
+                .addGroup(novo_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(combo_casa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(novo_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(combo_fora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                .addComponent(regista_evento_button)
+                .addGap(113, 113, 113))
+        );
+
+        options_panel.add(novo_evento_elements, "card2");
+
+        jLabel9.setText("Nova Equipa");
+
+        jLabel10.setText("Nome da equipa:");
+
+        jLabel11.setText("Liga:");
+
+        ligas_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout nova_equipa_elementsLayout = new javax.swing.GroupLayout(nova_equipa_elements);
+        nova_equipa_elements.setLayout(nova_equipa_elementsLayout);
+        nova_equipa_elementsLayout.setHorizontalGroup(
+            nova_equipa_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(nova_equipa_elementsLayout.createSequentialGroup()
+                .addGroup(nova_equipa_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(nova_equipa_elementsLayout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(jLabel9))
+                    .addGroup(nova_equipa_elementsLayout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addGroup(nova_equipa_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(nova_equipa_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nome_equipa_field, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ligas_combo, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(114, Short.MAX_VALUE))
+        );
+        nova_equipa_elementsLayout.setVerticalGroup(
+            nova_equipa_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(nova_equipa_elementsLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel9)
+                .addGap(30, 30, 30)
+                .addGroup(nova_equipa_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(nome_equipa_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(nova_equipa_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(ligas_combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(282, Short.MAX_VALUE))
+        );
+
+        options_panel.add(nova_equipa_elements, "card2");
+
+        jLabel12.setText("Nova Liga");
+
+        jLabel13.setText("Nome da Liga:");
+
+        regista_liga_button.setText("Registar Liga");
+        regista_liga_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regista_liga_buttonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout nova_liga_elementsLayout = new javax.swing.GroupLayout(nova_liga_elements);
+        nova_liga_elements.setLayout(nova_liga_elementsLayout);
+        nova_liga_elementsLayout.setHorizontalGroup(
+            nova_liga_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(nova_liga_elementsLayout.createSequentialGroup()
+                .addGroup(nova_liga_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(regista_liga_button)
+                    .addGroup(nova_liga_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(nova_liga_elementsLayout.createSequentialGroup()
+                            .addGap(61, 61, 61)
+                            .addComponent(jLabel12))
+                        .addGroup(nova_liga_elementsLayout.createSequentialGroup()
+                            .addGap(83, 83, 83)
+                            .addComponent(jLabel13)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(nome_liga_field, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(130, Short.MAX_VALUE))
+        );
+        nova_liga_elementsLayout.setVerticalGroup(
+            nova_liga_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(nova_liga_elementsLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel12)
+                .addGap(30, 30, 30)
+                .addGroup(nova_liga_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(nome_liga_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addComponent(regista_liga_button)
+                .addContainerGap(248, Short.MAX_VALUE))
+        );
+
+        options_panel.add(nova_liga_elements, "card2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -381,6 +662,14 @@ public class AreaAdministrador extends javax.swing.JFrame {
         options_panel.add(eventos_desportivos_elements);
         options_panel.repaint();
         options_panel.revalidate();
+        
+        DefaultTableModel model = (DefaultTableModel) eventos_lista.getModel();
+        
+        for (EventoDesportivo e : this.betess.getEventosDesportivos().values()){
+            String equipa_casa = this.betess.getEquipa(e.getequipa_casa()).getDesignacao();
+            String equipa_fora = this.betess.getEquipa(e.getequipa_fora()).getDesignacao();
+            model.addRow(new Object[]{e.getId_evento(), equipa_casa, equipa_fora, e.getGanha_casa(), e.getGanha_fora(), e.getEmpate(), e.getEstado()});
+        }
         
         
     }//GEN-LAST:event_eventos_desportivos_buttonActionPerformed
@@ -462,6 +751,100 @@ public class AreaAdministrador extends javax.swing.JFrame {
         model.removeRow(row);
     }//GEN-LAST:event_elimina_apostaActionPerformed
 
+    private void fechar_evento_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechar_evento_buttonActionPerformed
+        int row = jogadores_list.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) lista_apostas.getModel();
+        
+        int id_evento = (int) model.getValueAt(row, 0);
+        this.betess.fechaEvento(id_evento);
+    }//GEN-LAST:event_fechar_evento_buttonActionPerformed
+
+    private void registar_evento_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registar_evento_buttonActionPerformed
+        
+    }//GEN-LAST:event_registar_evento_buttonActionPerformed
+
+    private void regista_evento_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regista_evento_buttonActionPerformed
+        String c_casa = combo_casa.getSelectedItem().toString();                                                     
+        String c_fora = combo_fora.getSelectedItem().toString();
+        if (c_casa.equals(c_fora)){
+            JOptionPane.showMessageDialog(null, "Não é possível definir um evento apenas com uma equipa.", "Falha no registo do evento desportivo", JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            this.betess.registaEventoDesportivo(c_casa, c_fora);
+            JOptionPane.showMessageDialog(null, "Evento registado com sucesso.", "BetESS", JOptionPane.PLAIN_MESSAGE);
+        }
+    }//GEN-LAST:event_regista_evento_buttonActionPerformed
+
+    private void novo_evento_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novo_evento_buttonActionPerformed
+        /* remoção de paineis anteriores */
+        options_panel.removeAll();
+        options_panel.repaint();
+        options_panel.revalidate();
+        
+        /* alocação do respetivo painel de opções */
+        options_panel.add(novo_evento_elements);
+        options_panel.repaint();
+        options_panel.revalidate();
+        
+        List<Equipa> equipas = this.betess.getEquipas();
+        
+        for (Equipa e: equipas){
+            combo_casa.addItem(e.getDesignacao());
+            combo_casa.addItem(e.getDesignacao());
+        }
+    }//GEN-LAST:event_novo_evento_buttonActionPerformed
+
+    private void nova_equipa_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nova_equipa_buttonActionPerformed
+        /* remoção de paineis anteriores */
+        options_panel.removeAll();
+        options_panel.repaint();
+        options_panel.revalidate();
+        
+        /* alocação do respetivo painel de opções */
+        options_panel.add(nova_equipa_elements);
+        options_panel.repaint();
+        options_panel.revalidate();
+        
+        List<Liga> ligas = this.betess.getLigas();
+        
+        for (Liga l : ligas){
+            ligas_combo.addItem(l.getNome());
+        }
+    }//GEN-LAST:event_nova_equipa_buttonActionPerformed
+
+    private void nova_liga_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nova_liga_buttonActionPerformed
+        /* remoção de paineis anteriores */
+        options_panel.removeAll();
+        options_panel.repaint();
+        options_panel.revalidate();
+        
+        /* alocação do respetivo painel de opções */
+        options_panel.add(nova_liga_elements);
+        options_panel.repaint();
+        options_panel.revalidate();
+    }//GEN-LAST:event_nova_liga_buttonActionPerformed
+
+    private void regista_liga_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regista_liga_buttonActionPerformed
+        List<Liga> ligas = this.betess.getLigas();
+        
+        String nome_liga = nome_liga_field.getText();
+        
+        boolean permite_liga = true;
+        for (Liga l: ligas){
+            if (l.getNome().equals(nome_liga)){
+                permite_liga = false;
+                break;
+            }
+        }
+        if (permite_liga){
+            Liga l = new Liga(nome_liga);
+            this.betess.registaLiga(l);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Já existe uma Liga registada no sistema com o nome indicado.", "Falha no registo da liga", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_regista_liga_buttonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -505,24 +888,50 @@ public class AreaAdministrador extends javax.swing.JFrame {
     private javax.swing.JPanel apostas_elements;
     private javax.swing.JButton bloquear_jogador_button;
     private javax.swing.JPanel buttons_panel;
+    private javax.swing.JComboBox<String> combo_casa;
+    private javax.swing.JComboBox<String> combo_fora;
     private javax.swing.JButton desbloquear_jogador_button;
     private javax.swing.JButton elimina_aposta;
     private javax.swing.JButton eventos_desportivos_button;
     private javax.swing.JPanel eventos_desportivos_elements;
+    private javax.swing.JTable eventos_lista;
+    private javax.swing.JButton fechar_evento_button;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton jogadores_bloq_button;
     private javax.swing.JPanel jogadores_bloqueados_elements;
     private javax.swing.JTable jogadores_list;
+    private javax.swing.JComboBox<String> ligas_combo;
     private javax.swing.JTable lista_apostas;
+    private javax.swing.JTextField nome_equipa_field;
+    private javax.swing.JTextField nome_liga_field;
+    private javax.swing.JButton nova_equipa_button;
+    private javax.swing.JPanel nova_equipa_elements;
+    private javax.swing.JButton nova_liga_button;
+    private javax.swing.JPanel nova_liga_elements;
+    private javax.swing.JButton novo_evento_button;
+    private javax.swing.JPanel novo_evento_elements;
     private javax.swing.ButtonGroup opcoes_aposta;
     private javax.swing.JPanel options_panel;
+    private javax.swing.JButton regista_evento_button;
+    private javax.swing.JButton regista_liga_button;
+    private javax.swing.JButton registar_evento_button;
     private javax.swing.JButton remover_jogador_button;
     private javax.swing.JButton ver_jogadores_button;
     private javax.swing.JPanel ver_jogadores_elements;

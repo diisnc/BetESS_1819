@@ -6,31 +6,27 @@
 
 package betess;
 
+import java.io.Serializable;
+
 /**
  *
  *
  */
-public class Equipa {
+public class Equipa implements Serializable{
 
-    private int id_equipa;
     private int id_liga;
     private String designacao;
 
-    public Equipa(int id_equipa, int id_liga, String designacao) {
-        this.id_equipa = id_equipa;
+    public Equipa( int id_liga, String designacao) {
         this.id_liga = id_liga;
         this.designacao = designacao;
     }
     
     public Equipa clone(){
-        return new Equipa(this.getId_equipa(), this.getId_liga(), this.getDesignacao());
+        return new Equipa(this.getId_liga(), this.getDesignacao());
     }
 
     /* GETTERS */
-    public int getId_equipa() {
-        return id_equipa;
-    }
-
     public int getId_liga() {
         return id_liga;
     }
@@ -40,11 +36,6 @@ public class Equipa {
     }
     
     /* SETTERS */
-
-    public void setId_equipa(int id_equipa) {
-        this.id_equipa = id_equipa;
-    }
-
     public void setId_liga(int id_liga) {
         this.id_liga = id_liga;
     }
