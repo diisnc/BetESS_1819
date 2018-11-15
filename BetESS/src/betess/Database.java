@@ -30,6 +30,9 @@ public class Database implements Serializable{
         this.jogadores = new HashMap<> ();
         this.apostas = new HashMap<> ();
         this.eventos = new HashMap<> ();
+        this.jogadores_bloqueados = new HashMap<> ();
+        this.equipas = new HashMap<> ();
+        this.ligas = new HashMap<> ();
         this.cont_apostas = 1;
         this.cont_eventos = 1;
     }
@@ -67,6 +70,7 @@ public class Database implements Serializable{
     
     public void bloqueiaJogador(String id){
         Jogador j = this.jogadores.get(id);
+        System.out.println(j.getEmail());
         this.jogadores.remove(id);
         this.jogadores_bloqueados.put(id, j);
     }

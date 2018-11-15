@@ -68,7 +68,7 @@ public class AreaCliente extends javax.swing.JFrame {
         lista_apostas = new javax.swing.JTable();
         creditos_elements = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        saldo_field = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         creditos_field = new javax.swing.JTextField();
@@ -385,10 +385,10 @@ public class AreaCliente extends javax.swing.JFrame {
 
         jLabel9.setText("Saldo Atual:");
 
-        jTextField1.setEditable(false);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        saldo_field.setEditable(false);
+        saldo_field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                saldo_fieldActionPerformed(evt);
             }
         });
 
@@ -421,7 +421,7 @@ public class AreaCliente extends javax.swing.JFrame {
                     .addGroup(creditos_elementsLayout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(saldo_field, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel10)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -436,7 +436,7 @@ public class AreaCliente extends javax.swing.JFrame {
                 .addGap(77, 77, 77)
                 .addGroup(creditos_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(saldo_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addGap(57, 57, 57)
                 .addGroup(creditos_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -814,9 +814,9 @@ public class AreaCliente extends javax.swing.JFrame {
         ganhos_field.setText(Double.toString(odd_empate * Double.parseDouble(quantia_field.getText())));
     }//GEN-LAST:event_empate_buttonActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void saldo_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saldo_fieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_saldo_fieldActionPerformed
 
     private void creditar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditar_buttonActionPerformed
         double creditos = Double.parseDouble(creditos_field.getText());
@@ -873,6 +873,8 @@ public class AreaCliente extends javax.swing.JFrame {
         options_panel.add(creditos_elements);
         options_panel.repaint();
         options_panel.revalidate();
+        
+        saldo_field.setText(Double.toString(this.betess.checkUser(this.betess.getId_utilizador_aut()).getSaldo()));
     }//GEN-LAST:event_creditos_buttonActionPerformed
 
     /**
@@ -950,7 +952,6 @@ public class AreaCliente extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable lista_apostas;
     private javax.swing.JScrollPane lista_apostas_pane;
     private javax.swing.JButton logout_button;
@@ -962,6 +963,7 @@ public class AreaCliente extends javax.swing.JFrame {
     private javax.swing.JPanel options_panel;
     private javax.swing.JTextField palavra_passe_field;
     private javax.swing.JTextField quantia_field;
+    private javax.swing.JTextField saldo_field;
     private javax.swing.JButton submit_aposta_button;
     private javax.swing.JButton ver_apostas_button;
     // End of variables declaration//GEN-END:variables

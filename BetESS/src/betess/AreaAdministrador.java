@@ -19,8 +19,7 @@ public class AreaAdministrador extends javax.swing.JFrame {
 
     public void setBetess(BetESS betess) {
         this.betess = betess;
-        Welcome_label.setText("Bem vindo " + this.betess.checkUser(this.betess.getId_utilizador_aut()).getNome());
-
+        this.setTitle("Área de administração");
     }
 
     /**
@@ -190,10 +189,7 @@ public class AreaAdministrador extends javax.swing.JFrame {
 
         jogadores_list.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Email", "Nome", "Contacto", "Saldo"
@@ -357,10 +353,7 @@ public class AreaAdministrador extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Email", "Nome", "Contacto", "Saldo"

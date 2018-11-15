@@ -137,7 +137,7 @@ public class Login extends javax.swing.JFrame {
         if (email.equals("admin") && password.equals("admin")){
             this.betess.setId_utilizador_aut(email);
             AreaAdministrador frame = new AreaAdministrador();
-            frame.setTitle("Área de administração");
+            frame.setBetess(this.betess);
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
 }
@@ -148,7 +148,7 @@ public class Login extends javax.swing.JFrame {
                 if (jogador.checkPassword(password)){
                     this.betess.setId_utilizador_aut(email);
                     AreaCliente frame = new AreaCliente();
-                    frame.setTitle("Área autenticada");
+                    frame.setBetess(this.betess);
                     frame.setLocationRelativeTo(null);
                     frame.setVisible(true);
                 }
