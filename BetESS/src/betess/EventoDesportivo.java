@@ -26,13 +26,16 @@ public class EventoDesportivo implements Serializable{
     public double odd_empate;
     /* COLOCAMOS A HORA DO JOGO OU NÃO VALE A PENA? */
 
-    public EventoDesportivo(int id_evento, String equipa_casa, String equipa_fora) {
+    public EventoDesportivo(int id_evento, String equipa_casa, String equipa_fora, double odd_casa, double odd_fora, double empate) {
         this.equipa_casa = equipa_casa;
         this.equipa_fora = equipa_fora;
         this.estado = "Aberto";
         this.ganha_casa = false;
         this.ganha_fora = false;
         this.empate = false;
+        this.odd_casa = odd_casa;
+        this.odd_fora = odd_fora;
+        this.odd_empate = empate;
     }
 
     /* construtor utilizado no clone */

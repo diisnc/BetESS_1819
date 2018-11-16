@@ -55,6 +55,14 @@ public class Database implements Serializable{
         return res;
     }
     
+    public void removeNotificacao(String id_utilizador, int id_aposta){
+        Jogador j = this.jogadores.get(id_utilizador);
+        
+        j.removeNotificacao(id_aposta);
+        
+        this.jogadores.put(id_utilizador, j.clone());
+    }
+    
     public Equipa getEquipa(String id_equipa){
         return this.equipas.get(id_equipa).clone();
     }
@@ -95,6 +103,16 @@ public class Database implements Serializable{
         return res;
     }
     
+    public List<Jogador> getJogadoresBloqueados(){
+        List<Jogador> res = new ArrayList<>();
+        
+        for (Jogador j : this.jogadores_bloqueados.values()){
+            res.add(j.clone());
+        }
+        
+        return res;
+    }
+    
     public void registaAposta(Aposta a){
         this.apostas.put(cont_apostas++, a);
     }
@@ -120,8 +138,8 @@ public class Database implements Serializable{
         this.eventos.put(e.getId_evento(), e);
     }
     
-    public void registaEventoDesportivo(String equipa_casa, String equipa_fora){
-        EventoDesportivo e = new EventoDesportivo(this.cont_eventos++, equipa_casa, equipa_fora);
+    public void registaEventoDesportivo(String equipa_casa, String equipa_fora, double odd_casa, double odd_fora, double odd_empate){
+        EventoDesportivo e = new EventoDesportivo(this.cont_eventos++, equipa_casa, equipa_fora, odd_casa, odd_fora, odd_empate);
         this.eventos.put(e.getId_evento(), e);
     }
     

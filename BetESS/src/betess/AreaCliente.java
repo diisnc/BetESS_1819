@@ -66,6 +66,7 @@ public class AreaCliente extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         lista_apostas_pane = new javax.swing.JScrollPane();
         lista_apostas = new javax.swing.JTable();
+        cashout_button = new javax.swing.JButton();
         creditos_elements = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         saldo_field = new javax.swing.JTextField();
@@ -203,6 +204,11 @@ public class AreaCliente extends javax.swing.JFrame {
         jLabel8.setText("Ganhos possíveis:");
 
         ganhos_field.setEditable(false);
+        ganhos_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ganhos_fieldActionPerformed(evt);
+            }
+        });
 
         events_list.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -325,10 +331,7 @@ public class AreaCliente extends javax.swing.JFrame {
 
         lista_apostas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Identificador", "Equipa Casa", "Equipa Fora", "Vitória Casa", "Vitória Fora", "Empate", "Quantia"
@@ -360,15 +363,24 @@ public class AreaCliente extends javax.swing.JFrame {
             lista_apostas.getColumnModel().getColumn(6).setResizable(false);
         }
 
+        cashout_button.setText("Cashout");
+        cashout_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cashout_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout apostas_elementsLayout = new javax.swing.GroupLayout(apostas_elements);
         apostas_elements.setLayout(apostas_elementsLayout);
         apostas_elementsLayout.setHorizontalGroup(
             apostas_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(apostas_elementsLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addGroup(apostas_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lista_apostas_pane, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13))
+                .addGroup(apostas_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cashout_button)
+                    .addGroup(apostas_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lista_apostas_pane, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel13)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         apostas_elementsLayout.setVerticalGroup(
@@ -378,7 +390,9 @@ public class AreaCliente extends javax.swing.JFrame {
                 .addComponent(jLabel13)
                 .addGap(18, 18, 18)
                 .addComponent(lista_apostas_pane, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(cashout_button)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         options_panel.add(apostas_elements, "card2");
@@ -454,10 +468,7 @@ public class AreaCliente extends javax.swing.JFrame {
 
         notificacoes_list.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Identificador Evento", "Identificador Aposta", "Equipa Casa", "Equipa Fora", "Quantia aposta", "Balanço", "Estado"
@@ -689,6 +700,8 @@ public class AreaCliente extends javax.swing.JFrame {
         
         DefaultTableModel model = (DefaultTableModel) lista_apostas.getModel();
         
+        model.setRowCount(0);
+        
         for (Aposta a : apostas){
             EventoDesportivo e = this.betess.getEventoDesportivo(a.getId_evento());;
             model.addRow(new Object[]{a.getId_evento(), e.getequipa_casa(), e.getequipa_fora(), a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), a.getQuantia()});
@@ -711,6 +724,8 @@ public class AreaCliente extends javax.swing.JFrame {
         Map<Integer, EventoDesportivo> eventos = this.betess.getEventosDesportivos();
         
         DefaultTableModel model = (DefaultTableModel) events_list.getModel();
+        
+        model.setRowCount(0);
         
         for (EventoDesportivo e : eventos.values()){
             String equipa_casa = this.betess.getEquipa(e.getequipa_casa()).getDesignacao();
@@ -829,6 +844,8 @@ public class AreaCliente extends javax.swing.JFrame {
         int row = notificacoes_list.getSelectedRow();
         
         model.removeRow(row);
+        /* falta descartar a notificação no objeto jogador */
+        this.betess.removeNotificacao(this.betess.getId_utilizador_aut(), (int) model.getValueAt(row, 1));
     }//GEN-LAST:event_descartar_buttonActionPerformed
 
     private void notificacoes_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notificacoes_buttonActionPerformed
@@ -847,6 +864,8 @@ public class AreaCliente extends javax.swing.JFrame {
         List<Notificacao> notificacoes = j.getNotificacoes();
         
         DefaultTableModel model = (DefaultTableModel) notificacoes_list.getModel();
+        
+        model.setRowCount(0);
         
         for (Notificacao n : notificacoes){
             Aposta a = this.betess.getAposta(n.getId_aposta());
@@ -876,6 +895,24 @@ public class AreaCliente extends javax.swing.JFrame {
         
         saldo_field.setText(Double.toString(this.betess.checkUser(this.betess.getId_utilizador_aut()).getSaldo()));
     }//GEN-LAST:event_creditos_buttonActionPerformed
+
+    private void ganhos_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ganhos_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ganhos_fieldActionPerformed
+
+    private void cashout_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashout_buttonActionPerformed
+        int row = lista_apostas.getSelectedRow();
+        
+        DefaultTableModel model = (DefaultTableModel) notificacoes_list.getModel();
+        
+        model.removeRow(row);
+        
+        this.betess.removeAposta((int) model.getValueAt(row, 0));
+        
+        Double saldo = this.betess.checkUser(this.betess.getId_utilizador_aut()).getSaldo();
+        saldo *= -0.2;
+        this.betess.atualizaSaldo(saldo, this.betess.getId_utilizador_aut());
+    }//GEN-LAST:event_cashout_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -921,6 +958,7 @@ public class AreaCliente extends javax.swing.JFrame {
     private javax.swing.JPanel apostas_elements;
     private javax.swing.JPanel buttons_panel;
     private javax.swing.JRadioButton casa_button;
+    private javax.swing.JButton cashout_button;
     private javax.swing.JTextField contacto_field;
     private javax.swing.JButton creditar_button;
     private javax.swing.JButton creditos_button;

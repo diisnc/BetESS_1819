@@ -18,7 +18,7 @@ public class Notificacao implements Serializable{
     private double balanco;
     private String status;
 
-    public Notificacao(int id_aposta, double balaco) {
+    public Notificacao(int id_aposta, double balanco) {
         this.id_aposta = id_aposta;
         this.balanco = balanco;
         this.status = "Não Lida";

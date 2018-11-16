@@ -6,11 +6,13 @@
 
 package betess;
 
+import java.io.Serializable;
+
 /**
  *
  *
  */
-public class Aposta {
+public class Aposta implements Serializable{
     
     public int id_aposta;
     public double quantia;

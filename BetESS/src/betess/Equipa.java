@@ -14,10 +14,10 @@ import java.io.Serializable;
  */
 public class Equipa implements Serializable{
 
-    private int id_liga;
+    private String id_liga;
     private String designacao;
 
-    public Equipa( int id_liga, String designacao) {
+    public Equipa(String id_liga, String designacao) {
         this.id_liga = id_liga;
         this.designacao = designacao;
     }
@@ -27,7 +27,7 @@ public class Equipa implements Serializable{
     }
 
     /* GETTERS */
-    public int getId_liga() {
+    public String getId_liga() {
         return id_liga;
     }
 
@@ -36,7 +36,7 @@ public class Equipa implements Serializable{
     }
     
     /* SETTERS */
-    public void setId_liga(int id_liga) {
+    public void setId_liga(String id_liga) {
         this.id_liga = id_liga;
     }
 

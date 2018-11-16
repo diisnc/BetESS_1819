@@ -110,6 +110,15 @@ public class Jogador implements Serializable{
         this.notificacoes.add(n);
     }
     
+    public void removeNotificacao(int id_aposta){
+        for (Notificacao n : this.notificacoes){
+            if (n.getId_aposta() == id_aposta){
+                this.notificacoes.remove(n);
+                break;
+            }
+        }
+    }
+    
     public Jogador clone(){
         return new Jogador(this.getEmail(), this.getNome(), this.getPassword(), this.getContacto(), this.getSaldo(), this.getNotificacoes());
     }

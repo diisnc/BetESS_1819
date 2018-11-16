@@ -68,6 +68,10 @@ public class BetESS {
         return this.database.getJogadores();
     }
     
+    public List<Jogador> getJogadoresBloqueados(){
+        return this.database.getJogadoresBloqueados();
+    }
+    
     public void eliminaJogador(String id){
         this.database.eliminaJogador(id);
     }
@@ -90,6 +94,10 @@ public class BetESS {
     
     public List<Equipa> getEquipas(){
         return this.database.getEquipas();
+    }
+    
+    public void registaEquipa(Equipa e){
+        this.database.registaEquipa(e);
     }
     
     /* inserção de um jogador no sistema */
@@ -121,9 +129,13 @@ public class BetESS {
     public List<Liga> getLigas(){
         return this.database.getLigas();
     }
+    
+    public void removeNotificacao(String id_utilizador, int id_aposta){
+        this.database.removeNotificacao(id_utilizador, id_aposta);
+    }
             
-    public void registaEventoDesportivo(String equipa_casa, String equipa_fora){
-        this.database.registaEventoDesportivo(equipa_casa, equipa_fora);
+    public void registaEventoDesportivo(String equipa_casa, String equipa_fora, double odd_casa, double odd_fora, double odd_empate){
+        this.database.registaEventoDesportivo(equipa_casa, equipa_fora, odd_casa, odd_fora, odd_empate);
     }
     
     public Map<Integer, EventoDesportivo> getEventosDesportivos(){
