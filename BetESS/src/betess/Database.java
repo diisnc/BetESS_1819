@@ -113,8 +113,9 @@ public class Database implements Serializable{
         return res;
     }
     
-    public void registaAposta(Aposta a){
-        this.apostas.put(cont_apostas++, a);
+    public void registaAposta(double quantia, int id_evento, String id_jogador, boolean ganha_casa, boolean ganha_fora, boolean empate){
+        Aposta a = new Aposta(this.cont_apostas++, quantia, id_evento, id_jogador, ganha_casa, ganha_fora, empate);
+        this.apostas.put(a.getId_aposta(), a);
     }
     
     public Jogador checkUser(String username){
@@ -138,6 +139,10 @@ public class Database implements Serializable{
         this.eventos.put(e.getId_evento(), e);
     }
     
+    public void atualizaAposta(Aposta a){
+        this.apostas.put(a.getId_aposta(), a);
+    }
+    
     public void registaEventoDesportivo(String equipa_casa, String equipa_fora, double odd_casa, double odd_fora, double odd_empate){
         EventoDesportivo e = new EventoDesportivo(this.cont_eventos++, equipa_casa, equipa_fora, odd_casa, odd_fora, odd_empate);
         this.eventos.put(e.getId_evento(), e);
@@ -156,6 +161,17 @@ public class Database implements Serializable{
         
         for (Aposta a : this.apostas.values()){
             res.put(a.getId_aposta(), a.clone());
+        }
+        
+        return res;
+    }
+    
+    public List<Aposta> getApostasEvento(int id_evento){
+        List<Aposta> res = new ArrayList<>();
+        
+        for (Aposta a : this.apostas.values()){
+            if (a.getId_evento() == id_evento)
+                res.add(a.clone());
         }
         
         return res;

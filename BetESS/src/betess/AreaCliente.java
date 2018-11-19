@@ -334,14 +334,14 @@ public class AreaCliente extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Identificador", "Equipa Casa", "Equipa Fora", "Vitória Casa", "Vitória Fora", "Empate", "Quantia"
+                "Identificador", "Equipa Casa", "Equipa Fora", "Vitória Casa", "Vitória Fora", "Empate", "Quantia", "Estado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Double.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -361,6 +361,7 @@ public class AreaCliente extends javax.swing.JFrame {
             lista_apostas.getColumnModel().getColumn(4).setResizable(false);
             lista_apostas.getColumnModel().getColumn(5).setResizable(false);
             lista_apostas.getColumnModel().getColumn(6).setResizable(false);
+            lista_apostas.getColumnModel().getColumn(7).setResizable(false);
         }
 
         cashout_button.setText("Cashout");
@@ -704,7 +705,7 @@ public class AreaCliente extends javax.swing.JFrame {
         
         for (Aposta a : apostas){
             EventoDesportivo e = this.betess.getEventoDesportivo(a.getId_evento());;
-            model.addRow(new Object[]{a.getId_evento(), e.getequipa_casa(), e.getequipa_fora(), a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), a.getQuantia()});
+            model.addRow(new Object[]{a.getId_evento(), e.getequipa_casa(), e.getequipa_fora(), a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), a.getQuantia(), a.getEstado()});
         }
         
         
@@ -763,7 +764,7 @@ public class AreaCliente extends javax.swing.JFrame {
         String user = this.betess.getId_utilizador_aut();
         Jogador j = this.betess.checkUser(user);
         
-        if (j.getSaldo() > Double.parseDouble(quantia_field.getText())){
+        if (j.getSaldo() >= Double.parseDouble(quantia_field.getText())){
         
             DefaultTableModel model = (DefaultTableModel) events_list.getModel();
 
@@ -777,14 +778,14 @@ public class AreaCliente extends javax.swing.JFrame {
             
             boolean aposta_permitida = true;
             for (Aposta a : this.betess.getApostasJogador(user)){
-                aposta_permitida = false;
-                break;
+                if (a.getId_evento() == id_evento){
+                    aposta_permitida = false;
+                    break;
+                }
             }
 
             if (aposta_permitida){
-                Aposta a = new Aposta(Double.parseDouble(quantia_field.getText()), id_evento, user, casa_selected, fora_selected, empate_selected);
-
-                this.betess.registaAposta(a);
+                this.betess.registaAposta(Double.parseDouble(quantia_field.getText()), id_evento, user, casa_selected, fora_selected, empate_selected);
 
                 JOptionPane.showMessageDialog(null, "Aposta registada com sucesso.", "BetESS", JOptionPane.PLAIN_MESSAGE);
             }

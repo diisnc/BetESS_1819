@@ -813,8 +813,8 @@ public class AreaAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_elimina_apostaActionPerformed
 
     private void fechar_evento_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechar_evento_buttonActionPerformed
-        int row = jogadores_list.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel) lista_apostas.getModel();
+        int row = eventos_lista.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) eventos_lista.getModel();
         
         int id_evento = (int) model.getValueAt(row, 0);
         this.betess.fechaEvento(id_evento);

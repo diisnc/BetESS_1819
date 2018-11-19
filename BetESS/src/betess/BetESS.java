@@ -105,8 +105,8 @@ public class BetESS {
         this.database.registaJogador(j);
     }
     
-    public void registaAposta(Aposta a){
-        this.database.registaAposta(a);
+    public void registaAposta(double quantia, int id_evento, String id_jogador, boolean ganha_casa, boolean ganha_fora, boolean empate){
+        this.database.registaAposta(quantia, id_evento, id_jogador, ganha_casa, ganha_fora, empate);
     }
     
     public void atualizaSaldo(double creditos, String id_jogador){
@@ -160,9 +160,9 @@ public class BetESS {
         EventoDesportivo e = this.database.getEventoDesportivo(id_Evento);
         e.setEstado("Terminado");
         
-        for (Aposta a : database.getApostas().values()){
+        for (Aposta a : this.database.getApostasEvento(e.getId_evento())){
                 
-            if ( e != null){
+            if ( e != null && e.getEstado().equals("Aberto")){
                 boolean evento_ganha_casa = e.getGanha_casa();
                 boolean evento_ganha_fora = e.getGanha_fora();
                 boolean evento_empate = e.getEmpate();
@@ -200,6 +200,10 @@ public class BetESS {
                 else {
                     saldo -= quant_aposta;
                 }
+                
+                a.setEstado("Paga");
+                this.database.atualizaAposta(a);
+                
                 /* lançamento de notificações */
                 Notificacao n = new Notificacao(a.getId_aposta(), saldo - saldo_ant);
                 Jogador jogador = this.database.checkUser(a.getId_jogador());

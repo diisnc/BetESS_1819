@@ -27,6 +27,7 @@ public class EventoDesportivo implements Serializable{
     /* COLOCAMOS A HORA DO JOGO OU NÃO VALE A PENA? */
 
     public EventoDesportivo(int id_evento, String equipa_casa, String equipa_fora, double odd_casa, double odd_fora, double empate) {
+        this.id_evento = id_evento;
         this.equipa_casa = equipa_casa;
         this.equipa_fora = equipa_fora;
         this.estado = "Aberto";
