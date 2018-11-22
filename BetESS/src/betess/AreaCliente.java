@@ -701,6 +701,10 @@ public class AreaCliente extends javax.swing.JFrame {
         
         DefaultTableModel model = (DefaultTableModel) lista_apostas.getModel();
         
+        for (Aposta a : apostas){
+            System.out.println("Teste na areacliente" + a.getEstado());
+        }
+        
         model.setRowCount(0);
         
         for (Aposta a : apostas){

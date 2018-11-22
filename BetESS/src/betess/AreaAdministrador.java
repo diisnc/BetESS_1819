@@ -97,6 +97,12 @@ public class AreaAdministrador extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         nome_liga_field = new javax.swing.JTextField();
         regista_liga_button = new javax.swing.JButton();
+        fechar_evento_elements = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        evento_ganha_casa = new javax.swing.JRadioButton();
+        evento_ganha_fora = new javax.swing.JRadioButton();
+        evento_empate = new javax.swing.JRadioButton();
+        fecha_evento_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -674,6 +680,61 @@ public class AreaAdministrador extends javax.swing.JFrame {
 
         options_panel.add(nova_liga_elements, "card2");
 
+        jLabel18.setText("Resultado do Evento:");
+
+        opcoes_aposta.add(evento_ganha_casa);
+        evento_ganha_casa.setText("Ganha Casa");
+
+        opcoes_aposta.add(evento_ganha_fora);
+        evento_ganha_fora.setText("Ganha Fora");
+
+        opcoes_aposta.add(evento_empate);
+        evento_empate.setText("Empate");
+
+        fecha_evento_button.setText("Fechar");
+        fecha_evento_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fecha_evento_buttonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout fechar_evento_elementsLayout = new javax.swing.GroupLayout(fechar_evento_elements);
+        fechar_evento_elements.setLayout(fechar_evento_elementsLayout);
+        fechar_evento_elementsLayout.setHorizontalGroup(
+            fechar_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fechar_evento_elementsLayout.createSequentialGroup()
+                .addGroup(fechar_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(fechar_evento_elementsLayout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(jLabel18))
+                    .addGroup(fechar_evento_elementsLayout.createSequentialGroup()
+                        .addGap(117, 117, 117)
+                        .addComponent(evento_ganha_casa)
+                        .addGap(18, 18, 18)
+                        .addComponent(evento_ganha_fora)
+                        .addGap(18, 18, 18)
+                        .addGroup(fechar_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fecha_evento_button)
+                            .addComponent(evento_empate))))
+                .addContainerGap(253, Short.MAX_VALUE))
+        );
+        fechar_evento_elementsLayout.setVerticalGroup(
+            fechar_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fechar_evento_elementsLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel18)
+                .addGap(18, 18, 18)
+                .addGroup(fechar_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(evento_ganha_casa)
+                    .addComponent(evento_ganha_fora)
+                    .addComponent(evento_empate))
+                .addGap(44, 44, 44)
+                .addComponent(fecha_evento_button)
+                .addContainerGap(227, Short.MAX_VALUE))
+        );
+
+        options_panel.add(fechar_evento_elements, "card2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -813,11 +874,15 @@ public class AreaAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_elimina_apostaActionPerformed
 
     private void fechar_evento_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechar_evento_buttonActionPerformed
-        int row = eventos_lista.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel) eventos_lista.getModel();
+        /* remoção de paineis anteriores */
+        options_panel.removeAll();
+        options_panel.repaint();
+        options_panel.revalidate();
         
-        int id_evento = (int) model.getValueAt(row, 0);
-        this.betess.fechaEvento(id_evento);
+        /* alocação do respetivo painel de opções */
+        options_panel.add(fechar_evento_elements);
+        options_panel.repaint();
+        options_panel.revalidate();
     }//GEN-LAST:event_fechar_evento_buttonActionPerformed
 
     private void registar_evento_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registar_evento_buttonActionPerformed
@@ -949,6 +1014,29 @@ public class AreaAdministrador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jogadores_bloq_buttonActionPerformed
 
+    private void fecha_evento_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fecha_evento_buttonActionPerformed
+        boolean ganha_casa = evento_ganha_casa.isSelected();
+        boolean ganha_fora = evento_ganha_fora.isSelected();
+        boolean empate = evento_empate.isSelected();
+        
+        int row = eventos_lista.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) eventos_lista.getModel();
+        
+        int id_evento = (int) model.getValueAt(row, 0);
+        this.betess.fechaEvento(id_evento, ganha_casa, ganha_fora, empate);
+        
+        /* remoção de paineis anteriores */
+        options_panel.removeAll();
+        options_panel.repaint();
+        options_panel.revalidate();
+        
+        /* alocação do respetivo painel de opções */
+        options_panel.add(eventos_desportivos_elements);
+        options_panel.repaint();
+        options_panel.revalidate();
+        
+    }//GEN-LAST:event_fecha_evento_buttonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -996,10 +1084,15 @@ public class AreaAdministrador extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> combo_fora;
     private javax.swing.JButton desbloquear_jogador_button;
     private javax.swing.JButton elimina_aposta;
+    private javax.swing.JRadioButton evento_empate;
+    private javax.swing.JRadioButton evento_ganha_casa;
+    private javax.swing.JRadioButton evento_ganha_fora;
     private javax.swing.JButton eventos_desportivos_button;
     private javax.swing.JPanel eventos_desportivos_elements;
     private javax.swing.JTable eventos_lista;
+    private javax.swing.JButton fecha_evento_button;
     private javax.swing.JButton fechar_evento_button;
+    private javax.swing.JPanel fechar_evento_elements;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1008,6 +1101,7 @@ public class AreaAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

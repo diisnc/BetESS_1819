@@ -155,10 +155,12 @@ public class BetESS {
     }
     
     /* método que tratará do fecho de um evento desportivo com o respetivo pagamento das apostas referentes a esse */
-    public void fechaEvento(int id_Evento){
+    public void fechaEvento(int id_Evento, boolean ganha_casa, boolean ganha_fora, boolean empate){
         
         EventoDesportivo e = this.database.getEventoDesportivo(id_Evento);
-        e.setEstado("Terminado");
+        e.setGanha_casa(ganha_casa);
+        e.setGanha_fora(ganha_fora);
+        e.setEmpate(empate);
         
         for (Aposta a : this.database.getApostasEvento(e.getId_evento())){
                 
@@ -197,9 +199,6 @@ public class BetESS {
                         
                     }
                 }
-                else {
-                    saldo -= quant_aposta;
-                }
                 
                 a.setEstado("Paga");
                 this.database.atualizaAposta(a);
@@ -214,6 +213,7 @@ public class BetESS {
                 this.database.updateSaldo(j.getEmail(), saldo);
             }
         }
+        e.setEstado("Terminado");
         this.database.atualizaEventoDesportivo(e);
     }
 
