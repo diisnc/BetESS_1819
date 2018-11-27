@@ -8,10 +8,7 @@ package betess;
 
 import java.io.Serializable;
 
-/**
- *
- *
- */
+
 public class Liga implements Serializable{
     
     private String nome;

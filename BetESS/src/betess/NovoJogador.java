@@ -7,10 +7,7 @@ package betess;
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author MarcoSilva
- */
+
 public class NovoJogador extends javax.swing.JFrame {
     
     private BetESS betess;

@@ -8,10 +8,7 @@ package betess;
 
 import java.io.Serializable;
 
-/**
- *
- *
- */
+
 public class EventoDesportivo implements Serializable{
     
     public int id_evento;

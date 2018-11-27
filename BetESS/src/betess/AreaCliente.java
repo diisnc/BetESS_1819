@@ -9,10 +9,7 @@ import java.util.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author MarcoSilva
- */
+
 public class AreaCliente extends javax.swing.JFrame {
     
     private BetESS betess;

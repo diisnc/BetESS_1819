@@ -8,10 +8,7 @@ package betess;
 
 import java.io.Serializable;
 
-/**
- *
- *
- */
+
 public class Aposta implements Serializable{
     
     public int id_aposta;
@@ -81,8 +78,6 @@ public class Aposta implements Serializable{
     }
     
     
-    
-
     
     /* SETTERS */
 

@@ -9,10 +9,7 @@ package betess;
 import java.io.Serializable;
 import java.util.*;
 
-/**
- *
- * @author MarcoSilva
- */
+
 public class Jogador implements Serializable{
     public String email;
     public String nome;
