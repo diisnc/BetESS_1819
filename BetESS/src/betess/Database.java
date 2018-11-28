@@ -19,7 +19,7 @@ public class Database implements Serializable{
     private HashMap<String, Equipa> equipas;
     private HashMap<String, Liga> ligas;
     
-    /* CONTADORES DE IDENTIDICAÇÃO */
+    /* CONTADORES DE IDENTIFICAÇÃO */
     private int cont_apostas;
     private int cont_eventos;
     

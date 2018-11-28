@@ -1,13 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+public class View implements Observer{
 
-/**
- *
- * @author Diana
- */
-public class View {
+    /*
+    * This is one of the CONCRETE OBSERVERS !
+    */
     
+    private Model model;
+    private Controller_BetESS controller;
+    //private final int id;
+
+    /*
+    public Client(int id){
+        this.id = id;
+    }
+    */    
+    
+    @Override
+    public void update(/* int number */) {
+        //System.out.println("Client nr " + id + ":\nNew value: " + number + ".\n");
+    }
 }
