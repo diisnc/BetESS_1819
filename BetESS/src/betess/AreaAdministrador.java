@@ -10,10 +10,7 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author MarcoSilva
- */
+
 public class AreaAdministrador extends javax.swing.JFrame {
     
     private BetESS betess;

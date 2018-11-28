@@ -8,10 +8,7 @@ package betess;
 import java.io.*;
 import java.util.*;
 
-/**
- *
- * @author MarcoSilva
- */
+
 public class BetESS {
     
     private Database database;

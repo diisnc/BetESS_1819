@@ -9,10 +9,7 @@ package betess;
 import java.io.Serializable;
 import java.util.*;
 
-/**
- *
- *
- */
+
 public class Database implements Serializable{
     
     private HashMap<String, Jogador> jogadores;

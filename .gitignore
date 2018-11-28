@@ -1,3 +1,6 @@
 .DS_Store
 /BetESS/dist/
 /BetESS/build/
+/BetESS/nbproject/private/
+/BetESS_v2/nbproject/private/
+/BetESS_v2/build/

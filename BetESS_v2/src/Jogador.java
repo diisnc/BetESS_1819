@@ -1,11 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-package betess;
-
 import java.io.Serializable;
 import java.util.*;
 
@@ -110,7 +102,7 @@ public class Jogador implements Serializable{
     public void removeNotificacao(int id_aposta){
         for (Notificacao n : this.notificacoes){
             if (n.getId_aposta() == id_aposta){
-                this.notificacoes.remove(id_aposta);
+                this.notificacoes.remove(n);
                 break;
             }
         }

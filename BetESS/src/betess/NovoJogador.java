@@ -8,10 +8,7 @@ package betess;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
-/**
- *
- * @author MarcoSilva
- */
+
 public class NovoJogador extends javax.swing.JFrame {
     
     private BetESS betess;
