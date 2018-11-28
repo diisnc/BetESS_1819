@@ -6,6 +6,7 @@
 package betess;
 
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 /**
  *
@@ -123,29 +124,39 @@ public class NovoJogador extends javax.swing.JFrame {
     }//GEN-LAST:event_email_fieldActionPerformed
 
     private void registar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registar_buttonActionPerformed
-        String nome_completo = nome_completo_field.getText();
-        String email = email_field.getText();
-        String palavra_passe = password_field.getText();
-        String contacto = contacto_field.getText();
         
-        Jogador novo_jogador = new Jogador(email, nome_completo, palavra_passe, contacto);
-        
-        Jogador aux = this.betess.checkUser(email);
-        
-        if (aux != null){
-            JOptionPane.showMessageDialog(null, "Já existe um utilizador registado com o email indicado.", "Falha no registo", JOptionPane.ERROR_MESSAGE);
+        if (!nome_completo_field.getText().isEmpty() && 
+            !email_field.getText().isEmpty() &&
+            !password_field.getText().isEmpty() &&
+            !contacto_field.getText().isEmpty()){
+
+            String nome_completo = nome_completo_field.getText();
+            String email = email_field.getText();
+            String palavra_passe = password_field.getText();
+            String contacto = contacto_field.getText();
+
+            Jogador novo_jogador = new Jogador(email, nome_completo, palavra_passe, contacto);
+
+            Jogador aux = this.betess.checkUser(email);
+
+            if (aux != null){
+                JOptionPane.showMessageDialog(null, "Já existe um utilizador registado com o email indicado.", "Falha no registo", JOptionPane.ERROR_MESSAGE);
+            }
+            else {
+                this.betess.registaJogador(novo_jogador);
+                JOptionPane.showMessageDialog(null, "Registo efetuado com sucesso.", "Registo", JOptionPane.PLAIN_MESSAGE);
+                this.setVisible(false);
+
+                AreaCliente frame = new AreaCliente();
+                frame.setBetess(this.betess);
+                this.betess.setId_utilizador_aut(email);
+                frame.setTitle("Área autenticada");
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+            }
         }
         else {
-            this.betess.registaJogador(novo_jogador);
-            JOptionPane.showMessageDialog(null, "Registo efetuado com sucesso.", "Registo", JOptionPane.PLAIN_MESSAGE);
-            this.setVisible(false);
-            
-            AreaCliente frame = new AreaCliente();
-            frame.setBetess(this.betess);
-            this.betess.setId_utilizador_aut(email);
-            frame.setTitle("Área autenticada");
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
+            JOptionPane.showMessageDialog(null, "Existem campos do formulário não preenchidos.", "Erro!", ERROR_MESSAGE);
         }
     }//GEN-LAST:event_registar_buttonActionPerformed
 

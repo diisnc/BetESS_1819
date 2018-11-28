@@ -130,33 +130,40 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_password_fieldActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        String email = email_field.getText();
-        String password = password_field.getText();
         
-        /* NÃO ESQUECER QUE TEMOS DE VERIFICAR SEMPRE SE QUEM ESTÁ A FAZER O LOGIN É O ADMIN */
-        if (email.equals("admin") && password.equals("admin")){
-            this.betess.setId_utilizador_aut(email);
-            AreaAdministrador frame = new AreaAdministrador();
-            frame.setBetess(this.betess);
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
-}
-        else {
-            Jogador jogador = betess.checkUser(email);
+        if (!email_field.getText().isEmpty() && !password_field.getText().isEmpty()){
+        
+            String email = email_field.getText();
+            String password = password_field.getText();
 
-            if (jogador != null){
-                if (jogador.checkPassword(password)){
-                    this.betess.setId_utilizador_aut(email);
-                    AreaCliente frame = new AreaCliente();
-                    frame.setBetess(this.betess);
-                    frame.setLocationRelativeTo(null);
-                    frame.setVisible(true);
-                }
-
+            /* NÃO ESQUECER QUE TEMOS DE VERIFICAR SEMPRE SE QUEM ESTÁ A FAZER O LOGIN É O ADMIN */
+            if (email.equals("admin") && password.equals("admin")){
+                this.betess.setId_utilizador_aut(email);
+                AreaAdministrador frame = new AreaAdministrador();
+                frame.setBetess(this.betess);
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
             }
             else {
-                JOptionPane.showMessageDialog(null, "O nome de utilizador ou a palavra.passe introduzidos não são válidos.", "Erro na autenticação", ERROR_MESSAGE);
+                Jogador jogador = betess.checkUser(email);
+
+                if (jogador != null){
+                    if (jogador.checkPassword(password)){
+                        this.betess.setId_utilizador_aut(email);
+                        AreaCliente frame = new AreaCliente();
+                        frame.setBetess(this.betess);
+                        frame.setLocationRelativeTo(null);
+                        frame.setVisible(true);
+                    }
+
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "O nome de utilizador ou a palavra.passe introduzidos não são válidos.", "Erro na autenticação", ERROR_MESSAGE);
+                }
             }
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Existem campos do formulário não preenchidos.", "Erro!", ERROR_MESSAGE);
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 

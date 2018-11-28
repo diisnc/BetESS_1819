@@ -7,6 +7,7 @@ package betess;
 
 import java.util.*;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -756,49 +757,66 @@ public class AreaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_contacto_fieldActionPerformed
 
     private void edit_dados_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_dados_buttonActionPerformed
-        Jogador autenticado = this.betess.checkUser(this.betess.getId_utilizador_aut());
         
-        autenticado.setNome(nome_field.getText());
-        autenticado.setEmail(email_field.getText());
-        autenticado.setPassword(palavra_passe_field.getText());
-        autenticado.setContacto(contacto_field.getText());
+        if (!nome_field.getText().isEmpty() &&
+            !email_field.getText().isEmpty() &&
+            !palavra_passe_field.getText().isEmpty() &&
+            contacto_field.getText().isEmpty()){
+
+            Jogador autenticado = this.betess.checkUser(this.betess.getId_utilizador_aut());
+
+            autenticado.setNome(nome_field.getText());
+            autenticado.setEmail(email_field.getText());
+            autenticado.setPassword(palavra_passe_field.getText());
+            autenticado.setContacto(contacto_field.getText());
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Existem campos do formulário não preenchidos.", "Erro!", ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_edit_dados_buttonActionPerformed
 
     private void submit_aposta_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submit_aposta_buttonActionPerformed
-        String user = this.betess.getId_utilizador_aut();
-        Jogador j = this.betess.checkUser(user);
         
-        if (j.getSaldo() >= Double.parseDouble(quantia_field.getText())){
-        
-            DefaultTableModel model = (DefaultTableModel) events_list.getModel();
+        if (!quantia_field.getText().isEmpty() && (opcoes_aposta.getSelection() != null)){
 
-            int row = events_list.getSelectedRow();
+            String user = this.betess.getId_utilizador_aut();
+            Jogador j = this.betess.checkUser(user);
 
-            int id_evento = (int)model.getValueAt(row, 0);
+            if (j.getSaldo() >= Double.parseDouble(quantia_field.getText())){
 
-            boolean casa_selected = casa_button.isSelected();
-            boolean fora_selected = fora_button.isSelected();
-            boolean empate_selected = empate_button.isSelected();
-            
-            boolean aposta_permitida = true;
-            for (Aposta a : this.betess.getApostasJogador(user)){
-                if (a.getId_evento() == id_evento){
-                    aposta_permitida = false;
-                    break;
+                DefaultTableModel model = (DefaultTableModel) events_list.getModel();
+
+                int row = events_list.getSelectedRow();
+
+                int id_evento = (int)model.getValueAt(row, 0);
+
+                boolean casa_selected = casa_button.isSelected();
+                boolean fora_selected = fora_button.isSelected();
+                boolean empate_selected = empate_button.isSelected();
+
+                boolean aposta_permitida = true;
+                for (Aposta a : this.betess.getApostasJogador(user)){
+                    if (a.getId_evento() == id_evento){
+                        aposta_permitida = false;
+                        break;
+                    }
+                }
+
+                if (aposta_permitida){
+                    this.betess.registaAposta(Double.parseDouble(quantia_field.getText()), id_evento, user, casa_selected, fora_selected, empate_selected);
+
+                    JOptionPane.showMessageDialog(null, "Aposta registada com sucesso.", "BetESS", JOptionPane.PLAIN_MESSAGE);
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Já tem uma aposta registada para o evento selecionado.", "Falha no registo da aposta", JOptionPane.ERROR_MESSAGE);
                 }
             }
-
-            if (aposta_permitida){
-                this.betess.registaAposta(Double.parseDouble(quantia_field.getText()), id_evento, user, casa_selected, fora_selected, empate_selected);
-
-                JOptionPane.showMessageDialog(null, "Aposta registada com sucesso.", "BetESS", JOptionPane.PLAIN_MESSAGE);
-            }
             else {
-                JOptionPane.showMessageDialog(null, "Já tem uma aposta registada para o evento selecionado.", "Falha no registo da aposta", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Créditos insuficientes.", "Falha no registo da aposta", JOptionPane.ERROR_MESSAGE);
             }
         }
         else {
-            JOptionPane.showMessageDialog(null, "Créditos insuficientes.", "Falha no registo da aposta", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Existem campos do formulário não preenchidos.", "Erro!", ERROR_MESSAGE);
         }
         
     }//GEN-LAST:event_submit_aposta_buttonActionPerformed
@@ -839,18 +857,32 @@ public class AreaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_saldo_fieldActionPerformed
 
     private void creditar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditar_buttonActionPerformed
-        double creditos = Double.parseDouble(creditos_field.getText());
         
-        this.betess.atualizaSaldo(creditos, this.betess.getId_utilizador_aut());
+        if (!creditos_field.getText().isEmpty()){
+
+            double creditos = Double.parseDouble(creditos_field.getText());
+
+            this.betess.atualizaSaldo(creditos, this.betess.getId_utilizador_aut());
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Existem campos do formulário não preenchidos.", "Erro!", ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_creditar_buttonActionPerformed
 
     private void descartar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descartar_buttonActionPerformed
-        DefaultTableModel model = (DefaultTableModel) notificacoes_list.getModel(); 
-        int row = notificacoes_list.getSelectedRow();
         
-        model.removeRow(row);
-        /* falta descartar a notificação no objeto jogador */
-        this.betess.removeNotificacao(this.betess.getId_utilizador_aut(), (int) model.getValueAt(row, 1));
+        if (notificacoes_list.getSelectedRow() != -1){
+
+            DefaultTableModel model = (DefaultTableModel) notificacoes_list.getModel(); 
+            int row = notificacoes_list.getSelectedRow();
+
+            model.removeRow(row);
+            /* falta descartar a notificação no objeto jogador */
+            this.betess.removeNotificacao(this.betess.getId_utilizador_aut(), (int) model.getValueAt(row, 1));
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Selecione uma das notificações.", "Erro!", ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_descartar_buttonActionPerformed
 
     private void notificacoes_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notificacoes_buttonActionPerformed
@@ -906,17 +938,24 @@ public class AreaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_ganhos_fieldActionPerformed
 
     private void cashout_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashout_buttonActionPerformed
-        int row = lista_apostas.getSelectedRow();
         
-        DefaultTableModel model = (DefaultTableModel) notificacoes_list.getModel();
-        
-        model.removeRow(row);
-        
-        this.betess.removeAposta((int) model.getValueAt(row, 0));
-        
-        Double saldo = this.betess.checkUser(this.betess.getId_utilizador_aut()).getSaldo();
-        saldo *= -0.2;
-        this.betess.atualizaSaldo(saldo, this.betess.getId_utilizador_aut());
+        if (lista_apostas.getSelectedRow() != -1){
+
+            int row = lista_apostas.getSelectedRow();
+
+            DefaultTableModel model = (DefaultTableModel) lista_apostas.getModel();
+
+            model.removeRow(row);
+
+            this.betess.removeAposta((int) model.getValueAt(row, 0));
+
+            Double saldo = this.betess.checkUser(this.betess.getId_utilizador_aut()).getSaldo();
+            saldo *= -0.2;
+            this.betess.atualizaSaldo(saldo, this.betess.getId_utilizador_aut());
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Selecione uma aposta!", "Erro!", ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_cashout_buttonActionPerformed
 
     /**

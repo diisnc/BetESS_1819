@@ -7,6 +7,7 @@ package betess;
 
 import java.util.*;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -440,10 +441,7 @@ public class AreaAdministrador extends javax.swing.JFrame {
 
         lista_apostas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Identificador", "Identificador Evento", "Identificador Jogador", "Ganha Casa", "Ganha Fora", "Empate", "Quantia"
@@ -842,35 +840,63 @@ public class AreaAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_apostas_buttonActionPerformed
 
     private void remover_jogador_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remover_jogador_buttonActionPerformed
-        int row = jogadores_list.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel) jogadores_list.getModel();
         
-        this.betess.eliminaJogador((String) jogadores_list.getValueAt(row, 0));
-        model.removeRow(row);
+        if (jogadores_bloqueados_list.getSelectedRow() != -1){
+
+            int row = jogadores_list.getSelectedRow();
+            DefaultTableModel model = (DefaultTableModel) jogadores_list.getModel();
+
+            this.betess.eliminaJogador((String) jogadores_list.getValueAt(row, 0));
+            model.removeRow(row);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Selecione um dos jogadores.", "Erro!", ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_remover_jogador_buttonActionPerformed
 
     private void bloquear_jogador_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bloquear_jogador_buttonActionPerformed
-        int row = jogadores_list.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel) jogadores_list.getModel();
         
-        this.betess.bloqueiaJogador((String) jogadores_list.getValueAt(row, 0));
-        model.removeRow(row);
+        if (jogadores_list.getSelectedRow() != -1){
+
+            int row = jogadores_list.getSelectedRow();
+            DefaultTableModel model = (DefaultTableModel) jogadores_list.getModel();
+
+            this.betess.bloqueiaJogador((String) jogadores_list.getValueAt(row, 0));
+            model.removeRow(row);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Selecione um dos jogadores.", "Erro!", ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_bloquear_jogador_buttonActionPerformed
 
     private void desbloquear_jogador_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desbloquear_jogador_buttonActionPerformed
-        int row = jogadores_bloqueados_list.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel) jogadores_bloqueados_list.getModel();
         
-        this.betess.desbloqueiaJogador((String) jogadores_bloqueados_list.getValueAt(row, 0));
-        model.removeRow(row);
+        if (jogadores_bloqueados_list.getSelectedRow() != -1){
+
+            int row = jogadores_bloqueados_list.getSelectedRow();
+            DefaultTableModel model = (DefaultTableModel) jogadores_bloqueados_list.getModel();
+
+            this.betess.desbloqueiaJogador((String) jogadores_bloqueados_list.getValueAt(row, 0));
+            model.removeRow(row);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Selecione um dos jogadores.", "Erro!", ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_desbloquear_jogador_buttonActionPerformed
 
     private void elimina_apostaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_elimina_apostaActionPerformed
-        int row = jogadores_list.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel) lista_apostas.getModel();
         
-        this.betess.removeAposta((int)lista_apostas.getValueAt(row, 0));
-        model.removeRow(row);
+        if ( lista_apostas.getSelectedRow() != -1){
+
+            int row = lista_apostas.getSelectedRow();
+            DefaultTableModel model = (DefaultTableModel) lista_apostas.getModel();
+
+            this.betess.removeAposta((int)lista_apostas.getValueAt(row, 0));
+            model.removeRow(row);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Selecione uma das apostas.", "Erro!", ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_elimina_apostaActionPerformed
 
     private void fechar_evento_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechar_evento_buttonActionPerformed
@@ -908,19 +934,30 @@ public class AreaAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_registar_evento_buttonActionPerformed
 
     private void regista_evento_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regista_evento_buttonActionPerformed
-        String c_casa = combo_casa.getSelectedItem().toString();                                                     
-        String c_fora = combo_fora.getSelectedItem().toString();
         
-        String odd_casa = odd_casa_field.getText();
-        String odd_fora = odd_fora_field.getText();
-        String odd_empate = odd_empate_field.getText();
-        
-        if (c_casa.equals(c_fora)){
-            JOptionPane.showMessageDialog(null, "Não é possível definir um evento apenas com uma equipa.", "Falha no registo do evento desportivo", JOptionPane.ERROR_MESSAGE);
+        if (!combo_casa.getSelectedItem().toString().isEmpty() &&
+            !combo_fora.getSelectedItem().toString().isEmpty() &&
+            !odd_casa_field.getText().isEmpty() &&
+            !odd_fora_field.getText().isEmpty() &&
+            odd_empate_field.getText().isEmpty()){
+
+            String c_casa = combo_casa.getSelectedItem().toString();                                                     
+            String c_fora = combo_fora.getSelectedItem().toString();
+
+            String odd_casa = odd_casa_field.getText();
+            String odd_fora = odd_fora_field.getText();
+            String odd_empate = odd_empate_field.getText();
+
+            if (c_casa.equals(c_fora)){
+                JOptionPane.showMessageDialog(null, "Não é possível definir um evento apenas com uma equipa.", "Falha no registo do evento desportivo", ERROR_MESSAGE);
+            }
+            else {
+                this.betess.registaEventoDesportivo(c_casa, c_fora, Double.parseDouble(odd_casa), Double.parseDouble(odd_fora), Double.parseDouble(odd_empate));
+                JOptionPane.showMessageDialog(null, "Evento registado com sucesso.", "BetESS", JOptionPane.PLAIN_MESSAGE);
+            }
         }
         else {
-            this.betess.registaEventoDesportivo(c_casa, c_fora, Double.parseDouble(odd_casa), Double.parseDouble(odd_fora), Double.parseDouble(odd_empate));
-            JOptionPane.showMessageDialog(null, "Evento registado com sucesso.", "BetESS", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Existem campos do formulário não preenchidos.", "Erro!", ERROR_MESSAGE);
         }
     }//GEN-LAST:event_regista_evento_buttonActionPerformed
 
@@ -957,23 +994,30 @@ public class AreaAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_nova_liga_buttonActionPerformed
 
     private void regista_liga_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regista_liga_buttonActionPerformed
-        List<Liga> ligas = this.betess.getLigas();
         
-        String nome_liga = nome_liga_field.getText();
-        
-        boolean permite_liga = true;
-        for (Liga l: ligas){
-            if (l.getNome().equals(nome_liga)){
-                permite_liga = false;
-                break;
+        if (!nome_liga_field.getText().isEmpty()){
+
+            List<Liga> ligas = this.betess.getLigas();
+
+            String nome_liga = nome_liga_field.getText();
+
+            boolean permite_liga = true;
+            for (Liga l: ligas){
+                if (l.getNome().equals(nome_liga)){
+                    permite_liga = false;
+                    break;
+                }
+            }
+            if (permite_liga){
+                Liga l = new Liga(nome_liga);
+                this.betess.registaLiga(l);
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Já existe uma Liga registada no sistema com o nome indicado.", "Falha no registo da liga", JOptionPane.ERROR_MESSAGE);
             }
         }
-        if (permite_liga){
-            Liga l = new Liga(nome_liga);
-            this.betess.registaLiga(l);
-        }
         else {
-            JOptionPane.showMessageDialog(null, "Já existe uma Liga registada no sistema com o nome indicado.", "Falha no registo da liga", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Existem campos do formulário não preenchidos.", "Erro!", ERROR_MESSAGE);
         }
     }//GEN-LAST:event_regista_liga_buttonActionPerformed
 
@@ -986,10 +1030,18 @@ public class AreaAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_terminar_sessao_buttonActionPerformed
 
     private void regista_equipa_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regista_equipa_buttonActionPerformed
-        String nome_equipa = nome_equipa_field.getText();
-        String liga = (String) ligas_combo.getSelectedItem();
-        
-        this.betess.registaEquipa(new Equipa(liga, nome_equipa));
+
+        if (!nome_equipa_field.getText().isEmpty() &&
+            ligas_combo.getSelectedItem() != null){
+
+            String nome_equipa = nome_equipa_field.getText();
+            String liga = (String) ligas_combo.getSelectedItem();
+
+            this.betess.registaEquipa(new Equipa(liga, nome_equipa));
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Existem campos do formulário não preenchidos.", "Erro!", ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_regista_equipa_buttonActionPerformed
 
     private void jogadores_bloq_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jogadores_bloq_buttonActionPerformed
@@ -1015,25 +1067,32 @@ public class AreaAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jogadores_bloq_buttonActionPerformed
 
     private void fecha_evento_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fecha_evento_buttonActionPerformed
-        boolean ganha_casa = evento_ganha_casa.isSelected();
-        boolean ganha_fora = evento_ganha_fora.isSelected();
-        boolean empate = evento_empate.isSelected();
         
-        int row = eventos_lista.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel) eventos_lista.getModel();
-        
-        int id_evento = (int) model.getValueAt(row, 0);
-        this.betess.fechaEvento(id_evento, ganha_casa, ganha_fora, empate);
-        
-        /* remoção de paineis anteriores */
-        options_panel.removeAll();
-        options_panel.repaint();
-        options_panel.revalidate();
-        
-        /* alocação do respetivo painel de opções */
-        options_panel.add(eventos_desportivos_elements);
-        options_panel.repaint();
-        options_panel.revalidate();
+        if (opcoes_aposta.getSelection() != null){
+
+            boolean ganha_casa = evento_ganha_casa.isSelected();
+            boolean ganha_fora = evento_ganha_fora.isSelected();
+            boolean empate = evento_empate.isSelected();
+
+            int row = eventos_lista.getSelectedRow();
+            DefaultTableModel model = (DefaultTableModel) eventos_lista.getModel();
+
+            int id_evento = (int) model.getValueAt(row, 0);
+            this.betess.fechaEvento(id_evento, ganha_casa, ganha_fora, empate);
+
+            /* remoção de paineis anteriores */
+            options_panel.removeAll();
+            options_panel.repaint();
+            options_panel.revalidate();
+
+            /* alocação do respetivo painel de opções */
+            options_panel.add(eventos_desportivos_elements);
+            options_panel.repaint();
+            options_panel.revalidate();
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Existem campos do formulário não preenchidos.", "Erro!", ERROR_MESSAGE);
+        }
         
     }//GEN-LAST:event_fecha_evento_buttonActionPerformed
 
