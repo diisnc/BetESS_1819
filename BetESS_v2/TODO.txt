@@ -10,3 +10,5 @@
 	- Nas interfaces não têm q estar todos os métodos certo? ficam basicamente os de controlo do observer pattern (por definir)
 	- Na View e no Controller, o MyModel (var) é mesmo o nosso Model? ou é o Subject?
 	- Pôr no diagrama de classes a view com as heranças para mostrar como fizemos? ou pomos só uma view, já q nem sequer é costume pôr? isto é p mostrar também mvc por isso
+	- Mudança nos requisitos vai ser só na versão 2 ou nas duas?
+	- Vamos ter remove e register Observer? temos pelo menos 1 vez na inicializaçao do controller, nao?
