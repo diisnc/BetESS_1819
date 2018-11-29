@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
  * @author MarcoSilva
  */
-public class View extends javax.swing.JFrame {
+public class View extends javax.swing.JFrame implements Observer{
 
     /**
      * Creates new form View
@@ -16,6 +10,11 @@ public class View extends javax.swing.JFrame {
     public View() {
         initComponents();
     }
+    
+    private Model model;
+    private Controller_BetESS controller;
+    //private final int id;   
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -79,4 +78,9 @@ public class View extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(/* int number */) {
+        //System.out.println("Client nr " + id + ":\nNew value: " + number + ".\n");
+    }
 }

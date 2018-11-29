@@ -102,7 +102,7 @@ public class Jogador implements Serializable{
     public void removeNotificacao(int id_aposta){
         for (Notificacao n : this.notificacoes){
             if (n.getId_aposta() == id_aposta){
-                this.notificacoes.remove(n);
+                this.notificacoes.remove(id_aposta);
                 break;
             }
         }

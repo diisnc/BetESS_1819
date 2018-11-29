@@ -8,14 +8,18 @@
  *
  * @author MarcoSilva
  */
-public class NovoJogador extends javax.swing.JFrame {
+public class Registo extends javax.swing.JFrame {
 
     /**
      * Creates new form NovoJogador
      */
-    public NovoJogador() {
+    public Registo() {
         initComponents();
     }
+    
+    /*
+    * This is one of the CONCRETE OBSERVERS !
+    */
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,20 +63,21 @@ public class NovoJogador extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NovoJogador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Registo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NovoJogador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Registo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NovoJogador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Registo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NovoJogador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Registo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NovoJogador().setVisible(true);
+                new Registo().setVisible(true);
             }
         });
     }

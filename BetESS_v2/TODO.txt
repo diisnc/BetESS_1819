@@ -1,0 +1,12 @@
+- Mudar nomes classes para model, view, controller ----------------- DONE
+- Passar lógica controlador para model ----------------------------- DOING
+- View com herança ------------------------------------------------- DOING
+- Definir métodos relacionados com observer pattern ---------------- DOING
+
+- DÚVIDAS
+	- Temos concrete subject, certo? é o model. Dá p fazer como está no diagrama de classes?
+	- Model -> getData() é o run do nosso incrementor?
+	- Model -> SetOfObservers não é um arraylist de clientes (exemplo) como no incrementor certo? é private Observer observerView & private Observer observerController
+	- Nas interfaces não têm q estar todos os métodos certo? ficam basicamente os de controlo do observer pattern (por definir)
+	- Na View e no Controller, o MyModel (var) é mesmo o nosso Model? ou é o Subject?
+	- Pôr no diagrama de classes a view com as heranças para mostrar como fizemos? ou pomos só uma view, já q nem sequer é costume pôr? isto é p mostrar também mvc por isso
