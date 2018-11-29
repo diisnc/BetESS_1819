@@ -7,7 +7,7 @@ import java.util.*;
 */
 
 
-public class Model implements Serializable, Subject, Runnable{
+public class Model implements Serializable, Subject{
     
     /* Core Data */
     private HashMap<String, Jogador> jogadores;
@@ -23,8 +23,8 @@ public class Model implements Serializable, Subject, Runnable{
     
     
     /* Set of Observers */
-    private Observer observerView;
-    private Observer observerController;
+    private View observerView;
+    private Controller_BetESS observerController;
     
     
     public Model (){
@@ -139,6 +139,7 @@ public class Model implements Serializable, Subject, Runnable{
     public void updateSaldo(String id_jogador, double novo_saldo){
         Jogador j = this.jogadores.get(id_jogador);
         j.setSaldo(novo_saldo);
+        this.notifyObserver(saldo);
     }
     
     public void atualizaEventoDesportivo(EventoDesportivo e){
@@ -221,9 +222,67 @@ public class Model implements Serializable, Subject, Runnable{
         this.apostas.remove(id);
     }
     
-    
-    
-    
+    /* Único método que tem que fazer o notifyObservers pq retorna um valor modificado */
+    public void fechaEvento(int id_Evento, boolean ganha_casa, boolean ganha_fora, boolean empate){
+        EventoDesportivo e = this.getEventoDesportivo(id_Evento);
+        e.setGanha_casa(ganha_casa);
+        e.setGanha_fora(ganha_fora);
+        e.setEmpate(empate);
+        
+        for (Aposta a : this.getApostasEvento(e.getId_evento())){
+                
+            if ( e != null && e.getEstado().equals("Aberto")){
+                boolean evento_ganha_casa = e.getGanha_casa();
+                boolean evento_ganha_fora = e.getGanha_fora();
+                boolean evento_empate = e.getEmpate();
+                
+                boolean aposta_ganha_casa = a.getGanha_casa();
+                boolean aposta_ganha_fora = a.getGanha_fora();
+                boolean aposta_empate = a.getEmpate();
+                
+                Jogador j = this.checkUser(a.getId_jogador());
+                double saldo = j.getSaldo();
+                double quant_aposta = a.getQuantia();
+                double odd = -10000;
+                double saldo_ant = saldo;
+                
+                if (evento_ganha_casa == aposta_ganha_casa 
+                 && evento_ganha_fora == aposta_ganha_fora
+                 && evento_empate == aposta_empate)
+                {
+                    if (evento_ganha_casa){
+                        odd = e.getOdd_casa();
+                        saldo += odd * quant_aposta;
+                        
+                    }
+                    else if (evento_ganha_fora){
+                        odd = e.getOdd_fora();
+                        saldo += odd * quant_aposta;
+                        
+                    }
+                    else if (evento_empate){
+                        odd = e.getOdd_empate();
+                        saldo += odd * quant_aposta;
+                        
+                    }
+                }
+                
+                a.setEstado("Paga");
+                this.atualizaAposta(a);
+                
+                /* lançamento de notificações */
+                Notificacao n = new Notificacao(a.getId_aposta(), saldo - saldo_ant);
+                Jogador jogador = this.checkUser(a.getId_jogador());
+                jogador.adicionaNotificacao(n);
+                this.registaJogador(jogador);
+                
+                /* atualização do saldo do cliente */
+                this.updateSaldo(j.getEmail(), saldo);
+            }
+        }
+        e.setEstado("Terminado");
+        this.atualizaEventoDesportivo(e);
+    }   
     
     /* Métodos relacionados com observer pattern*/
     
@@ -241,38 +300,7 @@ public class Model implements Serializable, Subject, Runnable{
 
     @Override
     /* Corresponde ao notify() */
-    public void notifyObserver(/*param c*/) {
-        //c.update(this.number);
-    }
-
-    @Override
-    /* Corresponde ao getData()? */
-    public void run() {
-        /*
-        System.out.println("Initialising incrementor...");
-        
-        while (true){
-            
-            try {
-                
-                this.increment();
-
-                System.out.println("******************************************************");
-                for (Client c: observers){
-                    this.notifyObserver(c);
-                }
-                System.out.println("******************************************************");
-
-                Thread.sleep(3000);
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        */
-    }
-    
-    
-    
-    
+    public void notifyObserver(int saldo) {
+        this.observerView.update(saldo);
+    } 
 }

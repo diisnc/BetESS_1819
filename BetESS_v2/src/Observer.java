@@ -1,4 +1,4 @@
 public interface Observer {
 
-    void update(/* param */);
+    void update(int saldo);
 }
