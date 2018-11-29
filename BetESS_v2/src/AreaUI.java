@@ -8,7 +8,7 @@
  *
  * @author MarcoSilva
  */
-public class AreaUI extends javax.swing.JFrame, View{
+public class AreaUI extends javax.swing.JFrame{
 
     /**
      * Creates new form AreaUI
