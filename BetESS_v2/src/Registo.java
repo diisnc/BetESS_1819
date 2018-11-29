@@ -9,17 +9,18 @@
  * @author MarcoSilva
  */
 public class Registo extends javax.swing.JFrame {
+    
+    private Model mymodel;
+    private Controller_BetESS mycontroller;
 
     /**
-     * Creates new form NovoJogador
+     * Creates new form Registo
      */
-    public Registo() {
+    public Registo(Model model, Controller_BetESS controller) {
+        this.mymodel = model;
+        this.mycontroller = controller;
         initComponents();
     }
-    
-    /*
-    * This is one of the CONCRETE OBSERVERS !
-    */
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -71,7 +72,6 @@ public class Registo extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Registo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

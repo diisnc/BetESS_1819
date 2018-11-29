@@ -9,17 +9,18 @@
  * @author MarcoSilva
  */
 public class Login extends javax.swing.JFrame {
+    
+    private Model mymodel;
+    private Controller_BetESS mycontroller;
 
     /**
      * Creates new form Login
      */
-    public Login() {
+    public Login(Model model, Controller_BetESS controller) {
+        this.mymodel = model;
+        this.mycontroller = controller;
         initComponents();
     }
-    
-    /*
-    * This is one of the CONCRETE OBSERVERS !
-    */
 
     /**
      * This method is called from within the constructor to initialize the form.

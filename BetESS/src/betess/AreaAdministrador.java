@@ -936,7 +936,7 @@ public class AreaAdministrador extends javax.swing.JFrame {
             !combo_fora.getSelectedItem().toString().isEmpty() &&
             !odd_casa_field.getText().isEmpty() &&
             !odd_fora_field.getText().isEmpty() &&
-            odd_empate_field.getText().isEmpty()){
+            !odd_empate_field.getText().isEmpty()){
 
             String c_casa = combo_casa.getSelectedItem().toString();                                                     
             String c_fora = combo_fora.getSelectedItem().toString();
