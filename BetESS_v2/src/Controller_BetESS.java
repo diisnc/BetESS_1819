@@ -8,7 +8,9 @@ public class Controller_BetESS implements Observer{
     */
     
     private Model model;
-    private View view;
+    private Login login;
+    private Registo registo;
+    private AreaUI areaUI;
     private String id_utilizador_aut;
 
  
