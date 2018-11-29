@@ -75,7 +75,6 @@ public class Database implements Serializable{
     
     public void bloqueiaJogador(String id){
         Jogador j = this.jogadores.get(id);
-        System.out.println(j.getEmail());
         this.jogadores.remove(id);
         this.jogadores_bloqueados.put(id, j);
     }
@@ -143,7 +142,6 @@ public class Database implements Serializable{
     
     public void atualizaAposta(Aposta a){
         this.apostas.put(a.getId_aposta(), a);
-        System.out.println("Atualizei aposta! " + a.getEstado());
     }
     
     public void registaEventoDesportivo(String equipa_casa, String equipa_fora, double odd_casa, double odd_fora, double odd_empate){
