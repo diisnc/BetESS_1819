@@ -2,6 +2,10 @@
 - Passar lógica controlador para model ----------------------------- DOING
 - View ------------------------------------------------------------- DOING
 - Definir métodos relacionados com observer pattern ---------------- DOING
+- Rever requisitos !
+
+
+
 
 - DÚVIDAS
 	- Temos concrete subject, certo? é o model. Dá p fazer como está no diagrama de classes?
@@ -13,6 +17,8 @@
 	- Mudança nos requisitos vai ser só na versão 2 ou nas duas?
 	- Vamos ter remove e register Observer? temos pelo menos 1 vez na inicializaçao do controller, nao?
 	- Diagramas de use cases, classes e dominio. Mais algum? Menos algum aka dominio?
+	- Fazer máquinas de estado?
+	- 
 
 	- Marco: Se é correto passar o model e controller por metodos set para as views (mostrar esquema q mostramos nestor)
 			 (Ver exemplo sem padroes BetESS)
