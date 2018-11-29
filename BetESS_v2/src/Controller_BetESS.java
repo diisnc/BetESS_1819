@@ -52,6 +52,22 @@ public class Controller_BetESS implements Observer{
               i.printStackTrace();
         }
     }
+
+    public void setModel(Model model) {
+        this.model = model;
+    }
+
+    public void setLogin(Login login) {
+        this.login = login;
+    }
+
+    public void setRegisto(Registo registo) {
+        this.registo = registo;
+    }
+
+    public void setAreaUI(AreaUI areaUI) {
+        this.areaUI = areaUI;
+    }
     
     /* Método que permite definir o jogador autenticado na sessao */
     public void setId_utilizador_aut(String id_utilizador_aut) {
@@ -171,9 +187,20 @@ public class Controller_BetESS implements Observer{
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        View l = new Login();
-        View r = new Registo();
-        View a = AreaUI();
+        Login l = new Login();
+        Registo r = new Registo();
+        Model m = new Model();
+        AreaUI a = new AreaUI();
+        Controller_BetESS c = new Controller_BetESS();
+        
+        a.setMymodel(m);
+        a.setMycontroller(c);
+        
+        c.setModel(m);
+        c.setLogin(l);
+        c.setRegisto(r);
+        c.setAreaUI(a);
+        
         l.setLocationRelativeTo(null);
         l.setVisible(true);
     }

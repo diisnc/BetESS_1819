@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,7 +11,7 @@
  *
  * @author MarcoSilva
  */
-public class Login extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame implements Observer{
     
     private Model mymodel;
     private Controller_BetESS mycontroller;
@@ -16,9 +19,7 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-    public Login(Model model, Controller_BetESS controller) {
-        this.mymodel = model;
-        this.mycontroller = controller;
+    public Login() {
         initComponents();
     }
 
@@ -135,38 +136,38 @@ public class Login extends javax.swing.JFrame {
 
             /* NÃO ESQUECER QUE TEMOS DE VERIFICAR SEMPRE SE QUEM ESTÁ A FAZER O LOGIN É O ADMIN */
             if (email.equals("admin") && password.equals("admin")){
-                this.betess.setId_utilizador_aut(email);
-                AreaAdministrador frame = new AreaAdministrador();
-                frame.setBetess(this.betess);
+                this.mycontroller.setId_utilizador_aut(email);
+                AreaUI frame = new AreaUI();
+                frame.setMycontroller(this.mycontroller);
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
             }
             else {
-                Jogador jogador = betess.checkUser(email);
+                Jogador jogador = this.mycontroller.checkUser(email);
 
                 if (jogador != null){
                     if (jogador.checkPassword(password)){
-                        this.betess.setId_utilizador_aut(email);
-                        AreaCliente frame = new AreaCliente();
-                        frame.setBetess(this.betess);
+                        this.mycontroller.setId_utilizador_aut(email);
+                        AreaUI frame = new AreaUI();
+                        frame.setMycontroller(this.mycontroller);
                         frame.setLocationRelativeTo(null);
                         frame.setVisible(true);
                     }
 
                 }
                 else {
-                    JOptionPane.showMessageDialog(null, "O nome de utilizador ou a palavra.passe introduzidos não são válidos.", "Erro na autenticação", ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "O nome de utilizador ou a palavra.passe introduzidos não são válidos.", "Erro na autenticação", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
         else {
-            JOptionPane.showMessageDialog(null, "Existem campos do formulário não preenchidos.", "Erro!", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Existem campos do formulário não preenchidos.", "Erro!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void newUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newUserActionPerformed
-        NovoJogador frame = new NovoJogador();
-        frame.setBetess(this.betess);
+        Registo frame = new Registo();
+        frame.setMycontroller(this.mycontroller);
 
         frame.setTitle("Novo Jogador");
 
@@ -174,6 +175,11 @@ public class Login extends javax.swing.JFrame {
         frame.setVisible(true);
     }//GEN-LAST:event_newUserActionPerformed
 
+    @Override
+    public void update(int saldo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     /**
      * @param args the command line arguments
      */

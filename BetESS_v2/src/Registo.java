@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  *
  * @author MarcoSilva
  */
-public class Registo extends javax.swing.JFrame {
+public class Registo extends javax.swing.JFrame implements Observer{
     
     private Model mymodel;
     private Controller_BetESS mycontroller;
@@ -147,29 +147,34 @@ public class Registo extends javax.swing.JFrame {
 
             Jogador novo_jogador = new Jogador(email, nome_completo, palavra_passe, contacto);
 
-            Jogador aux = this.betess.checkUser(email);
+            Jogador aux = this.mycontroller.checkUser(email);
 
             if (aux != null){
                 JOptionPane.showMessageDialog(null, "Já existe um utilizador registado com o email indicado.", "Falha no registo", JOptionPane.ERROR_MESSAGE);
             }
             else {
-                this.betess.registaJogador(novo_jogador);
+                this.mycontroller.registaJogador(novo_jogador);
                 JOptionPane.showMessageDialog(null, "Registo efetuado com sucesso.", "Registo", JOptionPane.PLAIN_MESSAGE);
                 this.setVisible(false);
 
-                AreaCliente frame = new AreaCliente();
-                frame.setBetess(this.betess);
-                this.betess.setId_utilizador_aut(email);
+                AreaUI frame = new AreaUI();
+                frame.setMycontroller(this.mycontroller);
+                this.mycontroller.setId_utilizador_aut(email);
                 frame.setTitle("Área autenticada");
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
             }
         }
         else {
-            JOptionPane.showMessageDialog(null, "Existem campos do formulário não preenchidos.", "Erro!", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Existem campos do formulário não preenchidos.", "Erro!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_registar_buttonActionPerformed
 
+    @Override
+    public void update(int saldo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     /**
      * @param args the command line arguments
      */
