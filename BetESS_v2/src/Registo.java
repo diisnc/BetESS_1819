@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -16,10 +19,16 @@ public class Registo extends javax.swing.JFrame {
     /**
      * Creates new form Registo
      */
-    public Registo(Model model, Controller_BetESS controller) {
-        this.mymodel = model;
-        this.mycontroller = controller;
+    public Registo() {
         initComponents();
+    }
+
+    public void setMymodel(Model mymodel) {
+        this.mymodel = mymodel;
+    }
+
+    public void setMycontroller(Controller_BetESS mycontroller) {
+        this.mycontroller = mycontroller;
     }
 
     /**
@@ -31,21 +40,135 @@ public class Registo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        nome_completo_field = new javax.swing.JTextField();
+        email_field = new javax.swing.JTextField();
+        password_field = new javax.swing.JPasswordField();
+        contacto_field = new javax.swing.JTextField();
+        registar_button = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Nome completo:");
+
+        jLabel2.setText("Email:");
+
+        jLabel3.setText("Palavra-Passe:");
+
+        jLabel4.setText("Contacto:");
+
+        email_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                email_fieldActionPerformed(evt);
+            }
+        });
+
+        registar_button.setText("Registar");
+        registar_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registar_buttonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(19, 19, 19))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(nome_completo_field, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(contacto_field, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(password_field, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(email_field, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(registar_button))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(nome_completo_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(email_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(password_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(contacto_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4))
+                .addGap(15, 15, 15)
+                .addComponent(registar_button)
+                .addContainerGap(181, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void email_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_email_fieldActionPerformed
+
+    private void registar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registar_buttonActionPerformed
+
+        if (!nome_completo_field.getText().isEmpty() &&
+            !email_field.getText().isEmpty() &&
+            !password_field.getText().isEmpty() &&
+            !contacto_field.getText().isEmpty()){
+
+            String nome_completo = nome_completo_field.getText();
+            String email = email_field.getText();
+            String palavra_passe = password_field.getText();
+            String contacto = contacto_field.getText();
+
+            Jogador novo_jogador = new Jogador(email, nome_completo, palavra_passe, contacto);
+
+            Jogador aux = this.betess.checkUser(email);
+
+            if (aux != null){
+                JOptionPane.showMessageDialog(null, "Já existe um utilizador registado com o email indicado.", "Falha no registo", JOptionPane.ERROR_MESSAGE);
+            }
+            else {
+                this.betess.registaJogador(novo_jogador);
+                JOptionPane.showMessageDialog(null, "Registo efetuado com sucesso.", "Registo", JOptionPane.PLAIN_MESSAGE);
+                this.setVisible(false);
+
+                AreaCliente frame = new AreaCliente();
+                frame.setBetess(this.betess);
+                this.betess.setId_utilizador_aut(email);
+                frame.setTitle("Área autenticada");
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Existem campos do formulário não preenchidos.", "Erro!", ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_registar_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -83,5 +206,14 @@ public class Registo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField contacto_field;
+    private javax.swing.JTextField email_field;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField nome_completo_field;
+    private javax.swing.JPasswordField password_field;
+    private javax.swing.JButton registar_button;
     // End of variables declaration//GEN-END:variables
 }

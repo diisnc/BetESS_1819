@@ -699,10 +699,6 @@ public class AreaCliente extends javax.swing.JFrame {
         
         DefaultTableModel model = (DefaultTableModel) lista_apostas.getModel();
         
-        for (Aposta a : apostas){
-            System.out.println("Teste na areacliente" + a.getEstado());
-        }
-        
         model.setRowCount(0);
         
         for (Aposta a : apostas){
@@ -941,14 +937,17 @@ public class AreaCliente extends javax.swing.JFrame {
             int row = lista_apostas.getSelectedRow();
 
             DefaultTableModel model = (DefaultTableModel) lista_apostas.getModel();
-
-            model.removeRow(row);
-
+            
             this.betess.removeAposta((int) model.getValueAt(row, 0));
 
             Double saldo = this.betess.checkUser(this.betess.getId_utilizador_aut()).getSaldo();
-            saldo *= -0.2;
+            Double valor_aposta = (double) model.getValueAt(row, 6);
+            Double novo_saldo = saldo - (0.8 * valor_aposta);
+            
+            saldo -= novo_saldo;
             this.betess.atualizaSaldo(saldo, this.betess.getId_utilizador_aut());
+            
+            model.removeRow(row);
         }
         else{
             JOptionPane.showMessageDialog(null, "Selecione uma aposta!", "Erro!", ERROR_MESSAGE);
