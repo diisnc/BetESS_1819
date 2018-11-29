@@ -299,7 +299,7 @@ public class Model implements Serializable, Subject{
     }
 
     @Override
-    /* Corresponde ao notify() */
+    /* Corresponde ao notify() - só precisamos do saldo pq é o unico q precisa de atualizaçao instantanea*/
     public void notifyObserver(int saldo) {
         this.observerView.update(saldo);
     } 
