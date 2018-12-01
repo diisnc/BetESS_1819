@@ -210,10 +210,7 @@ public class AreaCliente extends javax.swing.JFrame {
 
         events_list.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Evento número", "Casa", "Fora", "Odd Casa", "Odd Fora", "Odd Empate"
@@ -938,16 +935,21 @@ public class AreaCliente extends javax.swing.JFrame {
 
             DefaultTableModel model = (DefaultTableModel) lista_apostas.getModel();
             
-            this.betess.removeAposta((int) model.getValueAt(row, 0));
+            String estado = (String) model.getValueAt(row, 7);
+            
+            if (estado.equals("Não paga")){
 
-            Double saldo = this.betess.checkUser(this.betess.getId_utilizador_aut()).getSaldo();
-            Double valor_aposta = (double) model.getValueAt(row, 6);
-            Double novo_saldo = saldo - (0.8 * valor_aposta);
-            
-            saldo -= novo_saldo;
-            this.betess.atualizaSaldo(saldo, this.betess.getId_utilizador_aut());
-            
-            model.removeRow(row);
+                this.betess.removeAposta((int) model.getValueAt(row, 0));
+
+                Double saldo = this.betess.checkUser(this.betess.getId_utilizador_aut()).getSaldo();
+                Double valor_aposta = (double) model.getValueAt(row, 6);
+                Double novo_saldo = saldo - (0.8 * valor_aposta);
+
+                saldo -= novo_saldo;
+                this.betess.atualizaSaldo(saldo, this.betess.getId_utilizador_aut());
+
+                model.removeRow(row);
+            }
         }
         else{
             JOptionPane.showMessageDialog(null, "Selecione uma aposta!", "Erro!", ERROR_MESSAGE);
