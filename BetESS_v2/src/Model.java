@@ -23,7 +23,9 @@ public class Model implements Serializable, Subject{
     
     
     /* Set of Observers */
-    private View observerView;
+    private AreaUI areaUI;
+    private Login login;
+    private Registo registo;
     private Controller_BetESS observerController;
     
     
@@ -297,10 +299,10 @@ public class Model implements Serializable, Subject{
     public void removeObserver(/*param c*/) {
         //this.observers.remove(param c);
     }
-
+    
     @Override
     /* Corresponde ao notify() - só precisamos do saldo pq é o unico q precisa de atualizaçao instantanea*/
     public void notifyObserver(int saldo) {
-        this.observerView.update(saldo);
+        this.areaUI.update(saldo);
     } 
 }

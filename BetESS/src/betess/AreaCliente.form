@@ -302,7 +302,7 @@
                     <Component class="javax.swing.JTable" name="events_list">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="6" rowCount="4">
+                          <Table columnCount="6" rowCount="0">
                             <Column editable="false" title="Evento n&#xfa;mero" type="java.lang.Integer"/>
                             <Column editable="false" title="Casa" type="java.lang.String"/>
                             <Column editable="false" title="Fora" type="java.lang.String"/>

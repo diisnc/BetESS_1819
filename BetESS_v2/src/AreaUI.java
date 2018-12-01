@@ -4,17 +4,28 @@
  * and open the template in the editor.
  */
 
-/**
- *
- * @author MarcoSilva
- */
-public class AreaUI extends javax.swing.JFrame{
+import java.util.*;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+public class AreaUI extends javax.swing.JFrame implements Observer{
+    
+    private Model mymodel;
+    private Controller_BetESS mycontroller;
 
     /**
      * Creates new form AreaUI
      */
     public AreaUI() {
         initComponents();
+    }
+
+    public void setMymodel(Model mymodel) {
+        this.mymodel = mymodel;
+    }
+
+    public void setMycontroller(Controller_BetESS mycontroller) {
+        this.mycontroller = mycontroller;
     }
 
     /**
@@ -26,22 +37,1914 @@ public class AreaUI extends javax.swing.JFrame{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        opcoes_aposta_client = new javax.swing.ButtonGroup();
+        opcoes_aposta_admin = new javax.swing.ButtonGroup();
+        Welcome_label_admin = new javax.swing.JLabel();
+        buttons_panel_admin = new javax.swing.JPanel();
+        ver_jogadores_button = new javax.swing.JButton();
+        eventos_desportivos_button = new javax.swing.JButton();
+        jogadores_bloq_button = new javax.swing.JButton();
+        apostas_button = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        nova_equipa_button = new javax.swing.JButton();
+        nova_liga_button = new javax.swing.JButton();
+        terminar_sessao_button = new javax.swing.JButton();
+        options_panel_admin = new javax.swing.JPanel();
+        ver_jogadores_elements = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jogadores_list = new javax.swing.JTable();
+        remover_jogador_button = new javax.swing.JButton();
+        bloquear_jogador_button = new javax.swing.JButton();
+        eventos_desportivos_elements = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        eventos_lista = new javax.swing.JTable();
+        fechar_evento_button = new javax.swing.JButton();
+        registar_evento_button = new javax.swing.JButton();
+        jogadores_bloqueados_elements = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        desbloquear_jogador_button = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jogadores_bloqueados_list = new javax.swing.JTable();
+        apostas_elements = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        lista_apostas = new javax.swing.JTable();
+        elimina_aposta = new javax.swing.JButton();
+        novo_evento_elements = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        combo_casa = new javax.swing.JComboBox<>();
+        combo_fora = new javax.swing.JComboBox<>();
+        regista_evento_button = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        odd_casa_field = new javax.swing.JTextField();
+        odd_fora_field = new javax.swing.JTextField();
+        odd_empate_field = new javax.swing.JTextField();
+        nova_equipa_elements = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        nome_equipa_field = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        ligas_combo = new javax.swing.JComboBox<>();
+        regista_equipa_button = new javax.swing.JButton();
+        nova_liga_elements = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        nome_liga_field = new javax.swing.JTextField();
+        regista_liga_button = new javax.swing.JButton();
+        fechar_evento_elements = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        evento_ganha_casa = new javax.swing.JRadioButton();
+        evento_ganha_fora = new javax.swing.JRadioButton();
+        evento_empate = new javax.swing.JRadioButton();
+        fecha_evento_button = new javax.swing.JButton();
+        options_panel_client = new javax.swing.JPanel();
+        apostar_elements = new javax.swing.JPanel();
+        submit_aposta_button = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        quantia_field = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        ganhos_field = new javax.swing.JTextField();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        events_list = new javax.swing.JTable();
+        casa_button = new javax.swing.JRadioButton();
+        empate_button = new javax.swing.JRadioButton();
+        fora_button = new javax.swing.JRadioButton();
+        apostas_elements1 = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        lista_apostas_pane = new javax.swing.JScrollPane();
+        lista_apostas1 = new javax.swing.JTable();
+        cashout_button = new javax.swing.JButton();
+        creditos_elements = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        saldo_field = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        creditos_field = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        creditar_button = new javax.swing.JButton();
+        notificacoes_elements = new javax.swing.JPanel();
+        jLabel26 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        notificacoes_list = new javax.swing.JTable();
+        descartar_button = new javax.swing.JButton();
+        edit_perfil_elements = new javax.swing.JPanel();
+        jLabel27 = new javax.swing.JLabel();
+        nome_field = new javax.swing.JTextField();
+        jLabel28 = new javax.swing.JLabel();
+        email_field = new javax.swing.JTextField();
+        jLabel29 = new javax.swing.JLabel();
+        palavra_passe_field = new javax.swing.JTextField();
+        jLabel30 = new javax.swing.JLabel();
+        contacto_field = new javax.swing.JTextField();
+        edit_dados_button = new javax.swing.JButton();
+        buttons_panel_client = new javax.swing.JPanel();
+        apostar_button = new javax.swing.JButton();
+        ver_apostas_button = new javax.swing.JButton();
+        creditos_button = new javax.swing.JButton();
+        notificacoes_button = new javax.swing.JButton();
+        editar_perfil_button = new javax.swing.JButton();
+        jLabel31 = new javax.swing.JLabel();
+        logout_button = new javax.swing.JButton();
+        Welcome_label_client = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        Welcome_label_admin.setText("Administração do Sistema");
+
+        ver_jogadores_button.setText("Ver Jogadores");
+        ver_jogadores_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ver_jogadores_buttonActionPerformed(evt);
+            }
+        });
+
+        eventos_desportivos_button.setText("Eventos Desportivos");
+        eventos_desportivos_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eventos_desportivos_buttonActionPerformed(evt);
+            }
+        });
+
+        jogadores_bloq_button.setText("Jogadores Bloqueados");
+        jogadores_bloq_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jogadores_bloq_buttonActionPerformed(evt);
+            }
+        });
+
+        apostas_button.setText("Apostas");
+        apostas_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apostas_buttonActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Menu:");
+
+        nova_equipa_button.setText("Nova Equipa");
+        nova_equipa_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nova_equipa_buttonActionPerformed(evt);
+            }
+        });
+
+        nova_liga_button.setText("Nova Liga");
+        nova_liga_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nova_liga_buttonActionPerformed(evt);
+            }
+        });
+
+        terminar_sessao_button.setText("Terminar Sessão");
+        terminar_sessao_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                terminar_sessao_buttonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout buttons_panel_adminLayout = new javax.swing.GroupLayout(buttons_panel_admin);
+        buttons_panel_admin.setLayout(buttons_panel_adminLayout);
+        buttons_panel_adminLayout.setHorizontalGroup(
+            buttons_panel_adminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buttons_panel_adminLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(69, 69, 69))
+            .addGroup(buttons_panel_adminLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(buttons_panel_adminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ver_jogadores_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jogadores_bloq_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(apostas_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(eventos_desportivos_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nova_equipa_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nova_liga_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(terminar_sessao_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        buttons_panel_adminLayout.setVerticalGroup(
+            buttons_panel_adminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(buttons_panel_adminLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(ver_jogadores_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(eventos_desportivos_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jogadores_bloq_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(apostas_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nova_equipa_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nova_liga_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 196, Short.MAX_VALUE)
+                .addComponent(terminar_sessao_button)
+                .addContainerGap())
+        );
+
+        options_panel_admin.setLayout(new java.awt.CardLayout());
+
+        jLabel2.setText("Lista de Jogadores registados no sistema");
+
+        jogadores_list.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Email", "Nome", "Contacto", "Saldo"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jogadores_list);
+
+        remover_jogador_button.setText("Remover");
+        remover_jogador_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                remover_jogador_buttonActionPerformed(evt);
+            }
+        });
+
+        bloquear_jogador_button.setText("Bloquear");
+        bloquear_jogador_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bloquear_jogador_buttonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ver_jogadores_elementsLayout = new javax.swing.GroupLayout(ver_jogadores_elements);
+        ver_jogadores_elements.setLayout(ver_jogadores_elementsLayout);
+        ver_jogadores_elementsLayout.setHorizontalGroup(
+            ver_jogadores_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ver_jogadores_elementsLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(ver_jogadores_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(ver_jogadores_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(ver_jogadores_elementsLayout.createSequentialGroup()
+                            .addComponent(bloquear_jogador_button)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(remover_jogador_button))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+        ver_jogadores_elementsLayout.setVerticalGroup(
+            ver_jogadores_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ver_jogadores_elementsLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(ver_jogadores_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(remover_jogador_button)
+                    .addComponent(bloquear_jogador_button))
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+
+        options_panel_admin.add(ver_jogadores_elements, "card2");
+
+        jLabel5.setText("Eventos Desportivos");
+
+        eventos_lista.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Identificador", "Equipa Casa", "Equipa Fora", "Ganha Casa", "Ganha Fora", "Empate", "Estado"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(eventos_lista);
+
+        fechar_evento_button.setText("Fechar Evento");
+        fechar_evento_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fechar_evento_buttonActionPerformed(evt);
+            }
+        });
+
+        registar_evento_button.setText("Registar Evento Desportivo");
+        registar_evento_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registar_evento_buttonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout eventos_desportivos_elementsLayout = new javax.swing.GroupLayout(eventos_desportivos_elements);
+        eventos_desportivos_elements.setLayout(eventos_desportivos_elementsLayout);
+        eventos_desportivos_elementsLayout.setHorizontalGroup(
+            eventos_desportivos_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(eventos_desportivos_elementsLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(eventos_desportivos_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(eventos_desportivos_elementsLayout.createSequentialGroup()
+                        .addComponent(registar_evento_button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(fechar_evento_button))
+                    .addGroup(eventos_desportivos_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5)))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+        eventos_desportivos_elementsLayout.setVerticalGroup(
+            eventos_desportivos_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(eventos_desportivos_elementsLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(eventos_desportivos_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fechar_evento_button)
+                    .addComponent(registar_evento_button))
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+
+        options_panel_admin.add(eventos_desportivos_elements, "card2");
+
+        jLabel3.setText("Jogadores Bloqueados na Plataforma");
+
+        desbloquear_jogador_button.setText("Desbloquear Jogador");
+        desbloquear_jogador_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                desbloquear_jogador_buttonActionPerformed(evt);
+            }
+        });
+
+        jogadores_bloqueados_list.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Email", "Nome", "Contacto", "Saldo"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jogadores_bloqueados_list);
+
+        javax.swing.GroupLayout jogadores_bloqueados_elementsLayout = new javax.swing.GroupLayout(jogadores_bloqueados_elements);
+        jogadores_bloqueados_elements.setLayout(jogadores_bloqueados_elementsLayout);
+        jogadores_bloqueados_elementsLayout.setHorizontalGroup(
+            jogadores_bloqueados_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jogadores_bloqueados_elementsLayout.createSequentialGroup()
+                .addGroup(jogadores_bloqueados_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jogadores_bloqueados_elementsLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jogadores_bloqueados_elementsLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(jogadores_bloqueados_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(desbloquear_jogador_button)
+                            .addGroup(jogadores_bloqueados_elementsLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(410, 410, 410)))))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+        jogadores_bloqueados_elementsLayout.setVerticalGroup(
+            jogadores_bloqueados_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jogadores_bloqueados_elementsLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(desbloquear_jogador_button)
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+
+        options_panel_admin.add(jogadores_bloqueados_elements, "card2");
+
+        jLabel4.setText("Apostas");
+
+        lista_apostas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Identificador", "Identificador Evento", "Identificador Jogador", "Ganha Casa", "Ganha Fora", "Empate", "Quantia"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Double.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(lista_apostas);
+
+        elimina_aposta.setText("Eliminar");
+        elimina_aposta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                elimina_apostaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout apostas_elementsLayout = new javax.swing.GroupLayout(apostas_elements);
+        apostas_elements.setLayout(apostas_elementsLayout);
+        apostas_elementsLayout.setHorizontalGroup(
+            apostas_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(apostas_elementsLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(apostas_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(elimina_aposta)
+                    .addGroup(apostas_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)))
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+        apostas_elementsLayout.setVerticalGroup(
+            apostas_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(apostas_elementsLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(elimina_aposta)
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+
+        options_panel_admin.add(apostas_elements, "card2");
+
+        jLabel6.setText("Novo Evento Desportivo");
+
+        jLabel7.setText("Equipa Casa:");
+
+        jLabel8.setText("Equipa Fora:");
+
+        regista_evento_button.setText("Registar Evento");
+        regista_evento_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regista_evento_buttonActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setText("Odd Casa:");
+
+        jLabel15.setText("Odd Fora:");
+
+        jLabel16.setText("Odd Empate:");
+
+        javax.swing.GroupLayout novo_evento_elementsLayout = new javax.swing.GroupLayout(novo_evento_elements);
+        novo_evento_elements.setLayout(novo_evento_elementsLayout);
+        novo_evento_elementsLayout.setHorizontalGroup(
+            novo_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, novo_evento_elementsLayout.createSequentialGroup()
+                .addContainerGap(446, Short.MAX_VALUE)
+                .addComponent(regista_evento_button)
+                .addGap(124, 124, 124))
+            .addGroup(novo_evento_elementsLayout.createSequentialGroup()
+                .addGroup(novo_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(novo_evento_elementsLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel6))
+                    .addGroup(novo_evento_elementsLayout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addGroup(novo_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(novo_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel8))
+                            .addGroup(novo_evento_elementsLayout.createSequentialGroup()
+                                .addGroup(novo_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(3, 3, 3)))
+                        .addGroup(novo_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(combo_casa, 0, 222, Short.MAX_VALUE)
+                            .addComponent(combo_fora, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(odd_empate_field, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                            .addComponent(odd_casa_field)
+                            .addComponent(odd_fora_field))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        novo_evento_elementsLayout.setVerticalGroup(
+            novo_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(novo_evento_elementsLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jLabel6)
+                .addGap(41, 41, 41)
+                .addGroup(novo_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(combo_casa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(novo_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(combo_fora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(18, 18, 18)
+                .addGroup(novo_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(odd_casa_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(novo_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(odd_fora_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(novo_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(odd_empate_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(regista_evento_button)
+                .addContainerGap(86, Short.MAX_VALUE))
+        );
+
+        options_panel_admin.add(novo_evento_elements, "card2");
+
+        jLabel9.setText("Nova Equipa");
+
+        jLabel10.setText("Nome da equipa:");
+
+        jLabel11.setText("Liga:");
+
+        ligas_combo.setToolTipText("");
+
+        regista_equipa_button.setText("Registar Equipa");
+        regista_equipa_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regista_equipa_buttonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout nova_equipa_elementsLayout = new javax.swing.GroupLayout(nova_equipa_elements);
+        nova_equipa_elements.setLayout(nova_equipa_elementsLayout);
+        nova_equipa_elementsLayout.setHorizontalGroup(
+            nova_equipa_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(nova_equipa_elementsLayout.createSequentialGroup()
+                .addGroup(nova_equipa_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(nova_equipa_elementsLayout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(jLabel9))
+                    .addGroup(nova_equipa_elementsLayout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addGroup(nova_equipa_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(regista_equipa_button)
+                            .addGroup(nova_equipa_elementsLayout.createSequentialGroup()
+                                .addGroup(nova_equipa_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel10))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(nova_equipa_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nome_equipa_field, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ligas_combo, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(114, Short.MAX_VALUE))
+        );
+        nova_equipa_elementsLayout.setVerticalGroup(
+            nova_equipa_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(nova_equipa_elementsLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel9)
+                .addGap(30, 30, 30)
+                .addGroup(nova_equipa_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(nome_equipa_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(nova_equipa_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(ligas_combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
+                .addComponent(regista_equipa_button)
+                .addContainerGap(212, Short.MAX_VALUE))
+        );
+
+        options_panel_admin.add(nova_equipa_elements, "card2");
+
+        jLabel12.setText("Nova Liga");
+
+        jLabel13.setText("Nome da Liga:");
+
+        regista_liga_button.setText("Registar Liga");
+        regista_liga_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regista_liga_buttonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout nova_liga_elementsLayout = new javax.swing.GroupLayout(nova_liga_elements);
+        nova_liga_elements.setLayout(nova_liga_elementsLayout);
+        nova_liga_elementsLayout.setHorizontalGroup(
+            nova_liga_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(nova_liga_elementsLayout.createSequentialGroup()
+                .addGroup(nova_liga_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(regista_liga_button)
+                    .addGroup(nova_liga_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(nova_liga_elementsLayout.createSequentialGroup()
+                            .addGap(61, 61, 61)
+                            .addComponent(jLabel12))
+                        .addGroup(nova_liga_elementsLayout.createSequentialGroup()
+                            .addGap(83, 83, 83)
+                            .addComponent(jLabel13)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(nome_liga_field, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(130, Short.MAX_VALUE))
+        );
+        nova_liga_elementsLayout.setVerticalGroup(
+            nova_liga_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(nova_liga_elementsLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel12)
+                .addGap(30, 30, 30)
+                .addGroup(nova_liga_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(nome_liga_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addComponent(regista_liga_button)
+                .addContainerGap(248, Short.MAX_VALUE))
+        );
+
+        options_panel_admin.add(nova_liga_elements, "card2");
+
+        jLabel18.setText("Resultado do Evento:");
+
+        evento_ganha_casa.setText("Ganha Casa");
+
+        evento_ganha_fora.setText("Ganha Fora");
+
+        evento_empate.setText("Empate");
+
+        fecha_evento_button.setText("Fechar");
+        fecha_evento_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fecha_evento_buttonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout fechar_evento_elementsLayout = new javax.swing.GroupLayout(fechar_evento_elements);
+        fechar_evento_elements.setLayout(fechar_evento_elementsLayout);
+        fechar_evento_elementsLayout.setHorizontalGroup(
+            fechar_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fechar_evento_elementsLayout.createSequentialGroup()
+                .addGroup(fechar_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(fechar_evento_elementsLayout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(jLabel18))
+                    .addGroup(fechar_evento_elementsLayout.createSequentialGroup()
+                        .addGap(117, 117, 117)
+                        .addComponent(evento_ganha_casa)
+                        .addGap(18, 18, 18)
+                        .addComponent(evento_ganha_fora)
+                        .addGap(18, 18, 18)
+                        .addGroup(fechar_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fecha_evento_button)
+                            .addComponent(evento_empate))))
+                .addContainerGap(253, Short.MAX_VALUE))
+        );
+        fechar_evento_elementsLayout.setVerticalGroup(
+            fechar_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fechar_evento_elementsLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel18)
+                .addGap(18, 18, 18)
+                .addGroup(fechar_evento_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(evento_ganha_casa)
+                    .addComponent(evento_ganha_fora)
+                    .addComponent(evento_empate))
+                .addGap(44, 44, 44)
+                .addComponent(fecha_evento_button)
+                .addContainerGap(227, Short.MAX_VALUE))
+        );
+
+        options_panel_admin.add(fechar_evento_elements, "card2");
+
+        options_panel_client.setLayout(new java.awt.CardLayout());
+
+        submit_aposta_button.setText("Apostar");
+        submit_aposta_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submit_aposta_buttonActionPerformed(evt);
+            }
+        });
+
+        jLabel17.setText("Quantia:");
+
+        quantia_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quantia_fieldActionPerformed(evt);
+            }
+        });
+
+        jLabel19.setText("€ (euros)");
+
+        jLabel20.setText("Ganhos possíveis:");
+
+        ganhos_field.setEditable(false);
+        ganhos_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ganhos_fieldActionPerformed(evt);
+            }
+        });
+
+        events_list.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Evento número", "Casa", "Fora", "Odd Casa", "Odd Fora", "Odd Empate"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane6.setViewportView(events_list);
+
+        jScrollPane5.setViewportView(jScrollPane6);
+
+        casa_button.setText("Casa");
+        casa_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                casa_buttonActionPerformed(evt);
+            }
+        });
+
+        empate_button.setText("Empate");
+        empate_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                empate_buttonActionPerformed(evt);
+            }
+        });
+
+        fora_button.setText("Fora");
+        fora_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fora_buttonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout apostar_elementsLayout = new javax.swing.GroupLayout(apostar_elements);
+        apostar_elements.setLayout(apostar_elementsLayout);
+        apostar_elementsLayout.setHorizontalGroup(
+            apostar_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(apostar_elementsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5)
+                .addContainerGap())
+            .addGroup(apostar_elementsLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(apostar_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(apostar_elementsLayout.createSequentialGroup()
+                        .addComponent(casa_button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fora_button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(empate_button)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(apostar_elementsLayout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(quantia_field, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel19)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ganhos_field, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                        .addComponent(submit_aposta_button)
+                        .addGap(36, 36, 36))))
+        );
+        apostar_elementsLayout.setVerticalGroup(
+            apostar_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(apostar_elementsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(apostar_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(quantia_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19)
+                    .addComponent(submit_aposta_button)
+                    .addComponent(jLabel20)
+                    .addComponent(ganhos_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(apostar_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(casa_button)
+                    .addComponent(fora_button)
+                    .addComponent(empate_button))
+                .addContainerGap(60, Short.MAX_VALUE))
+        );
+
+        options_panel_client.add(apostar_elements, "card2");
+
+        jLabel21.setText("Minhas apostas");
+
+        lista_apostas1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Identificador", "Equipa Casa", "Equipa Fora", "Vitória Casa", "Vitória Fora", "Empate", "Quantia", "Estado"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Double.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        lista_apostas_pane.setViewportView(lista_apostas1);
+
+        cashout_button.setText("Cashout");
+        cashout_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cashout_buttonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout apostas_elements1Layout = new javax.swing.GroupLayout(apostas_elements1);
+        apostas_elements1.setLayout(apostas_elements1Layout);
+        apostas_elements1Layout.setHorizontalGroup(
+            apostas_elements1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(apostas_elements1Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(apostas_elements1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cashout_button)
+                    .addGroup(apostas_elements1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lista_apostas_pane, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel21)))
+                .addContainerGap(37, Short.MAX_VALUE))
+        );
+        apostas_elements1Layout.setVerticalGroup(
+            apostas_elements1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(apostas_elements1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel21)
+                .addGap(18, 18, 18)
+                .addComponent(lista_apostas_pane, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(cashout_button)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        options_panel_client.add(apostas_elements1, "card2");
+
+        jLabel22.setText("Saldo Atual:");
+
+        saldo_field.setEditable(false);
+        saldo_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saldo_fieldActionPerformed(evt);
+            }
+        });
+
+        jLabel23.setText("€ (euros)");
+
+        jLabel24.setText("Creditar");
+
+        jLabel25.setText("€ (euros)");
+
+        creditar_button.setText("Creditar");
+        creditar_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                creditar_buttonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout creditos_elementsLayout = new javax.swing.GroupLayout(creditos_elements);
+        creditos_elements.setLayout(creditos_elementsLayout);
+        creditos_elementsLayout.setHorizontalGroup(
+            creditos_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(creditos_elementsLayout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addGroup(creditos_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(creditos_elementsLayout.createSequentialGroup()
+                        .addComponent(jLabel24)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(creditos_field, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel25))
+                    .addGroup(creditos_elementsLayout.createSequentialGroup()
+                        .addComponent(jLabel22)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(saldo_field, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel23)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, creditos_elementsLayout.createSequentialGroup()
+                .addContainerGap(342, Short.MAX_VALUE)
+                .addComponent(creditar_button)
+                .addGap(275, 275, 275))
+        );
+        creditos_elementsLayout.setVerticalGroup(
+            creditos_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(creditos_elementsLayout.createSequentialGroup()
+                .addGap(77, 77, 77)
+                .addGroup(creditos_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(saldo_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23))
+                .addGap(57, 57, 57)
+                .addGroup(creditos_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24)
+                    .addComponent(creditos_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel25))
+                .addGap(18, 18, 18)
+                .addComponent(creditar_button)
+                .addContainerGap(190, Short.MAX_VALUE))
+        );
+
+        options_panel_client.add(creditos_elements, "card2");
+
+        jLabel26.setText("Notificações:");
+
+        notificacoes_list.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Identificador Evento", "Identificador Aposta", "Equipa Casa", "Equipa Fora", "Quantia aposta", "Balanço", "Estado"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane7.setViewportView(notificacoes_list);
+
+        descartar_button.setText("Descartar");
+        descartar_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descartar_buttonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout notificacoes_elementsLayout = new javax.swing.GroupLayout(notificacoes_elements);
+        notificacoes_elements.setLayout(notificacoes_elementsLayout);
+        notificacoes_elementsLayout.setHorizontalGroup(
+            notificacoes_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(notificacoes_elementsLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(notificacoes_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(descartar_button)
+                    .addGroup(notificacoes_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel26)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(34, Short.MAX_VALUE))
+        );
+        notificacoes_elementsLayout.setVerticalGroup(
+            notificacoes_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(notificacoes_elementsLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jLabel26)
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(descartar_button)
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+
+        options_panel_client.add(notificacoes_elements, "card2");
+
+        jLabel27.setText("Nome:");
+
+        nome_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nome_fieldActionPerformed(evt);
+            }
+        });
+
+        jLabel28.setText("Email:");
+
+        email_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                email_fieldActionPerformed(evt);
+            }
+        });
+
+        jLabel29.setText("Palavra-Passe:");
+
+        palavra_passe_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                palavra_passe_fieldActionPerformed(evt);
+            }
+        });
+
+        jLabel30.setText("Contacto:");
+
+        contacto_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contacto_fieldActionPerformed(evt);
+            }
+        });
+
+        edit_dados_button.setText("Editar Dados");
+        edit_dados_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edit_dados_buttonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout edit_perfil_elementsLayout = new javax.swing.GroupLayout(edit_perfil_elements);
+        edit_perfil_elements.setLayout(edit_perfil_elementsLayout);
+        edit_perfil_elementsLayout.setHorizontalGroup(
+            edit_perfil_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(edit_perfil_elementsLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(edit_perfil_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(edit_perfil_elementsLayout.createSequentialGroup()
+                        .addComponent(jLabel30)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(contacto_field, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(edit_perfil_elementsLayout.createSequentialGroup()
+                        .addGroup(edit_perfil_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(edit_perfil_elementsLayout.createSequentialGroup()
+                                .addGroup(edit_perfil_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel28)
+                                    .addComponent(jLabel27))
+                                .addGap(28, 28, 28)
+                                .addGroup(edit_perfil_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(email_field)
+                                    .addComponent(nome_field)))
+                            .addGroup(edit_perfil_elementsLayout.createSequentialGroup()
+                                .addComponent(jLabel29)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(palavra_passe_field)))
+                        .addGap(6, 6, 6))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, edit_perfil_elementsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(edit_dados_button)
+                .addContainerGap())
+        );
+        edit_perfil_elementsLayout.setVerticalGroup(
+            edit_perfil_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(edit_perfil_elementsLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(edit_perfil_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel27)
+                    .addComponent(nome_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(edit_perfil_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel28)
+                    .addComponent(email_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(edit_perfil_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel29)
+                    .addComponent(palavra_passe_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(edit_perfil_elementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel30)
+                    .addComponent(contacto_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
+                .addComponent(edit_dados_button)
+                .addContainerGap(214, Short.MAX_VALUE))
+        );
+
+        options_panel_client.add(edit_perfil_elements, "card2");
+
+        apostar_button.setText("Apostar");
+        apostar_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apostar_buttonActionPerformed(evt);
+            }
+        });
+
+        ver_apostas_button.setText("Minhas apostas");
+        ver_apostas_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ver_apostas_buttonActionPerformed(evt);
+            }
+        });
+
+        creditos_button.setText("Créditos");
+        creditos_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                creditos_buttonActionPerformed(evt);
+            }
+        });
+
+        notificacoes_button.setText("Notificações");
+        notificacoes_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                notificacoes_buttonActionPerformed(evt);
+            }
+        });
+
+        editar_perfil_button.setText("Editar Perfil");
+        editar_perfil_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editar_perfil_buttonActionPerformed(evt);
+            }
+        });
+
+        jLabel31.setText("Menu:");
+
+        logout_button.setText("Terminar sessão");
+        logout_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logout_buttonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout buttons_panel_clientLayout = new javax.swing.GroupLayout(buttons_panel_client);
+        buttons_panel_client.setLayout(buttons_panel_clientLayout);
+        buttons_panel_clientLayout.setHorizontalGroup(
+            buttons_panel_clientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(buttons_panel_clientLayout.createSequentialGroup()
+                .addGroup(buttons_panel_clientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(buttons_panel_clientLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(buttons_panel_clientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(editar_perfil_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(apostar_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(creditos_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(notificacoes_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ver_apostas_button, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)))
+                    .addGroup(buttons_panel_clientLayout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(jLabel31)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(buttons_panel_clientLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(logout_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        buttons_panel_clientLayout.setVerticalGroup(
+            buttons_panel_clientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(buttons_panel_clientLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel31)
+                .addGap(18, 18, 18)
+                .addComponent(apostar_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ver_apostas_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(creditos_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(notificacoes_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(editar_perfil_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(logout_button)
+                .addContainerGap())
+        );
+
+        Welcome_label_client.setText("Bem-vindo à BetESS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(buttons_panel_admin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(Welcome_label_admin)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(options_panel_admin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43))))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(49, 49, 49)
+                    .addComponent(buttons_panel_client, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(options_panel_client, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(31, 31, 31)
+                            .addComponent(Welcome_label_client)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 548, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(50, 50, 50)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Welcome_label_admin)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                        .addComponent(options_panel_admin, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buttons_panel_admin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(23, 23, 23)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(0, 15, Short.MAX_VALUE)
+                            .addComponent(Welcome_label_client)
+                            .addGap(18, 18, 18)
+                            .addComponent(options_panel_client, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(buttons_panel_client, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGap(24, 24, 24)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void ver_jogadores_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ver_jogadores_buttonActionPerformed
+        /* remoção de paineis anteriores */
+        options_panel_admin.removeAll();
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+
+        /* alocação do respetivo painel de opções */
+        options_panel_admin.add(ver_jogadores_elements);
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+
+        HashMap<String, Jogador> jogadores = this.mycontroller.getJogadores();
+
+        DefaultTableModel model = (DefaultTableModel) jogadores_list.getModel();
+
+        model.setRowCount(0);
+
+        for (Jogador j : jogadores.values()){
+            model.addRow(new Object[]{j.getEmail(), j.getNome(), j.getContacto(), j.getSaldo()});
+        }
+
+    }//GEN-LAST:event_ver_jogadores_buttonActionPerformed
+
+    private void eventos_desportivos_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventos_desportivos_buttonActionPerformed
+        /* remoção de paineis anteriores */
+        options_panel_admin.removeAll();
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+
+        /* alocação do respetivo painel de opções */
+        options_panel_admin.add(eventos_desportivos_elements);
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+
+        DefaultTableModel model = (DefaultTableModel) eventos_lista.getModel();
+
+        model.setRowCount(0);
+
+        for (EventoDesportivo e : this.mycontroller.getEventosDesportivos().values()){
+            String equipa_casa = this.mycontroller.getEquipa(e.getequipa_casa()).getDesignacao();
+            String equipa_fora = this.mycontroller.getEquipa(e.getequipa_fora()).getDesignacao();
+            model.addRow(new Object[]{e.getId_evento(), equipa_casa, equipa_fora, e.getGanha_casa(), e.getGanha_fora(), e.getEmpate(), e.getEstado()});
+        }
+
+    }//GEN-LAST:event_eventos_desportivos_buttonActionPerformed
+
+    private void jogadores_bloq_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jogadores_bloq_buttonActionPerformed
+        /* remoção de paineis anteriores */
+        options_panel_admin.removeAll();
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+
+        /* alocação do respetivo painel de opções */
+        options_panel_admin.add(jogadores_bloqueados_elements);
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+
+        DefaultTableModel model = (DefaultTableModel) jogadores_bloqueados_list.getModel();
+
+        List<Jogador> jogadores = this.mycontroller.getJogadoresBloqueados();
+
+        model.setRowCount(0);
+
+        for (Jogador j : jogadores){
+            model.addRow(new Object[]{j.getEmail(), j.getNome(), j.getContacto(), j.getSaldo()});
+        }
+    }//GEN-LAST:event_jogadores_bloq_buttonActionPerformed
+
+    private void apostas_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apostas_buttonActionPerformed
+        /* remoção de paineis anteriores */
+        options_panel_admin.removeAll();
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+
+        /* alocação do respetivo painel de opções */
+        options_panel_admin.add(apostas_elements);
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+
+        HashMap<Integer, Aposta> apostas = this.mycontroller.getApostas();
+
+        DefaultTableModel model = (DefaultTableModel) lista_apostas.getModel();
+
+        model.setRowCount(0);
+
+        for (Aposta a : apostas.values()){
+            EventoDesportivo e = this.mycontroller.getEventoDesportivo(a.getId_evento());
+            /*String equipa_casa = this.mycontroller.getEquipa(e.getId_equipa_casa()).getDesignacao();
+            String equipa_fora = this.mycontroller.getEquipa(e.getId_equipa_fora()).getDesignacao();*/
+            model.addRow(new Object[]{a.getId_aposta(), a.getId_evento(), a.getId_jogador(), a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), a.getQuantia()});
+        }
+
+    }//GEN-LAST:event_apostas_buttonActionPerformed
+
+    private void nova_equipa_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nova_equipa_buttonActionPerformed
+        /* remoção de paineis anteriores */
+        options_panel_admin.removeAll();
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+
+        /* alocação do respetivo painel de opções */
+        options_panel_admin.add(nova_equipa_elements);
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+
+        List<Liga> ligas = this.mycontroller.getLigas();
+
+        ligas_combo.removeAllItems();
+
+        for (Liga l : ligas){
+            ligas_combo.addItem(l.getNome());
+        }
+    }//GEN-LAST:event_nova_equipa_buttonActionPerformed
+
+    private void nova_liga_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nova_liga_buttonActionPerformed
+        /* remoção de paineis anteriores */
+        options_panel_admin.removeAll();
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+
+        /* alocação do respetivo painel de opções */
+        options_panel_admin.add(nova_liga_elements);
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+    }//GEN-LAST:event_nova_liga_buttonActionPerformed
+
+    private void terminar_sessao_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminar_sessao_buttonActionPerformed
+        this.mycontroller.setId_utilizador_aut("None");
+        this.setVisible(false);
+
+        /* local onde o estado da aplicação é guardado */
+        this.mycontroller.save();
+    }//GEN-LAST:event_terminar_sessao_buttonActionPerformed
+
+    private void remover_jogador_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remover_jogador_buttonActionPerformed
+
+        if (jogadores_bloqueados_list.getSelectedRow() != -1){
+
+            int row = jogadores_list.getSelectedRow();
+            DefaultTableModel model = (DefaultTableModel) jogadores_list.getModel();
+
+            this.mycontroller.eliminaJogador((String) jogadores_list.getValueAt(row, 0));
+            model.removeRow(row);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Selecione um dos jogadores.", "Erro!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_remover_jogador_buttonActionPerformed
+
+    private void bloquear_jogador_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bloquear_jogador_buttonActionPerformed
+
+        if (jogadores_list.getSelectedRow() != -1){
+
+            int row = jogadores_list.getSelectedRow();
+            DefaultTableModel model = (DefaultTableModel) jogadores_list.getModel();
+
+            this.mycontroller.bloqueiaJogador((String) jogadores_list.getValueAt(row, 0));
+            model.removeRow(row);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Selecione um dos jogadores.", "Erro!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_bloquear_jogador_buttonActionPerformed
+
+    private void fechar_evento_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechar_evento_buttonActionPerformed
+        /* remoção de paineis anteriores */
+        options_panel_admin.removeAll();
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+
+        /* alocação do respetivo painel de opções */
+        options_panel_admin.add(fechar_evento_elements);
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+    }//GEN-LAST:event_fechar_evento_buttonActionPerformed
+
+    private void registar_evento_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registar_evento_buttonActionPerformed
+        /* remoção de paineis anteriores */
+        options_panel_admin.removeAll();
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+
+        /* alocação do respetivo painel de opções */
+        options_panel_admin.add(novo_evento_elements);
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+
+        List<Equipa> equipas = this.mycontroller.getEquipas();
+
+        combo_casa.removeAllItems();
+        combo_fora.removeAllItems();
+
+        for (Equipa e : equipas){
+            combo_casa.addItem(e.getDesignacao());
+            combo_fora.addItem(e.getDesignacao());
+        }
+    }//GEN-LAST:event_registar_evento_buttonActionPerformed
+
+    private void desbloquear_jogador_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desbloquear_jogador_buttonActionPerformed
+
+        if (jogadores_bloqueados_list.getSelectedRow() != -1){
+
+            int row = jogadores_bloqueados_list.getSelectedRow();
+            DefaultTableModel model = (DefaultTableModel) jogadores_bloqueados_list.getModel();
+
+            this.mycontroller.desbloqueiaJogador((String) jogadores_bloqueados_list.getValueAt(row, 0));
+            model.removeRow(row);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Selecione um dos jogadores.", "Erro!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_desbloquear_jogador_buttonActionPerformed
+
+    private void elimina_apostaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_elimina_apostaActionPerformed
+
+        if ( lista_apostas.getSelectedRow() != -1){
+
+            int row = lista_apostas.getSelectedRow();
+            DefaultTableModel model = (DefaultTableModel) lista_apostas.getModel();
+
+            this.mycontroller.removeAposta((int)lista_apostas.getValueAt(row, 0));
+            model.removeRow(row);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Selecione uma das apostas.", "Erro!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_elimina_apostaActionPerformed
+
+    private void regista_evento_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regista_evento_buttonActionPerformed
+
+        if (!combo_casa.getSelectedItem().toString().isEmpty() &&
+            !combo_fora.getSelectedItem().toString().isEmpty() &&
+            !odd_casa_field.getText().isEmpty() &&
+            !odd_fora_field.getText().isEmpty() &&
+            !odd_empate_field.getText().isEmpty()){
+
+            String c_casa = combo_casa.getSelectedItem().toString();
+            String c_fora = combo_fora.getSelectedItem().toString();
+
+            String odd_casa = odd_casa_field.getText();
+            String odd_fora = odd_fora_field.getText();
+            String odd_empate = odd_empate_field.getText();
+
+            if (c_casa.equals(c_fora)){
+                JOptionPane.showMessageDialog(null, "Não é possível definir um evento apenas com uma equipa.", "Falha no registo do evento desportivo", JOptionPane.ERROR_MESSAGE);
+            }
+            else {
+                this.mycontroller.registaEventoDesportivo(c_casa, c_fora, Double.parseDouble(odd_casa), Double.parseDouble(odd_fora), Double.parseDouble(odd_empate));
+                JOptionPane.showMessageDialog(null, "Evento registado com sucesso.", "BetESS", JOptionPane.PLAIN_MESSAGE);
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Existem campos do formulário não preenchidos.", "Erro!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_regista_evento_buttonActionPerformed
+
+    private void regista_equipa_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regista_equipa_buttonActionPerformed
+
+        if (!nome_equipa_field.getText().isEmpty() &&
+            ligas_combo.getSelectedItem() != null){
+
+            String nome_equipa = nome_equipa_field.getText();
+            String liga = (String) ligas_combo.getSelectedItem();
+
+            this.mycontroller.registaEquipa(new Equipa(liga, nome_equipa));
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Existem campos do formulário não preenchidos.", "Erro!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_regista_equipa_buttonActionPerformed
+
+    private void regista_liga_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regista_liga_buttonActionPerformed
+
+        if (!nome_liga_field.getText().isEmpty()){
+
+            List<Liga> ligas = this.mycontroller.getLigas();
+
+            String nome_liga = nome_liga_field.getText();
+
+            boolean permite_liga = true;
+            for (Liga l: ligas){
+                if (l.getNome().equals(nome_liga)){
+                    permite_liga = false;
+                    break;
+                }
+            }
+            if (permite_liga){
+                Liga l = new Liga(nome_liga);
+                this.mycontroller.registaLiga(l);
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Já existe uma Liga registada no sistema com o nome indicado.", "Falha no registo da liga", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Existem campos do formulário não preenchidos.", "Erro!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_regista_liga_buttonActionPerformed
+
+    private void fecha_evento_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fecha_evento_buttonActionPerformed
+
+        if (opcoes_aposta_client.getSelection() != null){
+
+            boolean ganha_casa = evento_ganha_casa.isSelected();
+            boolean ganha_fora = evento_ganha_fora.isSelected();
+            boolean empate = evento_empate.isSelected();
+
+            int row = eventos_lista.getSelectedRow();
+            DefaultTableModel model = (DefaultTableModel) eventos_lista.getModel();
+
+            int id_evento = (int) model.getValueAt(row, 0);
+            this.mycontroller.fechaEvento(id_evento, ganha_casa, ganha_fora, empate);
+
+            /* remoção de paineis anteriores */
+            options_panel_admin.removeAll();
+            options_panel_admin.repaint();
+            options_panel_admin.revalidate();
+
+            /* alocação do respetivo painel de opções */
+            options_panel_admin.add(eventos_desportivos_elements);
+            options_panel_admin.repaint();
+            options_panel_admin.revalidate();
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Existem campos do formulário não preenchidos.", "Erro!", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_fecha_evento_buttonActionPerformed
+
+    private void submit_aposta_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submit_aposta_buttonActionPerformed
+
+        if (!quantia_field.getText().isEmpty() && (opcoes_aposta_client.getSelection() != null)){
+
+            String user = this.mycontroller.getId_utilizador_aut();
+            Jogador j = this.mycontroller.checkUser(user);
+
+            if (j.getSaldo() >= Double.parseDouble(quantia_field.getText())){
+
+                DefaultTableModel model = (DefaultTableModel) events_list.getModel();
+
+                int row = events_list.getSelectedRow();
+
+                int id_evento = (int)model.getValueAt(row, 0);
+
+                boolean casa_selected = casa_button.isSelected();
+                boolean fora_selected = fora_button.isSelected();
+                boolean empate_selected = empate_button.isSelected();
+
+                boolean aposta_permitida = true;
+                for (Aposta a : this.mycontroller.getApostasJogador(user)){
+                    if (a.getId_evento() == id_evento){
+                        aposta_permitida = false;
+                        break;
+                    }
+                }
+
+                if (aposta_permitida){
+                    this.mycontroller.registaAposta(Double.parseDouble(quantia_field.getText()), id_evento, user, casa_selected, fora_selected, empate_selected);
+
+                    JOptionPane.showMessageDialog(null, "Aposta registada com sucesso.", "BetESS", JOptionPane.PLAIN_MESSAGE);
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Já tem uma aposta registada para o evento selecionado.", "Falha no registo da aposta", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Créditos insuficientes.", "Falha no registo da aposta", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Existem campos do formulário não preenchidos.", "Erro!", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_submit_aposta_buttonActionPerformed
+
+    private void quantia_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantia_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_quantia_fieldActionPerformed
+
+    private void ganhos_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ganhos_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ganhos_fieldActionPerformed
+
+    private void casa_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_casa_buttonActionPerformed
+        DefaultTableModel model = (DefaultTableModel) events_list.getModel();
+        int row = events_list.getSelectedRow();
+
+        double odd_casa = (double)model.getValueAt(row, 3);
+
+        ganhos_field.setText(Double.toString(odd_casa * Double.parseDouble(quantia_field.getText())));
+    }//GEN-LAST:event_casa_buttonActionPerformed
+
+    private void empate_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empate_buttonActionPerformed
+        DefaultTableModel model = (DefaultTableModel) events_list.getModel();
+        int row = events_list.getSelectedRow();
+
+        double odd_empate = (double)model.getValueAt(row, 5);
+
+        ganhos_field.setText(Double.toString(odd_empate * Double.parseDouble(quantia_field.getText())));
+    }//GEN-LAST:event_empate_buttonActionPerformed
+
+    private void fora_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fora_buttonActionPerformed
+        DefaultTableModel model = (DefaultTableModel) events_list.getModel();
+        int row = events_list.getSelectedRow();
+
+        double odd_fora = (double)model.getValueAt(row, 4);
+
+        ganhos_field.setText(Double.toString(odd_fora * Double.parseDouble(quantia_field.getText())));
+    }//GEN-LAST:event_fora_buttonActionPerformed
+
+    private void cashout_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashout_buttonActionPerformed
+
+        if (lista_apostas.getSelectedRow() != -1){
+
+            int row = lista_apostas.getSelectedRow();
+
+            DefaultTableModel model = (DefaultTableModel) lista_apostas.getModel();
+
+            model.removeRow(row);
+
+            this.mycontroller.removeAposta((int) model.getValueAt(row, 0));
+
+            Double saldo = this.mycontroller.checkUser(this.mycontroller.getId_utilizador_aut()).getSaldo();
+            saldo *= -0.2;
+            this.mycontroller.atualizaSaldo(saldo, this.mycontroller.getId_utilizador_aut());
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Selecione uma aposta!", "Erro!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_cashout_buttonActionPerformed
+
+    private void saldo_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saldo_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saldo_fieldActionPerformed
+
+    private void creditar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditar_buttonActionPerformed
+
+        if (!creditos_field.getText().isEmpty()){
+
+            double creditos = Double.parseDouble(creditos_field.getText());
+
+            this.mycontroller.atualizaSaldo(creditos, this.mycontroller.getId_utilizador_aut());
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Existem campos do formulário não preenchidos.", "Erro!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_creditar_buttonActionPerformed
+
+    private void descartar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descartar_buttonActionPerformed
+
+        if (notificacoes_list.getSelectedRow() != -1){
+
+            DefaultTableModel model = (DefaultTableModel) notificacoes_list.getModel();
+            int row = notificacoes_list.getSelectedRow();
+
+            model.removeRow(row);
+            /* falta descartar a notificação no objeto jogador */
+            this.mycontroller.removeNotificacao(this.mycontroller.getId_utilizador_aut(), (int) model.getValueAt(row, 1));
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Selecione uma das notificações.", "Erro!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_descartar_buttonActionPerformed
+
+    private void nome_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nome_fieldActionPerformed
+
+    }//GEN-LAST:event_nome_fieldActionPerformed
+
+    private void email_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_email_fieldActionPerformed
+
+    private void palavra_passe_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_palavra_passe_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_palavra_passe_fieldActionPerformed
+
+    private void contacto_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contacto_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_contacto_fieldActionPerformed
+
+    private void edit_dados_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_dados_buttonActionPerformed
+
+        if (!nome_field.getText().isEmpty() &&
+            !email_field.getText().isEmpty() &&
+            !palavra_passe_field.getText().isEmpty() &&
+            contacto_field.getText().isEmpty()){
+
+            Jogador autenticado = this.mycontroller.checkUser(this.mycontroller.getId_utilizador_aut());
+
+            autenticado.setNome(nome_field.getText());
+            autenticado.setEmail(email_field.getText());
+            autenticado.setPassword(palavra_passe_field.getText());
+            autenticado.setContacto(contacto_field.getText());
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Existem campos do formulário não preenchidos.", "Erro!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_edit_dados_buttonActionPerformed
+
+    private void apostar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apostar_buttonActionPerformed
+        /* remoção de paineis anteriores */
+        options_panel_admin.removeAll();
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+
+        /* alocação do respetivo painel de opções */
+        options_panel_admin.add(apostar_elements);
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+
+        Map<Integer, EventoDesportivo> eventos = this.mycontroller.getEventosDesportivos();
+
+        DefaultTableModel model = (DefaultTableModel) events_list.getModel();
+
+        model.setRowCount(0);
+
+        for (EventoDesportivo e : eventos.values()){
+            String equipa_casa = this.mycontroller.getEquipa(e.getequipa_casa()).getDesignacao();
+            String equipa_fora = this.mycontroller.getEquipa(e.getequipa_fora()).getDesignacao();
+            model.addRow(new Object[]{e.getId_evento(), equipa_casa, equipa_fora, e.getOdd_casa(), e.getOdd_fora(), e.getOdd_empate()});
+        }
+    }//GEN-LAST:event_apostar_buttonActionPerformed
+
+    private void ver_apostas_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ver_apostas_buttonActionPerformed
+        /* remoção de paineis anteriores */
+        options_panel_admin.removeAll();
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+
+        /* alocação do respetivo painel de opções */
+        options_panel_admin.add(apostas_elements);
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+
+        List<Aposta> apostas = this.mycontroller.getApostasJogador(this.mycontroller.getId_utilizador_aut());
+
+        DefaultTableModel model = (DefaultTableModel) lista_apostas.getModel();
+
+        for (Aposta a : apostas){
+            System.out.println("Teste na areacliente" + a.getEstado());
+        }
+
+        model.setRowCount(0);
+
+        for (Aposta a : apostas){
+            EventoDesportivo e = this.mycontroller.getEventoDesportivo(a.getId_evento());;
+            model.addRow(new Object[]{a.getId_evento(), e.getequipa_casa(), e.getequipa_fora(), a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), a.getQuantia(), a.getEstado()});
+        }
+
+    }//GEN-LAST:event_ver_apostas_buttonActionPerformed
+
+    private void creditos_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditos_buttonActionPerformed
+        /* remoção de paineis anteriores */
+        options_panel_admin.removeAll();
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+
+        /* alocação do respetivo painel de opções */
+        options_panel_admin.add(creditos_elements);
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+
+        saldo_field.setText(Double.toString(this.mycontroller.checkUser(this.mycontroller.getId_utilizador_aut()).getSaldo()));
+    }//GEN-LAST:event_creditos_buttonActionPerformed
+
+    private void notificacoes_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notificacoes_buttonActionPerformed
+        /* remoção de paineis anteriores */
+        options_panel_admin.removeAll();
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+
+        /* alocação do respetivo painel de opções */
+        options_panel_admin.add(notificacoes_elements);
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+
+        Jogador j = this.mycontroller.checkUser(this.mycontroller.getId_utilizador_aut());
+
+        List<Notificacao> notificacoes = j.getNotificacoes();
+
+        DefaultTableModel model = (DefaultTableModel) notificacoes_list.getModel();
+
+        model.setRowCount(0);
+
+        for (Notificacao n : notificacoes){
+            Aposta a = this.mycontroller.getAposta(n.getId_aposta());
+
+            model.addRow(new Object[]{a.getId_evento(), a.getId_aposta(), "nome equipa casa", "nome equipa fora", a.getQuantia(), n.getBalanco(), n.getStatus()});
+        }
+    }//GEN-LAST:event_notificacoes_buttonActionPerformed
+
+    private void editar_perfil_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editar_perfil_buttonActionPerformed
+        Jogador autenticado = this.mycontroller.checkUser(this.mycontroller.getId_utilizador_aut());
+
+        nome_field.setText(autenticado.getNome());
+        email_field.setText(autenticado.getEmail());
+        contacto_field.setText(autenticado.getContacto());
+
+        /* remoção de paineis anteriores */
+        options_panel_admin.removeAll();
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+
+        /* alocação do respetivo painel de opções */
+        options_panel_admin.add(edit_perfil_elements);
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
+
+    }//GEN-LAST:event_editar_perfil_buttonActionPerformed
+
+    private void logout_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout_buttonActionPerformed
+        this.mycontroller.setId_utilizador_aut("None");
+        this.setVisible(false);
+
+        /* local onde o estado da aplicação é guardado */
+        this.mycontroller.save();
+    }//GEN-LAST:event_logout_buttonActionPerformed
+
+    @Override
+    public void update(int saldo) {
+        saldo_field.setText(Integer.toString(saldo));
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -78,5 +1981,123 @@ public class AreaUI extends javax.swing.JFrame{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Welcome_label_admin;
+    private javax.swing.JLabel Welcome_label_client;
+    private javax.swing.JButton apostar_button;
+    private javax.swing.JPanel apostar_elements;
+    private javax.swing.JButton apostas_button;
+    private javax.swing.JPanel apostas_elements;
+    private javax.swing.JPanel apostas_elements1;
+    private javax.swing.JButton bloquear_jogador_button;
+    private javax.swing.JPanel buttons_panel_admin;
+    private javax.swing.JPanel buttons_panel_client;
+    private javax.swing.JRadioButton casa_button;
+    private javax.swing.JButton cashout_button;
+    private javax.swing.JComboBox<String> combo_casa;
+    private javax.swing.JComboBox<String> combo_fora;
+    private javax.swing.JTextField contacto_field;
+    private javax.swing.JButton creditar_button;
+    private javax.swing.JButton creditos_button;
+    private javax.swing.JPanel creditos_elements;
+    private javax.swing.JTextField creditos_field;
+    private javax.swing.JButton desbloquear_jogador_button;
+    private javax.swing.JButton descartar_button;
+    private javax.swing.JButton edit_dados_button;
+    private javax.swing.JPanel edit_perfil_elements;
+    private javax.swing.JButton editar_perfil_button;
+    private javax.swing.JButton elimina_aposta;
+    private javax.swing.JTextField email_field;
+    private javax.swing.JRadioButton empate_button;
+    private javax.swing.JRadioButton evento_empate;
+    private javax.swing.JRadioButton evento_ganha_casa;
+    private javax.swing.JRadioButton evento_ganha_fora;
+    private javax.swing.JButton eventos_desportivos_button;
+    private javax.swing.JPanel eventos_desportivos_elements;
+    private javax.swing.JTable eventos_lista;
+    private javax.swing.JTable events_list;
+    private javax.swing.JButton fecha_evento_button;
+    private javax.swing.JButton fechar_evento_button;
+    private javax.swing.JPanel fechar_evento_elements;
+    private javax.swing.JRadioButton fora_button;
+    private javax.swing.JTextField ganhos_field;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JButton jogadores_bloq_button;
+    private javax.swing.JPanel jogadores_bloqueados_elements;
+    private javax.swing.JTable jogadores_bloqueados_list;
+    private javax.swing.JTable jogadores_list;
+    private javax.swing.JComboBox<String> ligas_combo;
+    private javax.swing.JTable lista_apostas;
+    private javax.swing.JTable lista_apostas1;
+    private javax.swing.JScrollPane lista_apostas_pane;
+    private javax.swing.JButton logout_button;
+    private javax.swing.JTextField nome_equipa_field;
+    private javax.swing.JTextField nome_field;
+    private javax.swing.JTextField nome_liga_field;
+    private javax.swing.JButton notificacoes_button;
+    private javax.swing.JPanel notificacoes_elements;
+    private javax.swing.JTable notificacoes_list;
+    private javax.swing.JButton nova_equipa_button;
+    private javax.swing.JPanel nova_equipa_elements;
+    private javax.swing.JButton nova_liga_button;
+    private javax.swing.JPanel nova_liga_elements;
+    private javax.swing.JPanel novo_evento_elements;
+    private javax.swing.JTextField odd_casa_field;
+    private javax.swing.JTextField odd_empate_field;
+    private javax.swing.JTextField odd_fora_field;
+    private javax.swing.ButtonGroup opcoes_aposta_admin;
+    private javax.swing.ButtonGroup opcoes_aposta_client;
+    private javax.swing.JPanel options_panel_admin;
+    private javax.swing.JPanel options_panel_client;
+    private javax.swing.JTextField palavra_passe_field;
+    private javax.swing.JTextField quantia_field;
+    private javax.swing.JButton regista_equipa_button;
+    private javax.swing.JButton regista_evento_button;
+    private javax.swing.JButton regista_liga_button;
+    private javax.swing.JButton registar_evento_button;
+    private javax.swing.JButton remover_jogador_button;
+    private javax.swing.JTextField saldo_field;
+    private javax.swing.JButton submit_aposta_button;
+    private javax.swing.JButton terminar_sessao_button;
+    private javax.swing.JButton ver_apostas_button;
+    private javax.swing.JButton ver_jogadores_button;
+    private javax.swing.JPanel ver_jogadores_elements;
     // End of variables declaration//GEN-END:variables
+
 }
