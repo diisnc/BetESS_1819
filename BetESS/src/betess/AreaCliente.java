@@ -5,6 +5,7 @@
  */
 package betess;
 
+import java.text.DecimalFormat;
 import java.util.*;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
@@ -698,9 +699,11 @@ public class AreaCliente extends javax.swing.JFrame {
         
         model.setRowCount(0);
         
+        DecimalFormat dc = new DecimalFormat("0.00");
+        
         for (Aposta a : apostas){
             EventoDesportivo e = this.betess.getEventoDesportivo(a.getId_evento());;
-            model.addRow(new Object[]{a.getId_evento(), e.getequipa_casa(), e.getequipa_fora(), a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), a.getQuantia(), a.getEstado()});
+            model.addRow(new Object[]{a.getId_evento(), e.getequipa_casa(), e.getequipa_fora(), a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), Double.parseDouble(dc.format(a.getQuantia())), a.getEstado()});
         }
         
         
@@ -821,7 +824,9 @@ public class AreaCliente extends javax.swing.JFrame {
         
         double odd_casa = (double)model.getValueAt(row, 3);
         
-        ganhos_field.setText(Double.toString(odd_casa * Double.parseDouble(quantia_field.getText())));
+        DecimalFormat dc = new DecimalFormat("0.00");
+        
+        ganhos_field.setText(dc.format(odd_casa * Double.parseDouble(quantia_field.getText())));
     }//GEN-LAST:event_casa_buttonActionPerformed
 
     private void fora_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fora_buttonActionPerformed
@@ -830,7 +835,9 @@ public class AreaCliente extends javax.swing.JFrame {
         
         double odd_fora = (double)model.getValueAt(row, 4);
         
-        ganhos_field.setText(Double.toString(odd_fora * Double.parseDouble(quantia_field.getText())));
+        DecimalFormat dc = new DecimalFormat("0.00");
+        
+        ganhos_field.setText(dc.format(Double.toString(odd_fora * Double.parseDouble(quantia_field.getText()))));
     }//GEN-LAST:event_fora_buttonActionPerformed
 
     private void empate_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empate_buttonActionPerformed
@@ -839,7 +846,9 @@ public class AreaCliente extends javax.swing.JFrame {
         
         double odd_empate = (double)model.getValueAt(row, 5);
         
-        ganhos_field.setText(Double.toString(odd_empate * Double.parseDouble(quantia_field.getText())));
+        DecimalFormat dc = new DecimalFormat("0.00");
+        
+        ganhos_field.setText(dc.format(Double.toString(odd_empate * Double.parseDouble(quantia_field.getText()))));
     }//GEN-LAST:event_empate_buttonActionPerformed
 
     private void saldo_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saldo_fieldActionPerformed
@@ -897,7 +906,9 @@ public class AreaCliente extends javax.swing.JFrame {
         for (Notificacao n : notificacoes){
             Aposta a = this.betess.getAposta(n.getId_aposta());
             
-            model.addRow(new Object[]{a.getId_evento(), a.getId_aposta(), "nome equipa casa", "nome equipa fora", a.getQuantia(), n.getBalanco(), n.getStatus()});
+            DecimalFormat dc = new DecimalFormat("0.00");
+            
+            model.addRow(new Object[]{a.getId_evento(), a.getId_aposta(), "nome equipa casa", "nome equipa fora", Double.parseDouble(dc.format(a.getQuantia())), n.getBalanco(), n.getStatus()});
         }
     }//GEN-LAST:event_notificacoes_buttonActionPerformed
 
