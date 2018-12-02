@@ -1943,8 +1943,11 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
         for (Notificacao n : notificacoes){
             Aposta a = this.mycontroller.getAposta(n.getId_aposta());
+            EventoDesportivo e = this.mycontroller.getEventoDesportivo(a.getId_evento());
+            String equipa_casa = e.getequipa_casa();
+            String equipa_fora = e.getequipa_fora();
 
-            model.addRow(new Object[]{a.getId_evento(), a.getId_aposta(), "nome equipa casa", "nome equipa fora", Double.parseDouble(dc.format(a.getQuantia())), n.getBalanco(), n.getStatus()});
+            model.addRow(new Object[]{a.getId_evento(), a.getId_aposta(), equipa_casa, equipa_fora, Double.parseDouble(dc.format(a.getQuantia())), n.getBalanco(), n.getStatus()});
         }
     }//GEN-LAST:event_notificacoes_buttonActionPerformed
 

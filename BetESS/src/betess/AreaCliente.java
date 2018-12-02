@@ -903,12 +903,15 @@ public class AreaCliente extends javax.swing.JFrame {
         
         model.setRowCount(0);
         
+        DecimalFormat dc = new DecimalFormat("0.00");
+        
         for (Notificacao n : notificacoes){
             Aposta a = this.betess.getAposta(n.getId_aposta());
+            EventoDesportivo e = this.betess.getEventoDesportivo(a.getId_evento());
+            String equipa_casa = e.getequipa_casa();
+            String equipa_fora = e.getequipa_fora();
             
-            DecimalFormat dc = new DecimalFormat("0.00");
-            
-            model.addRow(new Object[]{a.getId_evento(), a.getId_aposta(), "nome equipa casa", "nome equipa fora", Double.parseDouble(dc.format(a.getQuantia())), n.getBalanco(), n.getStatus()});
+            model.addRow(new Object[]{a.getId_evento(), a.getId_aposta(), equipa_casa, equipa_fora, Double.parseDouble(dc.format(a.getQuantia())), n.getBalanco(), n.getStatus()});
         }
     }//GEN-LAST:event_notificacoes_buttonActionPerformed
 
