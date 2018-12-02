@@ -141,7 +141,7 @@ public class Model implements Serializable, Subject{
     public void updateSaldo(String id_jogador, double novo_saldo){
         Jogador j = this.jogadores.get(id_jogador);
         j.setSaldo(novo_saldo);
-        this.notifyObserver(saldo);
+        //this.notifyObserver(saldo);
     }
     
     public void atualizaEventoDesportivo(EventoDesportivo e){
@@ -300,9 +300,13 @@ public class Model implements Serializable, Subject{
         //this.observers.remove(param c);
     }
     
-    @Override
     /* Corresponde ao notify() - só precisamos do saldo pq é o unico q precisa de atualizaçao instantanea*/
     public void notifyObserver(int saldo) {
         this.areaUI.update(saldo);
     } 
+
+    @Override
+    public void notifyObserver() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

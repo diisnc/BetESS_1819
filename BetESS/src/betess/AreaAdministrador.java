@@ -5,6 +5,7 @@
  */
 package betess;
 
+import java.text.DecimalFormat;
 import java.util.*;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
@@ -804,8 +805,10 @@ public class AreaAdministrador extends javax.swing.JFrame {
         
         model.setRowCount(0);
         
+        DecimalFormat dc = new DecimalFormat("0.00");
+        
         for (Jogador j : jogadores.values()){
-            model.addRow(new Object[]{j.getEmail(), j.getNome(), j.getContacto(), j.getSaldo()});
+            model.addRow(new Object[]{j.getEmail(), j.getNome(), j.getContacto(), Double.parseDouble(dc.format(j.getSaldo()))});
         }
         
     }//GEN-LAST:event_ver_jogadores_buttonActionPerformed
@@ -827,11 +830,13 @@ public class AreaAdministrador extends javax.swing.JFrame {
         
         model.setRowCount(0);
         
+        DecimalFormat dc = new DecimalFormat("0.00");
+        
         for (Aposta a : apostas.values()){
             EventoDesportivo e = this.betess.getEventoDesportivo(a.getId_evento());
             /*String equipa_casa = this.betess.getEquipa(e.getId_equipa_casa()).getDesignacao();
             String equipa_fora = this.betess.getEquipa(e.getId_equipa_fora()).getDesignacao();*/
-            model.addRow(new Object[]{a.getId_aposta(), a.getId_evento(), a.getId_jogador(), a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), a.getQuantia()});
+            model.addRow(new Object[]{a.getId_aposta(), a.getId_evento(), a.getId_jogador(), a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), Double.parseDouble(dc.format(a.getQuantia()))});
         }
         
     }//GEN-LAST:event_apostas_buttonActionPerformed
@@ -1058,8 +1063,10 @@ public class AreaAdministrador extends javax.swing.JFrame {
         
         model.setRowCount(0);
         
+        DecimalFormat dc = new DecimalFormat("0.00");
+        
         for (Jogador j : jogadores){
-            model.addRow(new Object[]{j.getEmail(), j.getNome(), j.getContacto(), j.getSaldo()});
+            model.addRow(new Object[]{j.getEmail(), j.getNome(), j.getContacto(), Double.parseDouble(dc.format(j.getSaldo()))});
         }
     }//GEN-LAST:event_jogadores_bloq_buttonActionPerformed
 

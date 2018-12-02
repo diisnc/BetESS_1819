@@ -21,6 +21,7 @@ public class Login extends javax.swing.JFrame implements Observer{
      */
     public Login() {
         initComponents();
+        this.mycontroller = new Controller_BetESS();
     }
 
     /**
@@ -137,7 +138,7 @@ public class Login extends javax.swing.JFrame implements Observer{
             /* NÃO ESQUECER QUE TEMOS DE VERIFICAR SEMPRE SE QUEM ESTÁ A FAZER O LOGIN É O ADMIN */
             if (email.equals("admin") && password.equals("admin")){
                 this.mycontroller.setId_utilizador_aut(email);
-                AreaUI frame = new AreaUI();
+                AreaUI frame = new AreaUI(email);
                 frame.setMycontroller(this.mycontroller);
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
@@ -148,7 +149,7 @@ public class Login extends javax.swing.JFrame implements Observer{
                 if (jogador != null){
                     if (jogador.checkPassword(password)){
                         this.mycontroller.setId_utilizador_aut(email);
-                        AreaUI frame = new AreaUI();
+                        AreaUI frame = new AreaUI(email);
                         frame.setMycontroller(this.mycontroller);
                         frame.setLocationRelativeTo(null);
                         frame.setVisible(true);
@@ -178,41 +179,6 @@ public class Login extends javax.swing.JFrame implements Observer{
     @Override
     public void update(int saldo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

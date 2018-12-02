@@ -177,16 +177,28 @@ public class Controller_BetESS implements Observer{
         this.model.fechaEvento(id_Evento, ganha_casa, ganha_fora, empate);
     }
         
-    
-    @Override
     public void update(/* int number */) {
         //System.out.println("Client nr " + id + ":\nNew value: " + number + ".\n");
+    }
+    
+    @Override
+    public void update(int saldo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        Login l = new Login();
+        l.setLocationRelativeTo(null);
+        l.setVisible(true);
     }
     
      /*
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         Login l = new Login();
         Registo r = new Registo();
         Model m = new Model();
@@ -203,8 +215,5 @@ public class Controller_BetESS implements Observer{
         
         l.setLocationRelativeTo(null);
         l.setVisible(true);
-    }
-    
-    
-    
+    }*/
 }
