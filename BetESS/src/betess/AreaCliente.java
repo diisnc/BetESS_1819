@@ -931,7 +931,9 @@ public class AreaCliente extends javax.swing.JFrame {
         options_panel.repaint();
         options_panel.revalidate();
         
-        saldo_field.setText(Double.toString(this.betess.checkUser(this.betess.getId_utilizador_aut()).getSaldo()));
+        DecimalFormat dc = new DecimalFormat("0.00");
+        
+        saldo_field.setText(dc.format(this.betess.checkUser(this.betess.getId_utilizador_aut()).getSaldo()));
     }//GEN-LAST:event_creditos_buttonActionPerformed
 
     private void ganhos_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ganhos_fieldActionPerformed
