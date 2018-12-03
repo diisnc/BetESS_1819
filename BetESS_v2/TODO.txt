@@ -29,3 +29,6 @@
 
 	- Marco: Se é correto passar o model e controller por metodos set para as views (mostrar esquema q mostramos nestor)
 			 (Ver exemplo sem padroes BetESS)
+    - Como devemos proceder para distinguir as diferentes situações de update na view?
+        * devemos usar argumentos no update com gets diretos da view para o model
+        * devemos enviar os dados logo pelo argumento do update? (isto implicaria ter vários updates para as difernetes situações)
