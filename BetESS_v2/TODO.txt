@@ -1,30 +1,16 @@
-- Mudar nomes classes para model, view, controller ----------------- DONE
-- Passar lógica controlador para model ----------------------------- DOING
-- View ------------------------------------------------------------- DOING
-- Definir métodos relacionados com observer pattern ---------------- DOING
-
 - RELATORIO
 		- Rever requisitos ! + use cases, consequentemente
 		- Alterar introduçao se fizermos mais algum diagrama (está a vermelho)
-		- Fazer modelo domínio + alterar texto da secção do modelo de domínio
-		- Utiliza para tal, os teus conhecimentos de UML, desenvolvendo no mínimo, um vista de estrutura, de comportamento e uma de alocação que incorpore as  funções consideradas. " uma de alocação que incorpore as  funções consideradas"??????????????????????????
-
 
 - DÚVIDAS
-	- Temos concrete subject, certo? é o model. Dá p fazer como está no diagrama de classes?
-	- Model -> getData() é o run do nosso incrementor?
-	- Model -> SetOfObservers não é um arraylist de clientes (exemplo) como no incrementor certo? é private Observer observerView & private Observer observerController
-	- Nas interfaces não têm q estar todos os métodos certo? ficam basicamente os de controlo do observer pattern (por definir)
-	- Na View e no Controller, o MyModel (var) é mesmo o nosso Model? ou é o Subject?
 	- Pôr no diagrama de classes a view com as heranças para mostrar como fizemos? ou pomos só uma view, já q nem sequer é costume pôr? isto é p mostrar também mvc por isso
 	- Mudança nos requisitos vai ser só na versão 2 ou nas duas?
 	- Vamos ter remove e register Observer? temos pelo menos 1 vez na inicializaçao do controller, nao?
 	- Diagramas de use cases, classes e dominio. Mais algum? Menos algum aka dominio?
-	- Fazer máquinas de estado?
 	- DIAGRAMA DE ALOCAÇAO?!? (um vista de estrutura, de comportamento e uma de alocaçãoS)
+	- Fazer máquinas de estado?
 	- MAIS IMPORTANTE: UPDATE(): VARIOS UPDATES PARA SE FOR LISTA, OU SÓ UM VALOR? NA VERDADE SÓ VAMOS PRECISAR DE 1 UPDATE PQ SÓ HÁ UMA SITUAÇAO EM Q HÁ MUDANÇAS E PRECISAMOS DOS DADOS EM TEMPO REAL
 	- MOSTRAR NOSSO DIAGRAMA OBSERVER PATTERN IN THE MVC
-	- Ficheiro com dados para carregar no programa?
 
 
 	- Marco: Se é correto passar o model e controller por metodos set para as views (mostrar esquema q mostramos nestor)
