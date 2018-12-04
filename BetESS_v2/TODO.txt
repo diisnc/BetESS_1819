@@ -50,3 +50,5 @@ update: como quisermos. atençao aos requisitos nao funcionais, se quero sistema
 - fazer com list de observers na mesma (para manter padrao de implementaçao do padrao)
 
 - manter register e remove observer e usar só uma vez
+
+- DUVIDA PARA QUINTA FEIRA: ATRIBUTOS DE QUALIDADE É PARA FAZER COMO SLIDE Nº10 AULA3.PDF? 
