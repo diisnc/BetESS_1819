@@ -1,34 +1,54 @@
-- Mudar nomes classes para model, view, controller ----------------- DONE
-- Passar lógica controlador para model ----------------------------- DOING
-- View ------------------------------------------------------------- DOING
-- Definir métodos relacionados com observer pattern ---------------- DOING
-
 - RELATORIO
 		- Rever requisitos ! + use cases, consequentemente
 		- Alterar introduçao se fizermos mais algum diagrama (está a vermelho)
-		- Fazer modelo domínio + alterar texto da secção do modelo de domínio
-		- Utiliza para tal, os teus conhecimentos de UML, desenvolvendo no mínimo, um vista de estrutura, de comportamento e uma de alocação que incorpore as  funções consideradas. " uma de alocação que incorpore as  funções consideradas"??????????????????????????
-
 
 - DÚVIDAS
-	- Temos concrete subject, certo? é o model. Dá p fazer como está no diagrama de classes?
-	- Model -> getData() é o run do nosso incrementor?
-	- Model -> SetOfObservers não é um arraylist de clientes (exemplo) como no incrementor certo? é private Observer observerView & private Observer observerController
-	- Nas interfaces não têm q estar todos os métodos certo? ficam basicamente os de controlo do observer pattern (por definir)
-	- Na View e no Controller, o MyModel (var) é mesmo o nosso Model? ou é o Subject?
-	- Pôr no diagrama de classes a view com as heranças para mostrar como fizemos? ou pomos só uma view, já q nem sequer é costume pôr? isto é p mostrar também mvc por isso
-	- Mudança nos requisitos vai ser só na versão 2 ou nas duas?
 	- Vamos ter remove e register Observer? temos pelo menos 1 vez na inicializaçao do controller, nao?
 	- Diagramas de use cases, classes e dominio. Mais algum? Menos algum aka dominio?
-	- Fazer máquinas de estado?
 	- DIAGRAMA DE ALOCAÇAO?!? (um vista de estrutura, de comportamento e uma de alocaçãoS)
+	- Fazer máquinas de estado?
 	- MAIS IMPORTANTE: UPDATE(): VARIOS UPDATES PARA SE FOR LISTA, OU SÓ UM VALOR? NA VERDADE SÓ VAMOS PRECISAR DE 1 UPDATE PQ SÓ HÁ UMA SITUAÇAO EM Q HÁ MUDANÇAS E PRECISAMOS DOS DADOS EM TEMPO REAL
+certo?                                                                                                                                    
 	- MOSTRAR NOSSO DIAGRAMA OBSERVER PATTERN IN THE MVC
-	- Ficheiro com dados para carregar no programa?
-
+	- pomos setas todas ou fica mt confuso? pomos só instancia dentro da classe?
 
 	- Marco: Se é correto passar o model e controller por metodos set para as views (mostrar esquema q mostramos nestor)
 			 (Ver exemplo sem padroes BetESS)
     - Como devemos proceder para distinguir as diferentes situações de update na view?
         * devemos usar argumentos no update com gets diretos da view para o model
         * devemos enviar os dados logo pelo argumento do update? (isto implicaria ter vários updates para as difernetes situações)
+
+        - login fica como observer???? pq n faz nada, so manda info controller e tem uma instancia dele já 
+        - update no controller?? so atualiza user_autenticado -> é preciso?? tem instancia, passa direto
+
+PEDIR TESTE AS
+
+
+
+PROF-------------------------------------------------
+update: como quisermos. atençao aos requisitos nao funcionais, se quero sistema rapido, n faria sentido um update indo buscar os dados todos ao model.
+		requisito mais importante - modifiability   ----------> slides: apatterns, ultimo slide 15
+		(relatorio: alterar req nao funcional operacional: ficheiro de texto texto -> binario) 
+
+
+- explicar mvc também de acordo com requisitos de qualidade
+
+- Mudança nos requisitos vai ser só na versão 2 ou nas duas? RESPOSTA: só 2a fase -> discutir novo atributo e consequencias na soluçao
+
+- pôr interfaces no diagrama de classes
+
+- diagrama de classes: simplificar setas de ligaçao e pôr só instancias tipo vars
+
+- opçao nossa ter instancia do model ou passar pelo controlador: explicar variante q escolhemos ->  model centered slides por imagem (pq está controller e view como observadores) ---> deixar view e controller como observadores e explicar o porque (facilitar é um criterio)
+
+- login deixamos estar ou tirar p n ficar denso
+
+- alocação: para a nossa solução, não se justifica. n temos interface web
+			ou fazemos tudo na mm maquina, + simples ----> ver livro p.19? -----> mapeamento nos recursos
+			(ver diagrama + adequado para a nossa arquitetura)
+
+- fazer com list de observers na mesma (para manter padrao de implementaçao do padrao)
+
+- manter register e remove observer e usar só uma vez
+
+- DUVIDA PARA QUINTA FEIRA: ATRIBUTOS DE QUALIDADE É PARA FAZER COMO SLIDE Nº10 AULA3.PDF? 
