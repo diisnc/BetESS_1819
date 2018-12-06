@@ -1,5 +1,14 @@
+package betess.data;
+
+import betess.control.Observer;
+import betess.control.Subject;
+import betess.ui.AreaUI;
+import betess.ui.Login;
+import betess.ui.Registo;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 
 /*
@@ -23,10 +32,7 @@ public class Model implements Serializable, Subject{
     
     
     /* Set of Observers */
-    private AreaUI areaUI;
-    private Login login;
-    private Registo registo;
-    private Controller_BetESS observerController;
+    private List<Observer> observers;
     
     
     public Model (){
@@ -36,17 +42,50 @@ public class Model implements Serializable, Subject{
         this.jogadores_bloqueados = new HashMap<> ();
         this.equipas = new HashMap<> ();
         this.ligas = new HashMap<> ();
+        this.observers = new ArrayList<> ();
         this.cont_apostas = 1;
         this.cont_eventos = 1;
+    }
+    
+    
+    @Override
+    public void registerObserver(Observer obj) {
+        this.observers.add(obj);
+    }
+
+    @Override
+    public void removeObserver(Observer obj) {
+        /* VERIFICAR ESTE CASO SE FUNCIONA */
+        this.observers.remove(obj);
+    }
+
+    @Override
+    public void notifyObserver(String arg) {
+        for (Observer o : this.observers){
+            if (o instanceof AreaUI){
+                AreaUI areaui = (AreaUI) o;
+                areaui.update(arg);
+            }
+            else if (o instanceof Login){
+                Login login = (Login) o;
+                login.update(arg);
+            }
+            else if (o instanceof Registo){
+                Registo registo = (Registo) o;
+                registo.update(arg);
+            }
+        }
     }
     
     /* registo de uma equipa */
     public void registaEquipa(Equipa e){
         this.equipas.put(e.getDesignacao(), e);
+        notifyObserver("equipas");
     }
     
     public void registaLiga(Liga l){
         this.ligas.put(l.getNome(), l.clone());
+        notifyObserver("ligas");
     }
     
     public List<Liga> getLigas(){
@@ -64,6 +103,7 @@ public class Model implements Serializable, Subject{
         j.removeNotificacao(id_aposta);
         
         this.jogadores.put(id_utilizador, j.clone());
+        this.notifyObserver("notificacoes");
     }
     
     public Equipa getEquipa(String id_equipa){
@@ -84,17 +124,20 @@ public class Model implements Serializable, Subject{
         System.out.println(j.getEmail());
         this.jogadores.remove(id);
         this.jogadores_bloqueados.put(id, j);
+        notifyObserver("jogadores_bloqueados");
     }
     
     public void desbloqueiaJogador(String id){
         Jogador j = this.jogadores_bloqueados.get(id);
         this.jogadores_bloqueados.remove(id);
         this.jogadores.put(id, j);
+        notifyObserver("jogadores_bloqueados");
     }
     
     /* inserção de um jogador no sistema */
     public void registaJogador(Jogador j){
         this.jogadores.put(j.getEmail(), j);
+        notifyObserver("jogadores");
     }
     
     public HashMap<String, Jogador> getJogadores(){
@@ -124,6 +167,7 @@ public class Model implements Serializable, Subject{
         double novo_saldo = saldo_atual - quantia;
         j.setSaldo(novo_saldo);
         this.jogadores.put(id_jogador, j);
+        notifyObserver("apostas");
     }
     
     public Jogador checkUser(String username){
@@ -136,26 +180,23 @@ public class Model implements Serializable, Subject{
 
     public void eliminaJogador(String id) {
         this.jogadores.remove(id);
-    }
-    
-    public void updateSaldo(String id_jogador, double novo_saldo){
-        Jogador j = this.jogadores.get(id_jogador);
-        j.setSaldo(novo_saldo);
-        //this.notifyObserver(saldo);
+        notifyObserver("jogadores");
     }
     
     public void atualizaEventoDesportivo(EventoDesportivo e){
         this.eventos.put(e.getId_evento(), e);
+        notifyObserver("eventos");
     }
     
     public void atualizaAposta(Aposta a){
         this.apostas.put(a.getId_aposta(), a);
-        System.out.println("Atualizei aposta! " + a.getEstado());
+        notifyObserver("apostas");
     }
     
     public void registaEventoDesportivo(String equipa_casa, String equipa_fora, double odd_casa, double odd_fora, double odd_empate){
         EventoDesportivo e = new EventoDesportivo(this.cont_eventos++, equipa_casa, equipa_fora, odd_casa, odd_fora, odd_empate);
         this.eventos.put(e.getId_evento(), e);
+        notifyObserver("eventos");
     }
     
     public EventoDesportivo getEventoDesportivo(int id){
@@ -205,9 +246,11 @@ public class Model implements Serializable, Subject{
             j.setSaldo(saldo + creditos);
             this.jogadores.put(id_jogador, j);
         }
+        notifyObserver("jogadores");
+        notifyObserver("saldo");
     }
 
-    List<Aposta> getApostasJogador(String id_jogador) {
+    public List<Aposta> getApostasJogador(String id_jogador) {
         List<Aposta> res = new ArrayList();
         
         for (Aposta a: this.apostas.values()){
@@ -222,6 +265,7 @@ public class Model implements Serializable, Subject{
 
     public void removeAposta(int id) {
         this.apostas.remove(id);
+        notifyObserver("apostas");
     }
     
     /* Único método que tem que fazer o notifyObservers pq retorna um valor modificado */
@@ -279,34 +323,15 @@ public class Model implements Serializable, Subject{
                 this.registaJogador(jogador);
                 
                 /* atualização do saldo do cliente */
-                this.updateSaldo(j.getEmail(), saldo);
+                this.atualizaSaldo(saldo, j.getEmail());
             }
         }
         e.setEstado("Terminado");
         this.atualizaEventoDesportivo(e);
+        
+        notifyObserver("apostas");
+        notifyObserver("eventos");
+        notifyObserver("jogadores");
+        notifyObserver("saldo");
     }   
-    
-    /* Métodos relacionados com observer pattern*/
-    
-    @Override
-    /* Corresponde ao attach(observer) */
-    public void registerObserver(/*param c*/) {
-        //this.observers.add(param c);
-    }
-
-    @Override
-    /* Corresponde ao detach(observer) */
-    public void removeObserver(/*param c*/) {
-        //this.observers.remove(param c);
-    }
-    
-    /* Corresponde ao notify() - só precisamos do saldo pq é o unico q precisa de atualizaçao instantanea*/
-    public void notifyObserver(int saldo) {
-        this.areaUI.update(saldo);
-    } 
-
-    @Override
-    public void notifyObserver() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

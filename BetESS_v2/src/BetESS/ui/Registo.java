@@ -1,4 +1,9 @@
+package betess.ui;
 
+import betess.data.Jogador;
+import betess.data.Model;
+import betess.control.Observer;
+import betess.control.Controller_BetESS;
 import javax.swing.JOptionPane;
 
 /*
@@ -21,6 +26,11 @@ public class Registo extends javax.swing.JFrame implements Observer{
      */
     public Registo() {
         initComponents();
+    }
+    
+    @Override
+    public void update(String arg) {
+        
     }
 
     public void setMymodel(Model mymodel) {
@@ -169,11 +179,6 @@ public class Registo extends javax.swing.JFrame implements Observer{
             JOptionPane.showMessageDialog(null, "Existem campos do formulário não preenchidos.", "Erro!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_registar_buttonActionPerformed
-
-    @Override
-    public void update(int saldo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     /**
      * @param args the command line arguments

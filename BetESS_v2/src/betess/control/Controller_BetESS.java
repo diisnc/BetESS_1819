@@ -1,5 +1,17 @@
+package betess.control;
+
+import betess.data.Aposta;
+import betess.ui.AreaUI;
+import betess.data.Equipa;
+import betess.data.EventoDesportivo;
+import betess.data.Jogador;
+import betess.data.Liga;
+import betess.ui.Login;
+import betess.data.Model;
+import betess.ui.Registo;
 import java.io.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
 
 public class Controller_BetESS implements Observer{
     
@@ -51,6 +63,15 @@ public class Controller_BetESS implements Observer{
         } catch (IOException i) {
               i.printStackTrace();
         }
+    }
+    
+    @Override
+    public void update(String arg) {
+        
+    }
+
+    public Model getModel() {
+        return model;
     }
 
     public void setModel(Model model) {
@@ -152,7 +173,7 @@ public class Controller_BetESS implements Observer{
         this.model.registaEventoDesportivo(equipa_casa, equipa_fora, odd_casa, odd_fora, odd_empate);
     }
     
-    public Map<Integer, EventoDesportivo> getEventosDesportivos(){
+    public HashMap<Integer, EventoDesportivo> getEventosDesportivos(){
         return this.model.getEventosDesportivos();
     }
     
@@ -175,15 +196,6 @@ public class Controller_BetESS implements Observer{
     */
     public void fechaEvento(int id_Evento, boolean ganha_casa, boolean ganha_fora, boolean empate){
         this.model.fechaEvento(id_Evento, ganha_casa, ganha_fora, empate);
-    }
-        
-    public void update(/* int number */) {
-        //System.out.println("Client nr " + id + ":\nNew value: " + number + ".\n");
-    }
-    
-    @Override
-    public void update(int saldo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     /**

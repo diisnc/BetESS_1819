@@ -1,11 +1,23 @@
+package betess.ui;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
+import betess.data.Liga;
+import betess.data.EventoDesportivo;
+import betess.data.Aposta;
+import betess.data.Jogador;
+import betess.data.Equipa;
+import betess.data.Notificacao;
+import betess.data.Model;
+import betess.control.Observer;
+import betess.control.Controller_BetESS;
 import java.text.DecimalFormat;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,6 +28,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
     /**
      * Creates new form AreaUI
+     * @param email
      */
     public AreaUI(String email) {
         initComponents();
@@ -39,6 +52,105 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
     public void setMycontroller(Controller_BetESS mycontroller) {
         this.mycontroller = mycontroller;
+    }
+    
+    @Override
+    public void update(String arg) {
+        if (arg.equals("jogadores")){
+            DefaultTableModel model = (DefaultTableModel) jogadores_list.getModel();
+            
+            model.setRowCount(0);
+            
+            DecimalFormat dc = new DecimalFormat("0.00");
+            
+            for (Jogador j : this.mymodel.getJogadores().values()){
+                model.addRow(new Object[]{j.getEmail(), j.getNome(), j.getContacto(), Double.parseDouble(dc.format(j.getSaldo()))});
+            }
+        }
+        else if (arg.equals("jogadores_bloqueados")){
+            DefaultTableModel model = (DefaultTableModel) jogadores_bloqueados_list.getModel();
+
+            model.setRowCount(0);
+
+            DecimalFormat dc = new DecimalFormat("0.00");
+
+            for (Jogador j : this.mymodel.getJogadoresBloqueados()){
+                model.addRow(new Object[]{j.getEmail(), j.getNome(), j.getContacto(), Double.parseDouble(dc.format(j.getSaldo()))});
+            }
+        }
+        else if (arg.equals("eventos")){
+            DefaultTableModel model = (DefaultTableModel) eventos_lista.getModel();
+            DefaultTableModel model1 = (DefaultTableModel) events_list.getModel();
+
+            model.setRowCount(0);
+
+            DecimalFormat dc = new DecimalFormat("0.00");
+
+            for (EventoDesportivo e : this.mymodel.getEventosDesportivos().values()){
+                String equipa_casa = this.mycontroller.getEquipa(e.getequipa_casa()).getDesignacao();
+                String equipa_fora = this.mycontroller.getEquipa(e.getequipa_fora()).getDesignacao();
+                model.addRow(new Object[]{e.getId_evento(), equipa_casa, equipa_fora, e.getGanha_casa(), e.getGanha_fora(), e.getEmpate(), Double.parseDouble(dc.format(e.getEstado()))});
+                model1.addRow(new Object[]{e.getId_evento(), equipa_casa, equipa_fora, e.getOdd_casa(), e.getOdd_fora(), e.getOdd_empate()});
+        
+            }
+        }
+        else if (arg.equals("apostas")){
+            DefaultTableModel model = (DefaultTableModel) lista_apostas1.getModel();
+            DefaultTableModel model1 = (DefaultTableModel) lista_apostas.getModel();
+            
+
+            model.setRowCount(0);
+
+            DecimalFormat dc = new DecimalFormat("0.00");
+
+            for (Aposta a : this.mymodel.getApostas().values()){
+                EventoDesportivo e = this.mymodel.getEventoDesportivo(a.getId_evento());
+                model.addRow(new Object[]{a.getId_aposta(), a.getId_evento(), a.getId_jogador(), a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), Double.parseDouble(dc.format(a.getQuantia()))});
+                model1.addRow(new Object[]{a.getId_evento(), e.getequipa_casa(), e.getequipa_fora(), a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), Double.parseDouble(dc.format(a.getQuantia())), a.getEstado()});
+
+            }
+        }
+        else if (arg.equals("notificacoes")){
+            Jogador j = this.mymodel.checkUser(this.mycontroller.getId_utilizador_aut());
+
+            List<Notificacao> notificacoes = j.getNotificacoes();
+
+            DefaultTableModel model = (DefaultTableModel) notificacoes_list.getModel();
+
+            model.setRowCount(0);
+
+            DecimalFormat dc = new DecimalFormat("0.00");
+
+            for (Notificacao n : notificacoes){
+                Aposta a = this.mymodel.getAposta(n.getId_aposta());
+                EventoDesportivo e = this.mymodel.getEventoDesportivo(a.getId_evento());
+                String equipa_casa = e.getequipa_casa();
+                String equipa_fora = e.getequipa_fora();
+
+                model.addRow(new Object[]{a.getId_evento(), a.getId_aposta(), equipa_casa, equipa_fora, Double.parseDouble(dc.format(a.getQuantia())), n.getBalanco(), n.getStatus()});
+            }
+        }
+        else if (arg.equals("saldo")){
+            DecimalFormat dc = new DecimalFormat("0.00");
+
+            saldo_field.setText(dc.format(this.mymodel.checkUser(this.mycontroller.getId_utilizador_aut()).getSaldo()));
+        }
+        else if (arg.equals("equipas")){
+            combo_casa.removeAllItems();
+            combo_fora.removeAllItems();
+
+            for (Equipa e : this.mymodel.getEquipas()){
+                combo_casa.addItem(e.getDesignacao());
+                combo_fora.addItem(e.getDesignacao());
+            }
+        }
+        else if (arg.equals("ligas")){
+            ligas_combo.removeAllItems();
+
+            for (Liga l : this.mymodel.getLigas()){
+                ligas_combo.addItem(l.getNome());
+            }
+        }
     }
 
     /**
@@ -1079,6 +1191,12 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
         jLabel22.setText("Equipa Fora:");
 
+        combo_casa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_casaActionPerformed(evt);
+            }
+        });
+
         regista_evento_button.setText("Registar Evento");
         regista_evento_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1232,13 +1350,14 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
             nova_liga_elements_adminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(nova_liga_elements_adminLayout.createSequentialGroup()
                 .addGroup(nova_liga_elements_adminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(nova_liga_elements_adminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(regista_liga_button)
-                        .addGroup(nova_liga_elements_adminLayout.createSequentialGroup()
-                            .addGap(83, 83, 83)
-                            .addComponent(jLabel30)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(nome_liga_field, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(nova_liga_elements_adminLayout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addGroup(nova_liga_elements_adminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(regista_liga_button)
+                            .addGroup(nova_liga_elements_adminLayout.createSequentialGroup()
+                                .addComponent(jLabel30)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nome_liga_field, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(nova_liga_elements_adminLayout.createSequentialGroup()
                         .addGap(51, 51, 51)
                         .addComponent(jLabel29)))
@@ -1401,14 +1520,14 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
     private void eventos_desportivos_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventos_desportivos_buttonActionPerformed
         /* remoção de paineis anteriores */
-        options_panel_client.removeAll();
-        options_panel_client.repaint();
-        options_panel_client.revalidate();
+        options_panel_admin.removeAll();
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
 
         /* alocação do respetivo painel de opções */
-        options_panel_client.add(eventos_desportivos_elements_admin);
-        options_panel_client.repaint();
-        options_panel_client.revalidate();
+        options_panel_admin.add(eventos_desportivos_elements_admin);
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
 
         DefaultTableModel model = (DefaultTableModel) eventos_lista.getModel();
 
@@ -1426,14 +1545,14 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
     private void jogadores_bloq_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jogadores_bloq_buttonActionPerformed
         /* remoção de paineis anteriores */
-        options_panel_client.removeAll();
-        options_panel_client.repaint();
-        options_panel_client.revalidate();
+        options_panel_admin.removeAll();
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
 
         /* alocação do respetivo painel de opções */
-        options_panel_client.add(jogadores_bloqueados_elements_admin);
-        options_panel_client.repaint();
-        options_panel_client.revalidate();
+        options_panel_admin.add(jogadores_bloqueados_elements_admin);
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
 
         DefaultTableModel model = (DefaultTableModel) jogadores_bloqueados_list.getModel();
 
@@ -1450,18 +1569,18 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
     private void apostas_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apostas_buttonActionPerformed
         /* remoção de paineis anteriores */
-        options_panel_client.removeAll();
-        options_panel_client.repaint();
-        options_panel_client.revalidate();
+        options_panel_admin.removeAll();
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
 
         /* alocação do respetivo painel de opções */
-        options_panel_client.add(apostas_elements_client);
-        options_panel_client.repaint();
-        options_panel_client.revalidate();
+        options_panel_admin.add(apostas_elements_admin);
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
 
         HashMap<Integer, Aposta> apostas = this.mycontroller.getApostas();
 
-        DefaultTableModel model = (DefaultTableModel) lista_apostas.getModel();
+        DefaultTableModel model = (DefaultTableModel) lista_apostas1.getModel();
 
         model.setRowCount(0);
         
@@ -1478,14 +1597,14 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
     private void nova_equipa_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nova_equipa_buttonActionPerformed
         /* remoção de paineis anteriores */
-        options_panel_client.removeAll();
-        options_panel_client.repaint();
-        options_panel_client.revalidate();
+        options_panel_admin.removeAll();
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
 
         /* alocação do respetivo painel de opções */
-        options_panel_client.add(nova_equipa_elements_admin);
-        options_panel_client.repaint();
-        options_panel_client.revalidate();
+        options_panel_admin.add(nova_equipa_elements_admin);
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
 
         List<Liga> ligas = this.mycontroller.getLigas();
 
@@ -1498,14 +1617,14 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
     private void nova_liga_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nova_liga_buttonActionPerformed
         /* remoção de paineis anteriores */
-        options_panel_client.removeAll();
-        options_panel_client.repaint();
-        options_panel_client.revalidate();
+        options_panel_admin.removeAll();
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
 
         /* alocação do respetivo painel de opções */
-        options_panel_client.add(nova_liga_elements_admin);
-        options_panel_client.repaint();
-        options_panel_client.revalidate();
+        options_panel_admin.add(nova_liga_elements_admin);
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
     }//GEN-LAST:event_nova_liga_buttonActionPerformed
 
     private void terminar_sessao_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminar_sessao_buttonActionPerformed
@@ -1548,26 +1667,26 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
     private void fechar_evento_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechar_evento_buttonActionPerformed
         /* remoção de paineis anteriores */
-        options_panel_client.removeAll();
-        options_panel_client.repaint();
-        options_panel_client.revalidate();
+        options_panel_admin.removeAll();
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
 
         /* alocação do respetivo painel de opções */
-        options_panel_client.add(fechar_evento_elements_admin);
-        options_panel_client.repaint();
-        options_panel_client.revalidate();
+        options_panel_admin.add(fechar_evento_elements_admin);
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
     }//GEN-LAST:event_fechar_evento_buttonActionPerformed
 
     private void registar_evento_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registar_evento_buttonActionPerformed
         /* remoção de paineis anteriores */
-        options_panel_client.removeAll();
-        options_panel_client.repaint();
-        options_panel_client.revalidate();
+        options_panel_admin.removeAll();
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
 
         /* alocação do respetivo painel de opções */
-        options_panel_client.add(novo_evento_elements_admin);
-        options_panel_client.repaint();
-        options_panel_client.revalidate();
+        options_panel_admin.add(novo_evento_elements_admin);
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
 
         List<Equipa> equipas = this.mycontroller.getEquipas();
 
@@ -1696,14 +1815,14 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
             this.mycontroller.fechaEvento(id_evento, ganha_casa, ganha_fora, empate);
 
             /* remoção de paineis anteriores */
-            options_panel_client.removeAll();
-            options_panel_client.repaint();
-            options_panel_client.revalidate();
+            options_panel_admin.removeAll();
+            options_panel_admin.repaint();
+            options_panel_admin.revalidate();
 
             /* alocação do respetivo painel de opções */
-            options_panel_client.add(eventos_desportivos_elements_admin);
-            options_panel_client.repaint();
-            options_panel_client.revalidate();
+            options_panel_admin.add(eventos_desportivos_elements_admin);
+            options_panel_admin.repaint();
+            options_panel_admin.revalidate();
         }
         else {
             JOptionPane.showMessageDialog(null, "Existem campos do formulário não preenchidos.", "Erro!", JOptionPane.ERROR_MESSAGE);
@@ -2003,7 +2122,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
         options_panel_client.repaint();
         options_panel_client.revalidate();
 
-        Map<Integer, EventoDesportivo> eventos = this.mycontroller.getEventosDesportivos();
+        HashMap<Integer, EventoDesportivo> eventos = this.mycontroller.getEventosDesportivos();
 
         DefaultTableModel model = (DefaultTableModel) events_list.getModel();
 
@@ -2016,11 +2135,10 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
         }
     }//GEN-LAST:event_apostar_buttonActionPerformed
 
-    @Override
-    public void update(int saldo) {
-        saldo_field.setText(Integer.toString(saldo));
-    }
-    
+    private void combo_casaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_casaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combo_casaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2177,5 +2295,4 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
     private javax.swing.JButton ver_jogadores_button;
     private javax.swing.JPanel ver_jogadores_elements_admin;
     // End of variables declaration//GEN-END:variables
-
 }

@@ -1,4 +1,9 @@
+package betess.ui;
 
+import betess.data.Jogador;
+import betess.data.Model;
+import betess.control.Observer;
+import betess.control.Controller_BetESS;
 import javax.swing.JOptionPane;
 
 /*
@@ -13,6 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame implements Observer{
     
+    /* ACHO QUE NÃO PRECISAMOS DO MODEL NO LOGIN */
     private Model mymodel;
     private Controller_BetESS mycontroller;
 
@@ -22,6 +28,7 @@ public class Login extends javax.swing.JFrame implements Observer{
     public Login() {
         initComponents();
         this.mycontroller = new Controller_BetESS();
+        this.mymodel = this.mycontroller.getModel();
     }
 
     /**
@@ -140,6 +147,7 @@ public class Login extends javax.swing.JFrame implements Observer{
                 this.mycontroller.setId_utilizador_aut(email);
                 AreaUI frame = new AreaUI(email);
                 frame.setMycontroller(this.mycontroller);
+                frame.setMymodel(this.mymodel);
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
             }
@@ -151,6 +159,7 @@ public class Login extends javax.swing.JFrame implements Observer{
                         this.mycontroller.setId_utilizador_aut(email);
                         AreaUI frame = new AreaUI(email);
                         frame.setMycontroller(this.mycontroller);
+                        frame.setMymodel(this.mymodel);
                         frame.setLocationRelativeTo(null);
                         frame.setVisible(true);
                     }
@@ -169,6 +178,7 @@ public class Login extends javax.swing.JFrame implements Observer{
     private void newUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newUserActionPerformed
         Registo frame = new Registo();
         frame.setMycontroller(this.mycontroller);
+        frame.setMymodel(this.mymodel);
 
         frame.setTitle("Novo Jogador");
 
@@ -177,7 +187,7 @@ public class Login extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_newUserActionPerformed
 
     @Override
-    public void update(int saldo) {
+    public void update(String arg) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
