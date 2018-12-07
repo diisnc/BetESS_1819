@@ -145,9 +145,7 @@ public class Login extends javax.swing.JFrame implements Observer{
             /* NÃO ESQUECER QUE TEMOS DE VERIFICAR SEMPRE SE QUEM ESTÁ A FAZER O LOGIN É O ADMIN */
             if (email.equals("admin") && password.equals("admin")){
                 this.mycontroller.setId_utilizador_aut(email);
-                AreaUI frame = new AreaUI(email);
-                frame.setMycontroller(this.mycontroller);
-                frame.setMymodel(this.mymodel);
+                AreaUI frame = new AreaUI(email, this.mycontroller, this.mymodel);
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
             }
@@ -157,9 +155,7 @@ public class Login extends javax.swing.JFrame implements Observer{
                 if (jogador != null){
                     if (jogador.checkPassword(password)){
                         this.mycontroller.setId_utilizador_aut(email);
-                        AreaUI frame = new AreaUI(email);
-                        frame.setMycontroller(this.mycontroller);
-                        frame.setMymodel(this.mymodel);
+                        AreaUI frame = new AreaUI(email, this.mycontroller, this.mymodel);
                         frame.setLocationRelativeTo(null);
                         frame.setVisible(true);
                     }

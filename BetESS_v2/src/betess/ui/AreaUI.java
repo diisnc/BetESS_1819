@@ -30,9 +30,11 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
      * Creates new form AreaUI
      * @param email
      */
-    public AreaUI(String email) {
+    public AreaUI(String email, Controller_BetESS mycontroller, Model mymodel) {
         initComponents();
-        System.out.println(email);
+        
+        this.mycontroller = mycontroller;
+        this.mymodel = mymodel;
         
         /* remoção de paineis anteriores */
         area_administrador.setVisible(false);
@@ -44,6 +46,8 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
         else {
             area_cliente.setVisible(true);
         }
+        /* registo da interface como observadora dos dados */
+        this.mymodel.registerObserver(this);
     }
 
     public void setMymodel(Model mymodel) {
@@ -83,6 +87,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
             DefaultTableModel model1 = (DefaultTableModel) events_list.getModel();
 
             model.setRowCount(0);
+            model1.setRowCount(0);
 
             DecimalFormat dc = new DecimalFormat("0.00");
 
@@ -95,19 +100,22 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
             }
         }
         else if (arg.equals("apostas")){
-            DefaultTableModel model = (DefaultTableModel) lista_apostas1.getModel();
-            DefaultTableModel model1 = (DefaultTableModel) lista_apostas.getModel();
+            DefaultTableModel model_admin = (DefaultTableModel) lista_apostas_admin.getModel();
+            DefaultTableModel model = (DefaultTableModel) lista_apostas.getModel();
             
 
             model.setRowCount(0);
+            model_admin.setRowCount(0);
 
             DecimalFormat dc = new DecimalFormat("0.00");
 
             for (Aposta a : this.mymodel.getApostas().values()){
+                model_admin.addRow(new Object[]{a.getId_aposta(), a.getId_evento(), a.getId_jogador(), a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), Double.parseDouble(dc.format(a.getQuantia()))});
+            }
+            
+            for (Aposta a : this.mymodel.getApostasJogador(this.mycontroller.getId_utilizador_aut())){
                 EventoDesportivo e = this.mymodel.getEventoDesportivo(a.getId_evento());
-                model.addRow(new Object[]{a.getId_aposta(), a.getId_evento(), a.getId_jogador(), a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), Double.parseDouble(dc.format(a.getQuantia()))});
-                model1.addRow(new Object[]{a.getId_evento(), e.getequipa_casa(), e.getequipa_fora(), a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), Double.parseDouble(dc.format(a.getQuantia())), a.getEstado()});
-
+                model.addRow(new Object[]{a.getId_aposta(), a.getId_evento(), e.getequipa_casa(), e.getequipa_fora(), a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), Double.parseDouble(dc.format(a.getQuantia())), a.getEstado()});
             }
         }
         else if (arg.equals("notificacoes")){
@@ -248,7 +256,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
         apostas_elements_admin = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        lista_apostas1 = new javax.swing.JTable();
+        lista_apostas_admin = new javax.swing.JTable();
         elimina_aposta = new javax.swing.JButton();
         novo_evento_elements_admin = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
@@ -514,14 +522,14 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
             },
             new String [] {
-                "Identificador", "Equipa Casa", "Equipa Fora", "Vitória Casa", "Vitória Fora", "Empate", "Quantia", "Estado"
+                "Identificador aposta", "Identificador evento", "Equipa Casa", "Equipa Fora", "Vitória Casa", "Vitória Fora", "Empate", "Quantia", "Estado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Double.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Double.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1133,7 +1141,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
         jLabel19.setText("Apostas");
 
-        lista_apostas1.setModel(new javax.swing.table.DefaultTableModel(
+        lista_apostas_admin.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -1144,12 +1152,19 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Double.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
-        jScrollPane7.setViewportView(lista_apostas1);
+        jScrollPane7.setViewportView(lista_apostas_admin);
 
         elimina_aposta.setText("Eliminar");
         elimina_aposta.addActionListener(new java.awt.event.ActionListener() {
@@ -1495,14 +1510,14 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
     private void ver_jogadores_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ver_jogadores_buttonActionPerformed
         /* remoção de paineis anteriores */
-        options_panel_client.removeAll();
-        options_panel_client.repaint();
-        options_panel_client.revalidate();
+        options_panel_admin.removeAll();
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
 
         /* alocação do respetivo painel de opções */
-        options_panel_client.add(ver_jogadores_elements_admin);
-        options_panel_client.repaint();
-        options_panel_client.revalidate();
+        options_panel_admin.add(ver_jogadores_elements_admin);
+        options_panel_admin.repaint();
+        options_panel_admin.revalidate();
 
         HashMap<String, Jogador> jogadores = this.mycontroller.getJogadores();
 
@@ -1532,13 +1547,11 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
         DefaultTableModel model = (DefaultTableModel) eventos_lista.getModel();
 
         model.setRowCount(0);
-        
-        DecimalFormat dc = new DecimalFormat("0.00");
 
         for (EventoDesportivo e : this.mycontroller.getEventosDesportivos().values()){
             String equipa_casa = this.mycontroller.getEquipa(e.getequipa_casa()).getDesignacao();
             String equipa_fora = this.mycontroller.getEquipa(e.getequipa_fora()).getDesignacao();
-            model.addRow(new Object[]{e.getId_evento(), equipa_casa, equipa_fora, e.getGanha_casa(), e.getGanha_fora(), e.getEmpate(), Double.parseDouble(dc.format(e.getEstado()))});
+            model.addRow(new Object[]{e.getId_evento(), equipa_casa, equipa_fora, e.getGanha_casa(), e.getGanha_fora(), e.getEmpate(), e.getEstado()});
         }
 
     }//GEN-LAST:event_eventos_desportivos_buttonActionPerformed
@@ -1580,16 +1593,13 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
         HashMap<Integer, Aposta> apostas = this.mycontroller.getApostas();
 
-        DefaultTableModel model = (DefaultTableModel) lista_apostas1.getModel();
+        DefaultTableModel model = (DefaultTableModel) lista_apostas_admin.getModel();
 
         model.setRowCount(0);
         
         DecimalFormat dc = new DecimalFormat("0.00");
 
         for (Aposta a : apostas.values()){
-            EventoDesportivo e = this.mycontroller.getEventoDesportivo(a.getId_evento());
-            /*String equipa_casa = this.mycontroller.getEquipa(e.getId_equipa_casa()).getDesignacao();
-            String equipa_fora = this.mycontroller.getEquipa(e.getId_equipa_fora()).getDesignacao();*/
             model.addRow(new Object[]{a.getId_aposta(), a.getId_evento(), a.getId_jogador(), a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), Double.parseDouble(dc.format(a.getQuantia()))});
         }
 
@@ -1630,6 +1640,8 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
     private void terminar_sessao_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminar_sessao_buttonActionPerformed
         this.mycontroller.setId_utilizador_aut("None");
         this.setVisible(false);
+        
+        this.mymodel.removeObserver(this);
 
         /* local onde o estado da aplicação é guardado */
         this.mycontroller.save();
@@ -1643,7 +1655,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
             DefaultTableModel model = (DefaultTableModel) jogadores_list.getModel();
 
             this.mycontroller.eliminaJogador((String) jogadores_list.getValueAt(row, 0));
-            model.removeRow(row);
+            //model.removeRow(row);
         }
         else {
             JOptionPane.showMessageDialog(null, "Selecione um dos jogadores.", "Erro!", JOptionPane.ERROR_MESSAGE);
@@ -1658,7 +1670,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
             DefaultTableModel model = (DefaultTableModel) jogadores_list.getModel();
 
             this.mycontroller.bloqueiaJogador((String) jogadores_list.getValueAt(row, 0));
-            model.removeRow(row);
+            //model.removeRow(row);
         }
         else {
             JOptionPane.showMessageDialog(null, "Selecione um dos jogadores.", "Erro!", JOptionPane.ERROR_MESSAGE);
@@ -1707,7 +1719,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
             DefaultTableModel model = (DefaultTableModel) jogadores_bloqueados_list.getModel();
 
             this.mycontroller.desbloqueiaJogador((String) jogadores_bloqueados_list.getValueAt(row, 0));
-            model.removeRow(row);
+            //model.removeRow(row);
         }
         else {
             JOptionPane.showMessageDialog(null, "Selecione um dos jogadores.", "Erro!", JOptionPane.ERROR_MESSAGE);
@@ -1716,13 +1728,13 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
     private void elimina_apostaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_elimina_apostaActionPerformed
 
-        if ( lista_apostas.getSelectedRow() != -1){
+        if ( lista_apostas_admin.getSelectedRow() != -1){
 
-            int row = lista_apostas.getSelectedRow();
-            DefaultTableModel model = (DefaultTableModel) lista_apostas.getModel();
+            int row = lista_apostas_admin.getSelectedRow();
+            DefaultTableModel model = (DefaultTableModel) lista_apostas_admin.getModel();
 
-            this.mycontroller.removeAposta((int)lista_apostas.getValueAt(row, 0));
-            model.removeRow(row);
+            this.mycontroller.removeAposta((int)lista_apostas_admin.getValueAt(row, 0));
+            //model.removeRow(row);
         }
         else {
             JOptionPane.showMessageDialog(null, "Selecione uma das apostas.", "Erro!", JOptionPane.ERROR_MESSAGE);
@@ -1872,8 +1884,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
             DefaultTableModel model = (DefaultTableModel) notificacoes_list.getModel();
             int row = notificacoes_list.getSelectedRow();
 
-            model.removeRow(row);
-            /* falta descartar a notificação no objeto jogador */
+            //model.removeRow(row);
             this.mycontroller.removeNotificacao(this.mycontroller.getId_utilizador_aut(), (int) model.getValueAt(row, 1));
         }
         else {
@@ -1906,20 +1917,20 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
             DefaultTableModel model = (DefaultTableModel) lista_apostas.getModel();
 
-            String estado = (String) model.getValueAt(row, 7);
+            String estado = (String) model.getValueAt(row, 8);
 
             if (estado.equals("Não paga")){
 
-                this.mycontroller.removeAposta((int) model.getValueAt(row, 0));
-
                 Double saldo = this.mycontroller.checkUser(this.mycontroller.getId_utilizador_aut()).getSaldo();
-                Double valor_aposta = (double) model.getValueAt(row, 6);
+                Double valor_aposta = (double) model.getValueAt(row, 7);
                 Double novo_saldo = saldo - (0.8 * valor_aposta);
+                
+                this.mycontroller.removeAposta((int) model.getValueAt(row, 0));
 
                 saldo -= novo_saldo;
                 this.mycontroller.atualizaSaldo(saldo, this.mycontroller.getId_utilizador_aut());
 
-                model.removeRow(row);
+                //model.removeRow(row);
             }
         }
         else{
@@ -2016,6 +2027,8 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
     private void logout_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout_buttonActionPerformed
         this.mycontroller.setId_utilizador_aut("None");
         this.setVisible(false);
+        
+        this.mymodel.removeObserver(this);
 
         /* local onde o estado da aplicação é guardado */
         this.mycontroller.save();
@@ -2107,7 +2120,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
         for (Aposta a : apostas){
             EventoDesportivo e = this.mycontroller.getEventoDesportivo(a.getId_evento());;
-            model.addRow(new Object[]{a.getId_evento(), e.getequipa_casa(), e.getequipa_fora(), a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), Double.parseDouble(dc.format(a.getQuantia())), a.getEstado()});
+            model.addRow(new Object[]{a.getId_aposta(), a.getId_evento(), e.getequipa_casa(), e.getequipa_fora(), a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), Double.parseDouble(dc.format(a.getQuantia())), a.getEstado()});
         }
     }//GEN-LAST:event_ver_apostas_buttonActionPerformed
 
@@ -2260,7 +2273,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
     private javax.swing.JTable jogadores_list;
     private javax.swing.JComboBox<String> ligas_combo;
     private javax.swing.JTable lista_apostas;
-    private javax.swing.JTable lista_apostas1;
+    private javax.swing.JTable lista_apostas_admin;
     private javax.swing.JScrollPane lista_apostas_pane;
     private javax.swing.JButton logout_button;
     private javax.swing.JTextField nome_equipa_field;

@@ -2,9 +2,6 @@ package betess.data;
 
 import betess.control.Observer;
 import betess.control.Subject;
-import betess.ui.AreaUI;
-import betess.ui.Login;
-import betess.ui.Registo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,7 +59,7 @@ public class Model implements Serializable, Subject{
     @Override
     public void notifyObserver(String arg) {
         for (Observer o : this.observers){
-            if (o instanceof AreaUI){
+            /*if (o instanceof AreaUI){
                 AreaUI areaui = (AreaUI) o;
                 areaui.update(arg);
             }
@@ -73,7 +70,8 @@ public class Model implements Serializable, Subject{
             else if (o instanceof Registo){
                 Registo registo = (Registo) o;
                 registo.update(arg);
-            }
+            }*/
+            o.update(arg);
         }
     }
     

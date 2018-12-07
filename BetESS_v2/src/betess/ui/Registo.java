@@ -168,8 +168,7 @@ public class Registo extends javax.swing.JFrame implements Observer{
                 this.setVisible(false);
 
                 this.mycontroller.setId_utilizador_aut(email);
-                AreaUI frame = new AreaUI(email);
-                frame.setMycontroller(this.mycontroller);
+                AreaUI frame = new AreaUI(email, this.mycontroller, this.mymodel);
                 frame.setTitle("Área autenticada");
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);

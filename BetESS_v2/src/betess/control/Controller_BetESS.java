@@ -20,9 +20,6 @@ public class Controller_BetESS implements Observer{
     */
     
     private Model model;
-    private Login login;
-    private Registo registo;
-    private AreaUI areaUI;
     private String id_utilizador_aut;
 
  
@@ -76,18 +73,6 @@ public class Controller_BetESS implements Observer{
 
     public void setModel(Model model) {
         this.model = model;
-    }
-
-    public void setLogin(Login login) {
-        this.login = login;
-    }
-
-    public void setRegisto(Registo registo) {
-        this.registo = registo;
-    }
-
-    public void setAreaUI(AreaUI areaUI) {
-        this.areaUI = areaUI;
     }
     
     /* Método que permite definir o jogador autenticado na sessao */
