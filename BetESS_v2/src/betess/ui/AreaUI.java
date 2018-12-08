@@ -43,6 +43,10 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
         if (email.equals("admin")){
             area_administrador.setVisible(true);
         }
+        
+        //if (email.equals ("bookie")){
+        //    area_administrador1.setVisible(true);
+        //}
         else {
             area_cliente.setVisible(true);
         }
