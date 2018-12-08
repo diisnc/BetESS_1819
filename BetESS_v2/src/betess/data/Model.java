@@ -35,6 +35,7 @@ public class Model implements Serializable, Subject{
     
     public Model (){
         this.jogadores = new HashMap<> ();
+        this.bookie = new Bookie();
         this.apostas = new HashMap<> ();
         this.eventos = new HashMap<> ();
         this.jogadores_bloqueados = new HashMap<> ();
@@ -280,14 +281,12 @@ public class Model implements Serializable, Subject{
     
     /* Único método que tem que fazer o notifyObservers pq retorna um valor modificado */
     public void fechaEvento(int id_Evento, boolean ganha_casa, boolean ganha_fora, boolean empate){
-        
-        double ganhos = 0;
-        double perdas = 0;
-        
         EventoDesportivo e = this.getEventoDesportivo(id_Evento);
         e.setGanha_casa(ganha_casa);
         e.setGanha_fora(ganha_fora);
         e.setEmpate(empate);
+        double ganhos = 0;
+        double perdas = 0;
         
         for (Aposta a : this.getApostasEvento(e.getId_evento())){
                 
@@ -339,6 +338,8 @@ public class Model implements Serializable, Subject{
                 /* atualização do saldo do cliente */
                 this.atualizaSaldo(saldo, j.getEmail());
                 
+                /* Cálculo dos ganhos e perdas para notificação do bookie*/
+                
                 if ((saldo - saldo_ant) > 0){
                     perdas -= (saldo - saldo_ant);
                 }
@@ -358,6 +359,7 @@ public class Model implements Serializable, Subject{
                 break;
             }
         }
+
         e.setEstado("Terminado");
         this.atualizaEventoDesportivo(e);
         

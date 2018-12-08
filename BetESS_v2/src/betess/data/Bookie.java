@@ -5,19 +5,19 @@ import java.util.*;
 
 public class Bookie implements Serializable{
     
-    //private String username = "bookie";
-    //private String password = "bookie";
     public List<NotificacaoBookie> notificacoes;
     public List<Integer> id_eventos_interesse;
     
     public Bookie(){
         this.notificacoes = new ArrayList<> ();
+        this.id_eventos_interesse = new ArrayList<> ();
     }
     
-    public Bookie(List<NotificacaoBookie> notificacoesB){
+    public Bookie(List<NotificacaoBookie> notificacoesB, List<Integer> ids){
         this.notificacoes = notificacoesB;
+        this.id_eventos_interesse = ids;
     }
-
+    
     public List<NotificacaoBookie> getNotificacoes(){
         List<NotificacaoBookie> aux = new ArrayList ();
         
@@ -56,7 +56,7 @@ public class Bookie implements Serializable{
     }
     
     public Bookie clone(){
-        return new Bookie(this.getNotificacoes());
+        return new Bookie(this.getNotificacoes(), this.getid_eventos_interesse());
     }
  
     
