@@ -1,6 +1,7 @@
 package betess.ui;
 
 import betess.data.Jogador;
+import betess.data.Bookie;
 import betess.data.Model;
 import betess.control.Observer;
 import betess.control.Controller_BetESS;
@@ -149,27 +150,29 @@ public class Login extends javax.swing.JFrame implements Observer{
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
             }
-            /* VERIFICAR SE QUEM ESTÁ A FAZER O LOGIN É O BOOKIE */
-            if (email.equals("bookie") && password.equals("bookie")){
-                this.mycontroller.setId_utilizador_aut(email);
-                AreaUI frame = new AreaUI(email, this.mycontroller, this.mymodel);
-                frame.setLocationRelativeTo(null);
-                frame.setVisible(true);
-            }
-            else {
-                Jogador jogador = this.mycontroller.checkUser(email);
-
-                if (jogador != null){
-                    if (jogador.checkPassword(password)){
-                        this.mycontroller.setId_utilizador_aut(email);
-                        AreaUI frame = new AreaUI(email, this.mycontroller, this.mymodel);
-                        frame.setLocationRelativeTo(null);
-                        frame.setVisible(true);
-                    }
-
+            else{
+                /* VERIFICAR SE QUEM ESTÁ A FAZER O LOGIN É O BOOKIE */
+                if (email.equals("bookie") && password.equals("bookie")){
+                    this.mycontroller.setId_utilizador_aut(email);
+                    AreaUI frame = new AreaUI(email, this.mycontroller, this.mymodel);
+                    frame.setLocationRelativeTo(null);
+                    frame.setVisible(true);
                 }
                 else {
-                    JOptionPane.showMessageDialog(null, "O nome de utilizador ou a palavra.passe introduzidos não são válidos.", "Erro na autenticação", JOptionPane.ERROR_MESSAGE);
+                    Jogador jogador = this.mycontroller.checkUser(email);
+
+                    if (jogador != null){
+                        if (jogador.checkPassword(password)){
+                            this.mycontroller.setId_utilizador_aut(email);
+                            AreaUI frame = new AreaUI(email, this.mycontroller, this.mymodel);
+                            frame.setLocationRelativeTo(null);
+                            frame.setVisible(true);
+                        }
+
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "O nome de utilizador ou a palavra.passe introduzidos não são válidos.", "Erro na autenticação", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         }

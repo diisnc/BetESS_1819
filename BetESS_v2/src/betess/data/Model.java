@@ -17,6 +17,7 @@ public class Model implements Serializable, Subject{
     
     /* Core Data */
     private HashMap<String, Jogador> jogadores;
+    //private Bookie bookie;
     private HashMap<String, Jogador> jogadores_bloqueados;
     private HashMap<Integer, Aposta> apostas;
     private HashMap<Integer, EventoDesportivo> eventos;
@@ -175,7 +176,7 @@ public class Model implements Serializable, Subject{
         }
         return jogador;
     }
-
+    
     public void eliminaJogador(String id) {
         this.jogadores.remove(id);
         notifyObserver("jogadores");

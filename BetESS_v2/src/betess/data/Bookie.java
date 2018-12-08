@@ -5,6 +5,8 @@ import java.util.*;
 
 public class Bookie implements Serializable{
     
+    //private String username = "bookie";
+    //private String password = "bookie";
     /* Se queroN = true, notificações estão ativas */
     private boolean queroN;
     public List<NotificacaoBookie> notificacoes;
@@ -18,7 +20,15 @@ public class Bookie implements Serializable{
         this.notificacoes = notificacoesB;
     }
 
-  
+    /*
+    public String getUsername(){
+        return this.username;
+    }
+    
+    public String getPassword(){
+        return this.password;
+    }
+    */
     public boolean getQueroN(){
         return this.queroN;
     }
