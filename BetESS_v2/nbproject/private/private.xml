@@ -3,11 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/MarcoSilva/Repositories/BetESS_1819/BetESS_v2/src/betess/ui/Registo.java</file>
-            <file>file:/Users/MarcoSilva/Repositories/BetESS_1819/BetESS_v2/src/betess/ui/AreaUI.java</file>
-            <file>file:/Users/MarcoSilva/Repositories/BetESS_1819/BetESS_v2/src/betess/data/Model.java</file>
-            <file>file:/Users/MarcoSilva/Repositories/BetESS_1819/BetESS_v2/src/betess/ui/Login.java</file>
-            <file>file:/Users/MarcoSilva/Repositories/BetESS_1819/BetESS_v2/src/betess/control/Controller_BetESS.java</file>
+            <file>file:/C:/Users/Diana/Documents/BetESS_1819/BetESS_v2/src/betess/data/Notificacao.java</file>
+            <file>file:/C:/Users/Diana/Documents/BetESS_1819/BetESS_v2/src/betess/control/Subject.java</file>
+            <file>file:/C:/Users/Diana/Documents/BetESS_1819/BetESS_v2/src/betess/control/Observer.java</file>
+            <file>file:/C:/Users/Diana/Documents/BetESS_1819/BetESS_v2/src/betess/data/Model.java</file>
+            <file>file:/C:/Users/Diana/Documents/BetESS_1819/BetESS_v2/src/betess/data/Equipa.java</file>
+            <file>file:/C:/Users/Diana/Documents/BetESS_1819/BetESS_v2/src/betess/data/EventoDesportivo.java</file>
+            <file>file:/C:/Users/Diana/Documents/BetESS_1819/BetESS_v2/src/betess/ui/AreaUI.java</file>
+            <file>file:/C:/Users/Diana/Documents/BetESS_1819/BetESS_v2/src/betess/control/Controller_BetESS.java</file>
+            <file>file:/C:/Users/Diana/Documents/BetESS_1819/BetESS_v2/src/betess/data/Jogador.java</file>
+            <file>file:/C:/Users/Diana/Documents/BetESS_1819/BetESS_v2/src/betess/ui/Registo.java</file>
+            <file>file:/C:/Users/Diana/Documents/BetESS_1819/BetESS_v2/src/betess/data/Aposta.java</file>
+            <file>file:/C:/Users/Diana/Documents/BetESS_1819/BetESS_v2/src/betess/data/Liga.java</file>
+            <file>file:/C:/Users/Diana/Documents/BetESS_1819/BetESS_v2/src/betess/ui/Login.java</file>
         </group>
     </open-files>
 </project-private>
