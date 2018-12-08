@@ -62,11 +62,6 @@ public class Controller_BetESS implements Observer{
         }
     }
     
-    /* 
-    * Para a nossa solução atual, este método fica vazio.
-    * Futuramente é apenas necessário preencher o método !
-    */
-    
     @Override
     public void update(String arg) {
         

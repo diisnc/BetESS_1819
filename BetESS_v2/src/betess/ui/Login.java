@@ -142,15 +142,8 @@ public class Login extends javax.swing.JFrame implements Observer{
             String email = email_field.getText();
             String password = password_field.getText();
 
-            /* VERIFICAR SEMPRE SE QUEM ESTÁ A FAZER O LOGIN É O ADMIN */
+            /* NÃO ESQUECER QUE TEMOS DE VERIFICAR SEMPRE SE QUEM ESTÁ A FAZER O LOGIN É O ADMIN */
             if (email.equals("admin") && password.equals("admin")){
-                this.mycontroller.setId_utilizador_aut(email);
-                AreaUI frame = new AreaUI(email, this.mycontroller, this.mymodel);
-                frame.setLocationRelativeTo(null);
-                frame.setVisible(true);
-            }
-            
-            if (email.equals("bookie") && password.equals("bookie")){
                 this.mycontroller.setId_utilizador_aut(email);
                 AreaUI frame = new AreaUI(email, this.mycontroller, this.mymodel);
                 frame.setLocationRelativeTo(null);
