@@ -5,42 +5,51 @@ import java.io.Serializable;
 public class NotificacaoBookie implements Serializable{
     
     private int id_evento;
+    private double balanco;
     private double ganhos;
     private double perdas;
     
-    public NotificacaoBookie(double ganho, double perda){
-        this.ganhos = ganho;
-        this.perdas = perda;
+    public NotificacaoBookie(double balanco, double ganhos, double perdas){
+        this.balanco = balanco;
     }
 
     public NotificacaoBookie(){
+        this.balanco = 0;
         this.ganhos = 0;
         this.perdas = 0;
     }
+  
+
+    /* GETTERS */
     
-    
-    
-    
-    /* GETTERS */    
-    public double getGanhos() {
-        return this.ganhos;
-    }  
+    public double getGanhos(){
+        return ganhos;
+    }
     
     public double getPerdas() {
-        return this.perdas;
-    }  
-    
-    public int getIdEvento(){
+        return perdas;
+    }
+
+    public double getBalanco() {
+        return balanco;
+    }
+
+    public int getIdEvento() {
         return this.id_evento;
     }
     
     /* SETTERS */
-    public void setGanhos(double ganho){
-        this.ganhos = ganho;
+
+    public void setGanhos(double ganhos) {
+        this.ganhos = ganhos;
     }
-     
-    public void setPerdas(double perda){
-        this.perdas = perda;
+
+    public void setPerdas(double perdas) {
+        this.perdas = perdas;
+    }
+
+    public void setBalanco(double balanco) {
+        this.balanco = balanco;
     }
     
     public void setIdEvento(int idEvento){
@@ -48,7 +57,7 @@ public class NotificacaoBookie implements Serializable{
     }
      
     public NotificacaoBookie clone(){
-        return new NotificacaoBookie(this.getGanhos(), this.getPerdas());
+        return new NotificacaoBookie(this.getBalanco(), this.getGanhos(), this.getPerdas());
     } 
     
 }

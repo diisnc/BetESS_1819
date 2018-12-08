@@ -15,6 +15,8 @@ import betess.data.Notificacao;
 import betess.data.Model;
 import betess.control.Observer;
 import betess.control.Controller_BetESS;
+import betess.data.Bookie;
+import betess.data.NotificacaoBookie;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
@@ -165,6 +167,21 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
                 ligas_combo.addItem(l.getNome());
             }
         }
+        else if(arg.equals("notificacoes_bookie")){
+            Bookie bookie = this.mycontroller.getBookie();
+
+            List<NotificacaoBookie> notificacoes = bookie.getNotificacoes();
+
+            DefaultTableModel model = (DefaultTableModel) notificacoes_list_bookie.getModel();
+
+            model.setRowCount(0);
+
+            DecimalFormat dc = new DecimalFormat("0.00");
+
+            for (NotificacaoBookie n : notificacoes){
+                model.addRow(new Object[]{n.getIdEvento(), dc.format(n.getGanhos()), dc.format(n.getPerdas()),dc.format(n.getBalanco())});
+            }
+        }
     }
 
     /**
@@ -296,18 +313,19 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
         evento_empate = new javax.swing.JRadioButton();
         fecha_evento_button = new javax.swing.JButton();
         area_bookie = new javax.swing.JPanel();
-        Welcome_label_admin1 = new javax.swing.JLabel();
-        buttons_panel_admin1 = new javax.swing.JPanel();
+        Welcome_label_bookie = new javax.swing.JLabel();
+        buttons_panel_bookie = new javax.swing.JPanel();
         eventos_desportivos_button1 = new javax.swing.JButton();
         jLabel32 = new javax.swing.JLabel();
         terminar_sessao_button1 = new javax.swing.JButton();
-        options_panel_admin1 = new javax.swing.JPanel();
+        notificacoes_button_bookie = new javax.swing.JButton();
+        options_panel_bookie = new javax.swing.JPanel();
         eventos_desportivos_elements_admin1 = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
         eventos_lista1 = new javax.swing.JTable();
         registar_evento_button1 = new javax.swing.JButton();
-        novo_evento_elements_admin1 = new javax.swing.JPanel();
+        novo_evento_elements_bookie = new javax.swing.JPanel();
         jLabel37 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
@@ -320,6 +338,12 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
         odd_casa_field1 = new javax.swing.JTextField();
         odd_fora_field1 = new javax.swing.JTextField();
         odd_empate_field1 = new javax.swing.JTextField();
+        interesse_not = new javax.swing.JCheckBox();
+        notificacoes_bookie = new javax.swing.JPanel();
+        jLabel33 = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        notificacoes_list_bookie = new javax.swing.JTable();
+        descartar_button1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1261,7 +1285,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
         novo_evento_elements_adminLayout.setHorizontalGroup(
             novo_evento_elements_adminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, novo_evento_elements_adminLayout.createSequentialGroup()
-                .addContainerGap(484, Short.MAX_VALUE)
+                .addContainerGap(499, Short.MAX_VALUE)
                 .addComponent(regista_evento_button)
                 .addGap(124, 124, 124))
             .addGroup(novo_evento_elements_adminLayout.createSequentialGroup()
@@ -1357,7 +1381,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
                                 .addGroup(nova_equipa_elements_adminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(nome_equipa_field, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(ligas_combo, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
         nova_equipa_elements_adminLayout.setVerticalGroup(
             nova_equipa_elements_adminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1407,7 +1431,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
                     .addGroup(nova_liga_elements_adminLayout.createSequentialGroup()
                         .addGap(51, 51, 51)
                         .addComponent(jLabel29)))
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addContainerGap(185, Short.MAX_VALUE))
         );
         nova_liga_elements_adminLayout.setVerticalGroup(
             nova_liga_elements_adminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1509,7 +1533,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
                 .addContainerGap())
         );
 
-        Welcome_label_admin1.setText("Bem vindo à BetESS, Bookie!");
+        Welcome_label_bookie.setText("Bem vindo à BetESS, Bookie!");
 
         eventos_desportivos_button1.setText("Eventos Desportivos");
         eventos_desportivos_button1.addActionListener(new java.awt.event.ActionListener() {
@@ -1527,34 +1551,44 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
             }
         });
 
-        javax.swing.GroupLayout buttons_panel_admin1Layout = new javax.swing.GroupLayout(buttons_panel_admin1);
-        buttons_panel_admin1.setLayout(buttons_panel_admin1Layout);
-        buttons_panel_admin1Layout.setHorizontalGroup(
-            buttons_panel_admin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buttons_panel_admin1Layout.createSequentialGroup()
+        notificacoes_button_bookie.setText("Notificações");
+        notificacoes_button_bookie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                notificacoes_button_bookieActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout buttons_panel_bookieLayout = new javax.swing.GroupLayout(buttons_panel_bookie);
+        buttons_panel_bookie.setLayout(buttons_panel_bookieLayout);
+        buttons_panel_bookieLayout.setHorizontalGroup(
+            buttons_panel_bookieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buttons_panel_bookieLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel32)
                 .addGap(69, 69, 69))
-            .addGroup(buttons_panel_admin1Layout.createSequentialGroup()
+            .addGroup(buttons_panel_bookieLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(buttons_panel_admin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(buttons_panel_bookieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(eventos_desportivos_button1, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-                    .addComponent(terminar_sessao_button1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(terminar_sessao_button1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(notificacoes_button_bookie, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        buttons_panel_admin1Layout.setVerticalGroup(
-            buttons_panel_admin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(buttons_panel_admin1Layout.createSequentialGroup()
+        buttons_panel_bookieLayout.setVerticalGroup(
+            buttons_panel_bookieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(buttons_panel_bookieLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel32)
                 .addGap(56, 56, 56)
                 .addComponent(eventos_desportivos_button1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(notificacoes_button_bookie)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
                 .addComponent(terminar_sessao_button1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
 
-        options_panel_admin1.setLayout(new java.awt.CardLayout());
+        options_panel_bookie.setLayout(new java.awt.CardLayout());
 
         jLabel34.setText("Eventos Desportivos");
 
@@ -1601,7 +1635,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
                     .addGroup(eventos_desportivos_elements_admin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel34)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         eventos_desportivos_elements_admin1Layout.setVerticalGroup(
             eventos_desportivos_elements_admin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1615,7 +1649,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        options_panel_admin1.add(eventos_desportivos_elements_admin1, "card2");
+        options_panel_bookie.add(eventos_desportivos_elements_admin1, "card2");
 
         jLabel37.setText("Novo Evento Desportivo");
 
@@ -1642,62 +1676,72 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
         jLabel42.setText("Odd Empate:");
 
-        javax.swing.GroupLayout novo_evento_elements_admin1Layout = new javax.swing.GroupLayout(novo_evento_elements_admin1);
-        novo_evento_elements_admin1.setLayout(novo_evento_elements_admin1Layout);
-        novo_evento_elements_admin1Layout.setHorizontalGroup(
-            novo_evento_elements_admin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, novo_evento_elements_admin1Layout.createSequentialGroup()
-                .addContainerGap(484, Short.MAX_VALUE)
+        interesse_not.setText("Notificações");
+        interesse_not.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                interesse_notActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout novo_evento_elements_bookieLayout = new javax.swing.GroupLayout(novo_evento_elements_bookie);
+        novo_evento_elements_bookie.setLayout(novo_evento_elements_bookieLayout);
+        novo_evento_elements_bookieLayout.setHorizontalGroup(
+            novo_evento_elements_bookieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, novo_evento_elements_bookieLayout.createSequentialGroup()
+                .addContainerGap(492, Short.MAX_VALUE)
                 .addComponent(regista_evento_button1)
                 .addGap(124, 124, 124))
-            .addGroup(novo_evento_elements_admin1Layout.createSequentialGroup()
-                .addGroup(novo_evento_elements_admin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(novo_evento_elements_admin1Layout.createSequentialGroup()
+            .addGroup(novo_evento_elements_bookieLayout.createSequentialGroup()
+                .addGroup(novo_evento_elements_bookieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(novo_evento_elements_bookieLayout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addComponent(jLabel37))
-                    .addGroup(novo_evento_elements_admin1Layout.createSequentialGroup()
+                    .addGroup(novo_evento_elements_bookieLayout.createSequentialGroup()
                         .addGap(74, 74, 74)
-                        .addGroup(novo_evento_elements_admin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(novo_evento_elements_admin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(novo_evento_elements_bookieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(novo_evento_elements_bookieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel38)
                                 .addComponent(jLabel39))
-                            .addGroup(novo_evento_elements_admin1Layout.createSequentialGroup()
-                                .addGroup(novo_evento_elements_admin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(novo_evento_elements_bookieLayout.createSequentialGroup()
+                                .addGroup(novo_evento_elements_bookieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel42)
                                     .addComponent(jLabel41, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel40, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGap(3, 3, 3)))
-                        .addGroup(novo_evento_elements_admin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(novo_evento_elements_bookieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(combo_casa1, 0, 222, Short.MAX_VALUE)
                             .addComponent(combo_fora1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(odd_empate_field1, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
                             .addComponent(odd_casa_field1)
-                            .addComponent(odd_fora_field1))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(odd_fora_field1))
+                        .addGap(76, 76, 76)
+                        .addComponent(interesse_not)))
+                .addContainerGap(185, Short.MAX_VALUE))
         );
-        novo_evento_elements_admin1Layout.setVerticalGroup(
-            novo_evento_elements_admin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(novo_evento_elements_admin1Layout.createSequentialGroup()
+        novo_evento_elements_bookieLayout.setVerticalGroup(
+            novo_evento_elements_bookieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(novo_evento_elements_bookieLayout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(jLabel37)
                 .addGap(41, 41, 41)
-                .addGroup(novo_evento_elements_admin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(novo_evento_elements_bookieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel38)
-                    .addComponent(combo_casa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(combo_casa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(interesse_not))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(novo_evento_elements_admin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(novo_evento_elements_bookieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(combo_fora1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel39))
                 .addGap(18, 18, 18)
-                .addGroup(novo_evento_elements_admin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(novo_evento_elements_bookieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel40)
                     .addComponent(odd_casa_field1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(novo_evento_elements_admin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(novo_evento_elements_bookieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel41)
                     .addComponent(odd_fora_field1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(novo_evento_elements_admin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(novo_evento_elements_bookieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel42)
                     .addComponent(odd_empate_field1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -1705,7 +1749,68 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
                 .addContainerGap(55, Short.MAX_VALUE))
         );
 
-        options_panel_admin1.add(novo_evento_elements_admin1, "card2");
+        options_panel_bookie.add(novo_evento_elements_bookie, "card2");
+
+        jLabel33.setText("Notificações:");
+
+        notificacoes_list_bookie.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Identificador Evento", "Ganhos", "Perdas", "Balanço"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane8.setViewportView(notificacoes_list_bookie);
+
+        descartar_button1.setText("Descartar");
+        descartar_button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descartar_button1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout notificacoes_bookieLayout = new javax.swing.GroupLayout(notificacoes_bookie);
+        notificacoes_bookie.setLayout(notificacoes_bookieLayout);
+        notificacoes_bookieLayout.setHorizontalGroup(
+            notificacoes_bookieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(notificacoes_bookieLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(notificacoes_bookieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(descartar_button1)
+                    .addGroup(notificacoes_bookieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel33)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(91, Short.MAX_VALUE))
+        );
+        notificacoes_bookieLayout.setVerticalGroup(
+            notificacoes_bookieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(notificacoes_bookieLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jLabel33)
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(descartar_button1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        options_panel_bookie.add(notificacoes_bookie, "card2");
 
         javax.swing.GroupLayout area_bookieLayout = new javax.swing.GroupLayout(area_bookie);
         area_bookie.setLayout(area_bookieLayout);
@@ -1713,12 +1818,12 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
             area_bookieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(area_bookieLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(buttons_panel_admin1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttons_panel_bookie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(area_bookieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(options_panel_admin1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(options_panel_bookie, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(area_bookieLayout.createSequentialGroup()
-                        .addComponent(Welcome_label_admin1)
+                        .addComponent(Welcome_label_bookie)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -1729,10 +1834,10 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
                 .addGroup(area_bookieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(area_bookieLayout.createSequentialGroup()
                         .addGap(0, 20, Short.MAX_VALUE)
-                        .addComponent(Welcome_label_admin1)
+                        .addComponent(Welcome_label_bookie)
                         .addGap(18, 18, 18)
-                        .addComponent(options_panel_admin1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(buttons_panel_admin1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(options_panel_bookie, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buttons_panel_bookie, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -2028,7 +2133,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
                 JOptionPane.showMessageDialog(null, "Não é possível definir um evento apenas com uma equipa.", "Falha no registo do evento desportivo", JOptionPane.ERROR_MESSAGE);
             }
             else {
-                this.mycontroller.registaEventoDesportivo(c_casa, c_fora, Double.parseDouble(odd_casa), Double.parseDouble(odd_fora), Double.parseDouble(odd_empate));
+                this.mycontroller.registaEventoDesportivo(c_casa, c_fora, Double.parseDouble(odd_casa), Double.parseDouble(odd_fora), Double.parseDouble(odd_empate), false);
                 JOptionPane.showMessageDialog(null, "Evento registado com sucesso.", "BetESS", JOptionPane.PLAIN_MESSAGE);
             }
         }
@@ -2422,14 +2527,14 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
     private void eventos_desportivos_button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventos_desportivos_button1ActionPerformed
         /* remoção de paineis anteriores */
-        options_panel_admin1.removeAll();
-        options_panel_admin1.repaint();
-        options_panel_admin1.revalidate();
+        options_panel_bookie.removeAll();
+        options_panel_bookie.repaint();
+        options_panel_bookie.revalidate();
 
         /* alocação do respetivo painel de opções */
-        options_panel_admin1.add(eventos_desportivos_elements_admin1);
-        options_panel_admin1.repaint();
-        options_panel_admin1.revalidate();
+        options_panel_bookie.add(eventos_desportivos_elements_admin1);
+        options_panel_bookie.repaint();
+        options_panel_bookie.revalidate();
 
         DefaultTableModel model = (DefaultTableModel) eventos_lista1.getModel();
 
@@ -2454,14 +2559,14 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
     private void registar_evento_button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registar_evento_button1ActionPerformed
         /* remoção de paineis anteriores */
-        options_panel_admin1.removeAll();
-        options_panel_admin1.repaint();
-        options_panel_admin1.revalidate();
+        options_panel_bookie.removeAll();
+        options_panel_bookie.repaint();
+        options_panel_bookie.revalidate();
 
         /* alocação do respetivo painel de opções */
-        options_panel_admin1.add(novo_evento_elements_admin1);
-        options_panel_admin1.repaint();
-        options_panel_admin1.revalidate();
+        options_panel_bookie.add(novo_evento_elements_bookie);
+        options_panel_bookie.repaint();
+        options_panel_bookie.revalidate();
 
         List<Equipa> equipas = this.mycontroller.getEquipas();
 
@@ -2497,7 +2602,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
                 JOptionPane.showMessageDialog(null, "Não é possível definir um evento apenas com uma equipa.", "Falha no registo do evento desportivo", JOptionPane.ERROR_MESSAGE);
             }
             else {
-                this.mycontroller.registaEventoDesportivo(c_casa, c_fora, Double.parseDouble(odd_casa), Double.parseDouble(odd_fora), Double.parseDouble(odd_empate));
+                this.mycontroller.registaEventoDesportivo(c_casa, c_fora, Double.parseDouble(odd_casa), Double.parseDouble(odd_fora), Double.parseDouble(odd_empate), interesse_not.isSelected());
                 JOptionPane.showMessageDialog(null, "Evento registado com sucesso.", "BetESS", JOptionPane.PLAIN_MESSAGE);
             }
         }
@@ -2505,6 +2610,50 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
             JOptionPane.showMessageDialog(null, "Existem campos do formulário não preenchidos.", "Erro!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_regista_evento_button1ActionPerformed
+
+    private void descartar_button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descartar_button1ActionPerformed
+        if (notificacoes_list_bookie.getSelectedRow() != -1){
+
+            DefaultTableModel model = (DefaultTableModel) notificacoes_list_bookie.getModel();
+            int row = notificacoes_list_bookie.getSelectedRow();
+
+            //model.removeRow(row);
+            this.mycontroller.removeNotificacaoBookie((int) model.getValueAt(row, 0));
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Selecione uma das notificações.", "Erro!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_descartar_button1ActionPerformed
+
+    private void notificacoes_button_bookieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notificacoes_button_bookieActionPerformed
+        /* remoção de paineis anteriores */
+        options_panel_bookie.removeAll();
+        options_panel_bookie.repaint();
+        options_panel_bookie.revalidate();
+
+        /* alocação do respetivo painel de opções */
+        options_panel_bookie.add(notificacoes_bookie);
+        options_panel_bookie.repaint();
+        options_panel_bookie.revalidate();
+
+        Bookie bookie = this.mycontroller.getBookie();
+
+        List<NotificacaoBookie> notificacoes = bookie.getNotificacoes();
+
+        DefaultTableModel model = (DefaultTableModel) notificacoes_list_bookie.getModel();
+
+        model.setRowCount(0);
+        
+        DecimalFormat dc = new DecimalFormat("0.00");
+
+        for (NotificacaoBookie n : notificacoes){
+            model.addRow(new Object[]{n.getIdEvento(), dc.format(n.getGanhos()), dc.format(n.getPerdas()),dc.format(n.getBalanco())});
+        }
+    }//GEN-LAST:event_notificacoes_button_bookieActionPerformed
+
+    private void interesse_notActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_interesse_notActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_interesse_notActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2543,7 +2692,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Welcome_label_admin;
-    private javax.swing.JLabel Welcome_label_admin1;
+    private javax.swing.JLabel Welcome_label_bookie;
     private javax.swing.JLabel Welcome_label_client;
     private javax.swing.JButton apostar_button;
     private javax.swing.JPanel apostar_elements_client;
@@ -2555,7 +2704,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
     private javax.swing.JPanel area_cliente;
     private javax.swing.JButton bloquear_jogador_button;
     private javax.swing.JPanel buttons_panel_admin;
-    private javax.swing.JPanel buttons_panel_admin1;
+    private javax.swing.JPanel buttons_panel_bookie;
     private javax.swing.JPanel buttons_panel_client;
     private javax.swing.JRadioButton casa_button;
     private javax.swing.JButton cashout_button;
@@ -2570,6 +2719,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
     private javax.swing.JTextField creditos_field;
     private javax.swing.JButton desbloquear_jogador_button;
     private javax.swing.JButton descartar_button;
+    private javax.swing.JButton descartar_button1;
     private javax.swing.JButton edit_dados_button;
     private javax.swing.JPanel edit_perfil_elements_client;
     private javax.swing.JButton editar_perfil_button;
@@ -2591,6 +2741,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
     private javax.swing.JPanel fechar_evento_elements_admin;
     private javax.swing.JRadioButton fora_button;
     private javax.swing.JTextField ganhos_field;
+    private javax.swing.JCheckBox interesse_not;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2617,6 +2768,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
@@ -2637,6 +2789,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JButton jogadores_bloq_button;
     private javax.swing.JPanel jogadores_bloqueados_elements_admin;
@@ -2650,15 +2803,18 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
     private javax.swing.JTextField nome_equipa_field;
     private javax.swing.JTextField nome_field;
     private javax.swing.JTextField nome_liga_field;
+    private javax.swing.JPanel notificacoes_bookie;
     private javax.swing.JButton notificacoes_button;
+    private javax.swing.JButton notificacoes_button_bookie;
     private javax.swing.JPanel notificacoes_elements_client;
     private javax.swing.JTable notificacoes_list;
+    private javax.swing.JTable notificacoes_list_bookie;
     private javax.swing.JButton nova_equipa_button;
     private javax.swing.JPanel nova_equipa_elements_admin;
     private javax.swing.JButton nova_liga_button;
     private javax.swing.JPanel nova_liga_elements_admin;
     private javax.swing.JPanel novo_evento_elements_admin;
-    private javax.swing.JPanel novo_evento_elements_admin1;
+    private javax.swing.JPanel novo_evento_elements_bookie;
     private javax.swing.JTextField odd_casa_field;
     private javax.swing.JTextField odd_casa_field1;
     private javax.swing.JTextField odd_empate_field;
@@ -2668,7 +2824,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
     private javax.swing.ButtonGroup opcoes_aposta_admin;
     private javax.swing.ButtonGroup opcoes_aposta_client;
     private javax.swing.JPanel options_panel_admin;
-    private javax.swing.JPanel options_panel_admin1;
+    private javax.swing.JPanel options_panel_bookie;
     private javax.swing.JPanel options_panel_client;
     private javax.swing.JTextField palavra_passe_field;
     private javax.swing.JTextField quantia_field;
