@@ -9,8 +9,11 @@ public class NotificacaoBookie implements Serializable{
     private double ganhos;
     private double perdas;
     
-    public NotificacaoBookie(double balanco, double ganhos, double perdas){
+    public NotificacaoBookie(int id_evento, double balanco, double ganhos, double perdas){
+        this.id_evento = id_evento; 
         this.balanco = balanco;
+        this.ganhos = ganhos;
+        this.perdas = perdas;
     }
 
     public NotificacaoBookie(){
@@ -57,7 +60,7 @@ public class NotificacaoBookie implements Serializable{
     }
      
     public NotificacaoBookie clone(){
-        return new NotificacaoBookie(this.getBalanco(), this.getGanhos(), this.getPerdas());
+        return new NotificacaoBookie(this.getIdEvento(), this.getBalanco(), this.getGanhos(), this.getPerdas());
     } 
     
 }
