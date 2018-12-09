@@ -17,6 +17,7 @@ public class Model implements Serializable, Subject{
     
     /* Core Data */
     private HashMap<String, Jogador> jogadores;
+    private Bookie bookie;
     private HashMap<String, Jogador> jogadores_bloqueados;
     private HashMap<Integer, Aposta> apostas;
     private HashMap<Integer, EventoDesportivo> eventos;
@@ -34,6 +35,7 @@ public class Model implements Serializable, Subject{
     
     public Model (){
         this.jogadores = new HashMap<> ();
+        this.bookie = new Bookie();
         this.apostas = new HashMap<> ();
         this.eventos = new HashMap<> ();
         this.jogadores_bloqueados = new HashMap<> ();
@@ -44,6 +46,13 @@ public class Model implements Serializable, Subject{
         this.cont_eventos = 1;
     }
     
+    public Bookie getBookie(){
+        return this.bookie.clone();
+    }
+    
+    public void removeNotificacaoBookie(int id_evento){
+        this.bookie.removeNotificacao(id_evento);
+    }
     
     @Override
     public void registerObserver(Observer obj) {
@@ -175,7 +184,7 @@ public class Model implements Serializable, Subject{
         }
         return jogador;
     }
-
+    
     public void eliminaJogador(String id) {
         this.jogadores.remove(id);
         notifyObserver("jogadores");
@@ -191,9 +200,13 @@ public class Model implements Serializable, Subject{
         notifyObserver("apostas");
     }
     
-    public void registaEventoDesportivo(String equipa_casa, String equipa_fora, double odd_casa, double odd_fora, double odd_empate){
+    public void registaEventoDesportivo(String equipa_casa, String equipa_fora, double odd_casa, double odd_fora, double odd_empate, boolean interesse_not){
         EventoDesportivo e = new EventoDesportivo(this.cont_eventos++, equipa_casa, equipa_fora, odd_casa, odd_fora, odd_empate);
         this.eventos.put(e.getId_evento(), e);
+        if (interesse_not){
+            int cont_eventos_aux = cont_eventos - 1;
+            this.bookie.adiciona_interesse(cont_eventos_aux);
+        }
         notifyObserver("eventos");
     }
     
@@ -272,6 +285,8 @@ public class Model implements Serializable, Subject{
         e.setGanha_casa(ganha_casa);
         e.setGanha_fora(ganha_fora);
         e.setEmpate(empate);
+        double ganhos = 0;
+        double perdas = 0;
         
         for (Aposta a : this.getApostasEvento(e.getId_evento())){
                 
@@ -314,7 +329,7 @@ public class Model implements Serializable, Subject{
                 a.setEstado("Paga");
                 this.atualizaAposta(a);
                 
-                /* lançamento de notificações */
+                /* lançamento de notificações cliente */
                 Notificacao n = new Notificacao(a.getId_aposta(), saldo - saldo_ant);
                 Jogador jogador = this.checkUser(a.getId_jogador());
                 jogador.adicionaNotificacao(n);
@@ -322,11 +337,33 @@ public class Model implements Serializable, Subject{
                 
                 /* atualização do saldo do cliente */
                 this.atualizaSaldo(saldo, j.getEmail());
+                
+                /* Cálculo dos ganhos e perdas para notificação do bookie*/
+                
+                if ((saldo - saldo_ant) > 0){
+                    perdas -= (saldo - saldo_ant);
+                }
+                else {
+                    ganhos -= (saldo - saldo_ant);
+                }
+                
             }
         }
+        
+        /* lancamento de notificacoes bookie */
+        List<Integer> ids_eventos_bookie = this.bookie.getid_eventos_interesse();
+        
+        for (int i : ids_eventos_bookie){
+            if (i == id_Evento){
+                this.bookie.adicionaNotificacao(new NotificacaoBookie(ganhos - perdas, ganhos, perdas));
+                break;
+            }
+        }
+
         e.setEstado("Terminado");
         this.atualizaEventoDesportivo(e);
         
+        notifyObserver("notificacoes_bookie");
         notifyObserver("apostas");
         notifyObserver("eventos");
         notifyObserver("jogadores");

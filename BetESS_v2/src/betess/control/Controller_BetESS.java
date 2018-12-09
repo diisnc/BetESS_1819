@@ -1,14 +1,13 @@
 package betess.control;
 
 import betess.data.Aposta;
-import betess.ui.AreaUI;
+import betess.data.Bookie;
 import betess.data.Equipa;
 import betess.data.EventoDesportivo;
 import betess.data.Jogador;
 import betess.data.Liga;
 import betess.ui.Login;
 import betess.data.Model;
-import betess.ui.Registo;
 import java.io.*;
 import java.util.HashMap;
 import java.util.List;
@@ -69,6 +68,14 @@ public class Controller_BetESS implements Observer{
 
     public Model getModel() {
         return model;
+    }
+    
+    public Bookie getBookie(){
+        return this.model.getBookie();
+    }
+    
+    public void removeNotificacaoBookie(int id_evento){
+        this.model.removeNotificacaoBookie(id_evento);
     }
 
     public void setModel(Model model) {
@@ -154,8 +161,8 @@ public class Controller_BetESS implements Observer{
         this.model.removeNotificacao(id_utilizador, id_aposta);
     }
             
-    public void registaEventoDesportivo(String equipa_casa, String equipa_fora, double odd_casa, double odd_fora, double odd_empate){
-        this.model.registaEventoDesportivo(equipa_casa, equipa_fora, odd_casa, odd_fora, odd_empate);
+    public void registaEventoDesportivo(String equipa_casa, String equipa_fora, double odd_casa, double odd_fora, double odd_empate, boolean interesse_not){
+        this.model.registaEventoDesportivo(equipa_casa, equipa_fora, odd_casa, odd_fora, odd_empate, interesse_not);
     }
     
     public HashMap<Integer, EventoDesportivo> getEventosDesportivos(){

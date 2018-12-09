@@ -5,24 +5,19 @@ import java.util.*;
 
 public class Bookie implements Serializable{
     
-    /* Se queroN = true, notificações estão ativas */
-    private boolean queroN;
     public List<NotificacaoBookie> notificacoes;
+    public List<Integer> id_eventos_interesse;
     
-    public Bookie(boolean queroNotificacao){
-        this.queroN = queroNotificacao;
+    public Bookie(){
+        this.notificacoes = new ArrayList<> ();
+        this.id_eventos_interesse = new ArrayList<> ();
     }
     
-    public Bookie(boolean queroNotificacao, List<NotificacaoBookie> notificacoesB){
-        this.queroN = queroNotificacao;
+    public Bookie(List<NotificacaoBookie> notificacoesB, List<Integer> ids){
         this.notificacoes = notificacoesB;
+        this.id_eventos_interesse = ids;
     }
-
-  
-    public boolean getQueroN(){
-        return this.queroN;
-    }
-
+    
     public List<NotificacaoBookie> getNotificacoes(){
         List<NotificacaoBookie> aux = new ArrayList ();
         
@@ -31,14 +26,24 @@ public class Bookie implements Serializable{
         }
         
         return aux;
-    }  
+    }
     
-    public void setQueroN(boolean queroNotific){
-        this.queroN = queroNotific; 
+    public List<Integer> getid_eventos_interesse(){
+        List<Integer> res = new ArrayList<> ();
+        
+        for (int i : this.id_eventos_interesse){
+            res.add(i);
+        }
+        
+        return res;
     }
 
     public void adicionaNotificacao(NotificacaoBookie n){
         this.notificacoes.add(n);
+    }
+    
+    public void adiciona_interesse(int id_evento){
+        this.id_eventos_interesse.add(id_evento);
     }
     
     public void removeNotificacao(int id_evento){
@@ -48,6 +53,10 @@ public class Bookie implements Serializable{
                 break;
             }
         }
+    }
+    
+    public Bookie clone(){
+        return new Bookie(this.getNotificacoes(), this.getid_eventos_interesse());
     }
  
     
