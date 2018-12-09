@@ -123,7 +123,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
             
             for (Aposta a : this.mymodel.getApostasJogador(this.mycontroller.getId_utilizador_aut())){
                 EventoDesportivo e = this.mymodel.getEventoDesportivo(a.getId_evento());
-                model.addRow(new Object[]{a.getId_aposta(), a.getId_evento(), e.getequipa_casa(), e.getequipa_fora(), a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), Double.parseDouble(dc.format(a.getQuantia())), a.getEstado()});
+                model.addRow(new Object[]{a.getId_aposta(), a.getId_evento(), e.getequipa_casa(), e.getequipa_fora(), a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), Double.parseDouble(dc.format(a.getQuantia())), Double.parseDouble(dc.format(a.getEstado()))});
             }
         }
         else if (arg.equals("notificacoes")){
@@ -143,7 +143,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
                 String equipa_casa = e.getequipa_casa();
                 String equipa_fora = e.getequipa_fora();
 
-                model.addRow(new Object[]{a.getId_evento(), a.getId_aposta(), equipa_casa, equipa_fora, Double.parseDouble(dc.format(a.getQuantia())), n.getBalanco(), n.getStatus()});
+                model.addRow(new Object[]{a.getId_evento(), a.getId_aposta(), equipa_casa, equipa_fora, Double.parseDouble(dc.format(a.getQuantia())), Double.parseDouble(dc.format(n.getBalanco())), n.getStatus()});
             }
         }
         else if (arg.equals("saldo")){
@@ -179,7 +179,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
             DecimalFormat dc = new DecimalFormat("0.00");
 
             for (NotificacaoBookie n : notificacoes){
-                model.addRow(new Object[]{n.getIdEvento(), dc.format(n.getGanhos()), dc.format(n.getPerdas()),dc.format(n.getBalanco())});
+                model.addRow(new Object[]{n.getIdEvento(), Double.parseDouble(dc.format(n.getGanhos())), Double.parseDouble(dc.format(n.getPerdas())), Double.parseDouble(dc.format(n.getBalanco()))});
             }
         }
     }
@@ -1676,6 +1676,12 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
         jLabel42.setText("Odd Empate:");
 
+        odd_casa_field1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                odd_casa_field1ActionPerformed(evt);
+            }
+        });
+
         interesse_not.setText("Notificações");
         interesse_not.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1920,11 +1926,13 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
         DefaultTableModel model = (DefaultTableModel) eventos_lista.getModel();
 
         model.setRowCount(0);
-
+        
+        DecimalFormat dc = new DecimalFormat("0.00");
+        
         for (EventoDesportivo e : this.mycontroller.getEventosDesportivos().values()){
             String equipa_casa = this.mycontroller.getEquipa(e.getequipa_casa()).getDesignacao();
             String equipa_fora = this.mycontroller.getEquipa(e.getequipa_fora()).getDesignacao();
-            model.addRow(new Object[]{e.getId_evento(), equipa_casa, equipa_fora, e.getGanha_casa(), e.getGanha_fora(), e.getEmpate(), e.getEstado()});
+            model.addRow(new Object[]{e.getId_evento(), equipa_casa, equipa_fora, e.getGanha_casa(), e.getGanha_fora(), e.getEmpate(), Double.parseDouble(dc.format(e.getEstado()))});
         }
 
     }//GEN-LAST:event_eventos_desportivos_buttonActionPerformed
@@ -2452,7 +2460,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
             String equipa_casa = e.getequipa_casa();
             String equipa_fora = e.getequipa_fora();
 
-            model.addRow(new Object[]{a.getId_evento(), a.getId_aposta(), equipa_casa, equipa_fora, Double.parseDouble(dc.format(a.getQuantia())), n.getBalanco(), n.getStatus()});
+            model.addRow(new Object[]{a.getId_evento(), a.getId_aposta(), equipa_casa, equipa_fora, Double.parseDouble(dc.format(a.getQuantia())), Double.parseDouble(dc.format(n.getBalanco())), n.getStatus()});
         }
     }//GEN-LAST:event_notificacoes_buttonActionPerformed
 
@@ -2493,7 +2501,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
         for (Aposta a : apostas){
             EventoDesportivo e = this.mycontroller.getEventoDesportivo(a.getId_evento());;
-            model.addRow(new Object[]{a.getId_aposta(), a.getId_evento(), e.getequipa_casa(), e.getequipa_fora(), a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), Double.parseDouble(dc.format(a.getQuantia())), a.getEstado()});
+            model.addRow(new Object[]{a.getId_aposta(), a.getId_evento(), e.getequipa_casa(), e.getequipa_fora(), a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), Double.parseDouble(dc.format(a.getQuantia())), Double.parseDouble(dc.format(a.getEstado()))});
         }
     }//GEN-LAST:event_ver_apostas_buttonActionPerformed
 
@@ -2540,10 +2548,12 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
         model.setRowCount(0);
 
+        DecimalFormat dc = new DecimalFormat("0.00");
+        
         for (EventoDesportivo e : this.mycontroller.getEventosDesportivos().values()){
             String equipa_casa = this.mycontroller.getEquipa(e.getequipa_casa()).getDesignacao();
             String equipa_fora = this.mycontroller.getEquipa(e.getequipa_fora()).getDesignacao();
-            model.addRow(new Object[]{e.getId_evento(), equipa_casa, equipa_fora, e.getGanha_casa(), e.getGanha_fora(), e.getEmpate(), e.getEstado()});
+            model.addRow(new Object[]{e.getId_evento(), equipa_casa, equipa_fora, e.getGanha_casa(), e.getGanha_fora(), e.getEmpate(), Double.parseDouble(dc.format(e.getEstado()))});
         }
     }//GEN-LAST:event_eventos_desportivos_button1ActionPerformed
 
@@ -2647,13 +2657,17 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
         DecimalFormat dc = new DecimalFormat("0.00");
 
         for (NotificacaoBookie n : notificacoes){
-            model.addRow(new Object[]{n.getIdEvento(), dc.format(n.getGanhos()), dc.format(n.getPerdas()),dc.format(n.getBalanco())});
+            model.addRow(new Object[]{n.getIdEvento(), Double.parseDouble(dc.format(n.getGanhos())), Double.parseDouble(dc.format(n.getPerdas())), Double.parseDouble(dc.format(n.getBalanco()))});
         }
     }//GEN-LAST:event_notificacoes_button_bookieActionPerformed
 
     private void interesse_notActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_interesse_notActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_interesse_notActionPerformed
+
+    private void odd_casa_field1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_odd_casa_field1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_odd_casa_field1ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -2153,6 +2153,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="odd_casa_field1">
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="odd_casa_field1ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="odd_fora_field1">
                 </Component>
