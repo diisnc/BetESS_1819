@@ -364,7 +364,7 @@ public class Model implements Serializable, Subject{
         this.atualizaEventoDesportivo(e);
         
         notifyObserver("notificacoes_bookie");
-        notifyObserver("");
+        notifyObserver("notificacoes");
         notifyObserver("apostas");
         notifyObserver("eventos");
         notifyObserver("jogadores");
