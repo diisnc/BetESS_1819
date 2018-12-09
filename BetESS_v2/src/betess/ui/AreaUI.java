@@ -122,7 +122,7 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
             
             for (Aposta a : this.mymodel.getApostasJogador(this.mycontroller.getId_utilizador_aut())){
                 EventoDesportivo e = this.mymodel.getEventoDesportivo(a.getId_evento());
-                model.addRow(new Object[]{a.getId_aposta(), a.getId_evento(), e.getequipa_casa(), e.getequipa_fora(), a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), Double.parseDouble(dc.format(a.getQuantia())), Double.parseDouble(dc.format(a.getEstado()))});
+                model.addRow(new Object[]{a.getId_aposta(), a.getId_evento(), e.getequipa_casa(), e.getequipa_fora(), a.getGanha_casa(), a.getGanha_fora(), a.getEmpate(), Double.parseDouble(dc.format(a.getQuantia())), a.getEstado()});
             }
         }
         else if (arg.equals("notificacoes")){
@@ -147,8 +147,10 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
         }
         else if (arg.equals("saldo")){
             DecimalFormat dc = new DecimalFormat("0.00");
-
-            saldo_field.setText(dc.format(this.mymodel.checkUser(this.mycontroller.getId_utilizador_aut()).getSaldo()));
+            
+            if (this.mymodel.checkUser(this.mycontroller.getId_utilizador_aut()) != null){
+                saldo_field.setText(dc.format(this.mymodel.checkUser(this.mycontroller.getId_utilizador_aut()).getSaldo()));
+            }
         }
         else if (arg.equals("equipas")){
             combo_casa.removeAllItems();
@@ -2521,9 +2523,11 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
         model.setRowCount(0);
 
         for (EventoDesportivo e : eventos.values()){
-            String equipa_casa = this.mycontroller.getEquipa(e.getequipa_casa()).getDesignacao();
-            String equipa_fora = this.mycontroller.getEquipa(e.getequipa_fora()).getDesignacao();
-            model.addRow(new Object[]{e.getId_evento(), equipa_casa, equipa_fora, e.getOdd_casa(), e.getOdd_fora(), e.getOdd_empate()});
+            if (e.getEstado().equals("Aberto")){
+                String equipa_casa = this.mycontroller.getEquipa(e.getequipa_casa()).getDesignacao();
+                String equipa_fora = this.mycontroller.getEquipa(e.getequipa_fora()).getDesignacao();
+                model.addRow(new Object[]{e.getId_evento(), equipa_casa, equipa_fora, e.getOdd_casa(), e.getOdd_fora(), e.getOdd_empate()});
+            }
         }
     }//GEN-LAST:event_apostar_buttonActionPerformed
 
