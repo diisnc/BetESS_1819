@@ -97,12 +97,11 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
             model.setRowCount(0);
             model1.setRowCount(0);
 
-            DecimalFormat dc = new DecimalFormat("0.00");
 
             for (EventoDesportivo e : this.mymodel.getEventosDesportivos().values()){
                 String equipa_casa = this.mycontroller.getEquipa(e.getequipa_casa()).getDesignacao();
                 String equipa_fora = this.mycontroller.getEquipa(e.getequipa_fora()).getDesignacao();
-                model.addRow(new Object[]{e.getId_evento(), equipa_casa, equipa_fora, e.getGanha_casa(), e.getGanha_fora(), e.getEmpate(), Double.parseDouble(dc.format(e.getEstado()))});
+                model.addRow(new Object[]{e.getId_evento(), equipa_casa, equipa_fora, e.getGanha_casa(), e.getGanha_fora(), e.getEmpate(), e.getEstado()});
                 model1.addRow(new Object[]{e.getId_evento(), equipa_casa, equipa_fora, e.getOdd_casa(), e.getOdd_fora(), e.getOdd_empate()});
         
             }
@@ -1927,12 +1926,11 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
         model.setRowCount(0);
         
-        DecimalFormat dc = new DecimalFormat("0.00");
         
         for (EventoDesportivo e : this.mycontroller.getEventosDesportivos().values()){
             String equipa_casa = this.mycontroller.getEquipa(e.getequipa_casa()).getDesignacao();
             String equipa_fora = this.mycontroller.getEquipa(e.getequipa_fora()).getDesignacao();
-            model.addRow(new Object[]{e.getId_evento(), equipa_casa, equipa_fora, e.getGanha_casa(), e.getGanha_fora(), e.getEmpate(), Double.parseDouble(dc.format(e.getEstado()))});
+            model.addRow(new Object[]{e.getId_evento(), equipa_casa, equipa_fora, e.getGanha_casa(), e.getGanha_fora(), e.getEmpate(), e.getEstado()});
         }
 
     }//GEN-LAST:event_eventos_desportivos_buttonActionPerformed
@@ -2548,12 +2546,11 @@ public class AreaUI extends javax.swing.JFrame implements Observer{
 
         model.setRowCount(0);
 
-        DecimalFormat dc = new DecimalFormat("0.00");
         
         for (EventoDesportivo e : this.mycontroller.getEventosDesportivos().values()){
             String equipa_casa = this.mycontroller.getEquipa(e.getequipa_casa()).getDesignacao();
             String equipa_fora = this.mycontroller.getEquipa(e.getequipa_fora()).getDesignacao();
-            model.addRow(new Object[]{e.getId_evento(), equipa_casa, equipa_fora, e.getGanha_casa(), e.getGanha_fora(), e.getEmpate(), Double.parseDouble(dc.format(e.getEstado()))});
+            model.addRow(new Object[]{e.getId_evento(), equipa_casa, equipa_fora, e.getGanha_casa(), e.getGanha_fora(), e.getEmpate(), e.getEstado()});
         }
     }//GEN-LAST:event_eventos_desportivos_button1ActionPerformed
 
