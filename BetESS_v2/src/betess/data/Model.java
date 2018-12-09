@@ -355,7 +355,7 @@ public class Model implements Serializable, Subject{
         
         for (int i : ids_eventos_bookie){
             if (i == id_Evento){
-                this.bookie.adicionaNotificacao(new NotificacaoBookie(id_Evento, ganhos - perdas, ganhos, perdas));
+                this.bookie.adicionaNotificacao(new NotificacaoBookie(id_Evento, perdas - ganhos, ganhos, perdas));
                 break;
             }
         }
@@ -364,6 +364,7 @@ public class Model implements Serializable, Subject{
         this.atualizaEventoDesportivo(e);
         
         notifyObserver("notificacoes_bookie");
+        notifyObserver("");
         notifyObserver("apostas");
         notifyObserver("eventos");
         notifyObserver("jogadores");
