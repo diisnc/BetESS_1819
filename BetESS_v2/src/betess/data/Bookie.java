@@ -49,7 +49,7 @@ public class Bookie implements Serializable{
     public void removeNotificacao(int id_evento){
         for (NotificacaoBookie n : this.notificacoes){
             if (n.getIdEvento() == id_evento){
-                this.notificacoes.remove(id_evento);
+                this.notificacoes.remove(n);
                 break;
             }
         }
